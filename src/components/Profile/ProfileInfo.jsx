@@ -1,5 +1,6 @@
 import React from "react";
-import './ProfileInfo.css'
+import './ProfileInfo.modules.css'
+import s from './ProfileInfo.modules.css'
 
 export function ProfileInfo() {
     return (
@@ -8,7 +9,7 @@ export function ProfileInfo() {
                 <section className="personBackgroundPhoto">
                 </section>
                 <section className="aboutPerson">
-                    <div className="photo">
+                    <div className='personPhoto'>
                     </div>
                     <div className="description">
                         <ul>

@@ -1,7 +1,7 @@
 import React from "react";
-import {Header} from "./Header";
-import {Nav} from "./Nav";
-import {Main} from "./Main";
+import {Header} from "./Header/Header";
+import {Nav} from "./Nav/Nav";
+import {Main} from "./Profile/Main";
 
 export function Page() {
     return (

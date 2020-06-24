@@ -1,6 +1,6 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo";
-import {ProfileWall} from "./ProfileWall";
+import {ProfileWall} from "./Wall/ProfileWall";
 import './Main.css'
 
 export function Main() {

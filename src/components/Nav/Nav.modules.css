@@ -5,3 +5,12 @@ nav {
     margin-right: 10px;
     flex-grow: 1;
 }
+
+.textUl {
+    text-align: center;
+}
+
+.textUl li {
+    margin-bottom: 20px;
+    font-size: 16pt;
+}

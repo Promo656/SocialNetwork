@@ -1,7 +1,12 @@
-header {
+.header {
     background-color: #61dafb;
     border-radius: 20px;
     margin-bottom: 10px;
     height: 70px;
     width: 100%;
+}
+
+.photo {
+    width: 70px;
+    height: 70px;
 }
