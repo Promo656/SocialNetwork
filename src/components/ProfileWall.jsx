@@ -1,4 +1,5 @@
 import React from "react";
+import './ProfileWall.css'
 
 export function ProfileWall() {
     return (

@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container img {
+    width: 70px;
+    height: 70px;
+}
+
+ul {
+    text-align: center;
+}
+
+.ul li {
+    margin-bottom: 20px;
+    font-size: 16pt;
+}
+
+.container {
+    padding: 10px 450px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.post h1 {
+    margin-bottom: 30px;
+}
+
+.hr {
+    margin: 20px 0;
+
+}
+
