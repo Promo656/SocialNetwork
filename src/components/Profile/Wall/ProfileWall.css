@@ -11,6 +11,8 @@
     border-radius: 10px;
     border: 0;
     font-size: 15pt;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .button {
