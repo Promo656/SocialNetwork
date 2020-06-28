@@ -1,9 +1,9 @@
-nav {
+.nav {
     background-color: #52a8ec;
     border-radius: 20px;
     height: 800px;
     margin-right: 10px;
-    flex-grow: 1;
+    min-width: 20%;
 }
 
 .textUl {

@@ -1,11 +1,10 @@
 import React from "react";
-import  "./Nav.css"
+import s from "./Nav.module.css"
 
 export function Nav() {
     return (
-        <>
-            <nav>
-                <ul className='textUl'>
+            <nav className={s.nav}>
+                <ul className={s.textUl}>
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Messages</a></li>
                     <li><a href="#">News</a></li>
@@ -13,6 +12,5 @@ export function Nav() {
                     <li><a href="#">Settings</a></li>
                 </ul>
             </nav>
-        </>
     )
 }

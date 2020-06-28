@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css'
+import s from './App.module.css'
 import {Page} from "./components/Page";
 
 function App() {
   return (
-      <div className="container">
+      <div className={s.container}>
         <Page/>
       </div>
   )
