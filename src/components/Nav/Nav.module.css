@@ -11,6 +11,13 @@
 }
 
 .textUl li {
-    margin-bottom: 20px;
+    margin: 20px;
     font-size: 16pt;
+}
+a {
+    text-decoration: none;
+}
+
+.activeLink {
+    color: #9708CC;
 }
