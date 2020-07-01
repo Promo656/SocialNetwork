@@ -11,6 +11,7 @@ export function Nav() {
                     <li><NavLink to="/news" activeClassName={s.activeLink}>News</NavLink></li>
                     <li><NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink></li>
                     <li><NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink></li>
+                    <li><NavLink to="/homework" activeClassName={s.activeLink}>Homework</NavLink></li>
                 </ul>
             </nav>
     )
