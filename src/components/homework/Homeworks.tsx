@@ -3,10 +3,12 @@ import Message from "./01-Messages/Message";
 import s from "./Homeworks.module.css"
 import {TasksList} from "./02-Tasks/TasksList";
 
+export type FilterType = "low" | "middle" | "high" | "all"
 export type PropsType = {
     title: string
     tasks: TasksListType
-    delTask:(id:number)=>void
+    delTask: (id: number) => void
+    filterTasks:(value:FilterType)=>void
 }
 export type TasksListType = Array<TasksType>
 export type TasksType = {
@@ -25,6 +27,8 @@ export function Homeworks() {
         {id: 7, title: "Gaming", priority: "low"}
     ])
 
+    let [filter, setFilter] = useState<FilterType>("all")
+
     function delTask(id: number) {
         tasks = tasks.filter((t) => {
             return t.id !== id
@@ -32,11 +36,25 @@ export function Homeworks() {
         setTasks(tasks)
     }
 
+    function filterTasks(value:FilterType){
+        setFilter(value)
+    }
+
+    let filteredTasks = tasks
+    if (filter === "low") {
+        filteredTasks = tasks.filter((t) => t.priority === "low")
+    }
+    if (filter === "middle") {
+        filteredTasks = tasks.filter((t) => t.priority === "middle")
+    }
+    if (filter === "high") {
+        filteredTasks = tasks.filter((t) => t.priority === "high")
+    }
 
     return (
         <div className={s.container}>
             <Message name='Egor' text='Hello, my friends! It is my first homework! ' time='13:38'/>
-            <TasksList title="My daily tasks" tasks={tasks} delTask={delTask}/>
+            <TasksList title="My daily tasks" tasks={filteredTasks} delTask={delTask} filterTasks={filterTasks}/>
         </div>
     )
 }

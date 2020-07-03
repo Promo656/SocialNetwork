@@ -1,10 +1,13 @@
 import React from "react";
 import {PropsType} from "../Homeworks";
+import s from "./TasksList.module.css"
 
 
 export function TasksList(props: PropsType) {
+
     return (
-        <div>
+        <div className={s.item}>
+            <h4>2 Домашнее задание</h4>
             <h2>{props.title}</h2>
             <ul>
                 {props.tasks.map((t) => {
@@ -16,9 +19,10 @@ export function TasksList(props: PropsType) {
                         </li>)
                 })}
             </ul>
-            <button>Low</button>
-            <button>Middle</button>
-            <button>High</button>
+            <button onClick={()=>props.filterTasks("all")}>All</button>
+            <button onClick={()=>props.filterTasks("low")}>Low</button>
+            <button onClick={()=>props.filterTasks("middle")}>Middle</button>
+            <button onClick={()=>props.filterTasks("high")}>High</button>
         </div>
     )
 }
