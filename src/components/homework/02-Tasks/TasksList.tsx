@@ -7,7 +7,6 @@ export function TasksList(props: PropsType) {
 
     return (
         <div className={s.item}>
-            <h4>2 Домашнее задание</h4>
             <h2>{props.title}</h2>
             <ul>
                 {props.tasks.map((t) => {
