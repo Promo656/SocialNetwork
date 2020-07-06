@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.dialogs {
+    width: 20%;
+    background-color: #d1f8ff;
+}
+
+.message {
+    width: 80%;
+    background-color: #ffd3cf;
+}

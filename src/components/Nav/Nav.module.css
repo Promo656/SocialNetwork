@@ -1,19 +1,26 @@
 .nav {
     background-color: #52a8ec;
     border-radius: 20px;
-    height: 800px;
-    margin-right: 10px;
+    height: 410px;
     min-width: 20%;
+    margin-right: 10px;
+    display: flex;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.textUl {
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     text-align: center;
 }
 
-.textUl li {
-    margin: 20px;
+.container li {
+    margin: 10px;
     font-size: 16pt;
 }
+
 a {
     text-decoration: none;
 }

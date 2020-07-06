@@ -1,20 +1,22 @@
 import React from "react";
-import './ProfileWall.css'
+import './ProfileWall.module.css'
 import Message from '../../homework/01-Messages/Message';
 import {NewPost} from "./NewPost/NewPost";
 import {OldPosts} from "./OldPosts/OldPosts";
+import s from "./ProfileWall.module.css"
+export type OldPostPropsType={
+    text:string
+}
 
 export function ProfileWall() {
     return (
-        <>
-            <article className='post'>
-                <h1>My posts</h1>
-                <NewPost/>
-                <hr className='hr'/>
-                <OldPosts/>
-                <OldPosts/>
-            </article>
-        </>
+        <article className={s.post}>
+            <h1>My posts</h1>
+            <NewPost/>
+            <hr className={s.hr}/>
+            <OldPosts text="Hello, everyone!!"/>
+            <OldPosts text="It's my first site!"/>
+        </article>
     )
 }
 

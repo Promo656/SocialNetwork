@@ -1,0 +1,13 @@
+.post {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post h1 {
+    margin-bottom: 30px;
+}
+
+.hr {
+    margin: 20px 0;
+}
