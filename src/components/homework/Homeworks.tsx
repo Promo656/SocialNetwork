@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Message from "./01-Messages/Message";
 import s from "./Homeworks.module.css"
 import {TasksList} from "./02-Tasks/TasksList";
+import {Input} from "./03-input/Input";
 
 export type FilterType = "low" | "middle" | "high" | "all"
 export type PropsType = {
@@ -55,6 +56,8 @@ export function Homeworks() {
         <div className={s.container}>
             <Message name='Egor' text='Hello, my friends! It is my first homework! ' time='13:38'/>
             <TasksList title="My daily tasks" tasks={filteredTasks} delTask={delTask} filterTasks={filterTasks}/>
+            <Input/>
         </div>
     )
 }
+
