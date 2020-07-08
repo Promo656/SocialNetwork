@@ -17,8 +17,14 @@ export type TasksType = {
     title: string
     priority: "low" | "middle" | "high"
 }
+export type NameType={
+    id:string
+    title:string
+}
 
 export function Homeworks() {
+    let [arr,setAr]=useState <NameType>()
+
     let [tasks, setTasks] = useState<TasksListType>([
         {id: 1, title: "Job", priority: "high"},
         {id: 2, title: "Relaxing", priority: "middle"},
