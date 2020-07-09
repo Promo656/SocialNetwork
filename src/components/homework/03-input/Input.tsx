@@ -28,7 +28,7 @@ let newName={id:v1()}
                 onChange={takeValue}
                 onKeyPress={sayHy}
             />
-            <button >OK
+            <button onClick={}>OK
             </button>
         </div>
     )
