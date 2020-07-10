@@ -17,13 +17,9 @@ export type TasksType = {
     title: string
     priority: "low" | "middle" | "high"
 }
-export type NameType={
-    id:string
-    title:string
-}
+
 
 export function Homeworks() {
-    let [arr,setAr]=useState <NameType>()
 
     let [tasks, setTasks] = useState<TasksListType>([
         {id: 1, title: "Job", priority: "high"},
@@ -58,11 +54,17 @@ export function Homeworks() {
         filteredTasks = tasks.filter((t) => t.priority === "high")
     }
 
+
+
+
+
+
+
     return (
         <div className={s.container}>
             <Message name='Egor' text='Hello, my friends! It is my first homework! ' time='13:38'/>
             <TasksList title="My daily tasks" tasks={filteredTasks} delTask={delTask} filterTasks={filterTasks}/>
-            <Input/>
+            <Input />
         </div>
     )
 }

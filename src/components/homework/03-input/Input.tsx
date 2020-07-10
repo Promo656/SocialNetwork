@@ -1,35 +1,55 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
+import {v1} from "uuid";
 
 
 export function Input() {
-    let [hi, setHi] = useState("")
+    let [name, setHi] = useState("")
 
-    function takeName(nn:string) {
-let newName={id:v1()}
+    let [newNameArr, setNewNameArr] = useState([
+        {id: "1", name: 'one'},
+        {id: "2", name: 'two'}
+    ])
+
+    function addName() {
+        debugger
+        alert('hi')
+        let newName = {id: v1(), name: name}
+
+        let newArr = [newName, ...newNameArr]
+        setNewNameArr(newArr)
+        setHi('')
     }
+
 
     function takeValue(e: ChangeEvent<HTMLInputElement>) {
         setHi(e.currentTarget.value)
     }
 
     function sayHy(event: KeyboardEvent<HTMLInputElement>) {
+
         if (event.key === "Enter") {
-            alert(`Hello ${hi}!`)
-            setHi("")
+            addName()
         }
     }
-
 
     return (
         <div>
             <input
                 type="text"
-                value={hi}
+                value={name}
                 onChange={takeValue}
                 onKeyPress={sayHy}
             />
-            <button >OK
-            </button>
+            <button onClick={addName}>OK</button>
+            <div>
+                {
+                    newNameArr.map((user) => {
+                        return <div key={user.id}>
+                            <p>{user.name}</p>
+                        </div>
+                    })
+                }
+            </div>
         </div>
     )
 }
