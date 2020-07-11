@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
+import s from "./Input.module.css"
 import {v1} from "uuid";
 type ArrType={
     id:string
@@ -36,7 +37,7 @@ export function Input() {
     }
 
     return (
-        <div>
+        <div className={s.item}>
             <input
                 type="text"
                 value={name}
