@@ -24,7 +24,6 @@ export function Input() {
 
     }
 
-
     function takeValue(e: ChangeEvent<HTMLInputElement>) {
         setHi(e.currentTarget.value)
     }
