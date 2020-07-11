@@ -1,23 +1,27 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import {v1} from "uuid";
-
+type ArrType={
+    id:string
+    name:string
+}
 
 export function Input() {
     let [name, setHi] = useState("")
 
-    let [newNameArr, setNewNameArr] = useState([
-        {id: "1", name: 'one'},
-        {id: "2", name: 'two'}
-    ])
+    let [newNameArr, setNewNameArr] = useState <Array<ArrType>> ([])
 
     function addName() {
-        debugger
-        alert('hi')
-        let newName = {id: v1(), name: name}
+        if (name!=="") {
+            alert(`Hi ${name}!`)
+            let newName = {id: v1(), name: name}
 
-        let newArr = [newName, ...newNameArr]
-        setNewNameArr(newArr)
-        setHi('')
+            let newArr = [newName, ...newNameArr]
+            setNewNameArr(newArr)
+            setHi('')
+        } else {
+            alert("Enter a valid name!")
+        }
+
     }
 
 
@@ -25,7 +29,7 @@ export function Input() {
         setHi(e.currentTarget.value)
     }
 
-    function sayHy(event: KeyboardEvent<HTMLInputElement>) {
+    function sayHi(event: KeyboardEvent<HTMLInputElement>) {
 
         if (event.key === "Enter") {
             addName()
@@ -38,16 +42,12 @@ export function Input() {
                 type="text"
                 value={name}
                 onChange={takeValue}
-                onKeyPress={sayHy}
+                onKeyPress={sayHi}
             />
             <button onClick={addName}>OK</button>
             <div>
                 {
-                    newNameArr.map((user) => {
-                        return <div key={user.id}>
-                            <p>{user.name}</p>
-                        </div>
-                    })
+                    newNameArr.length
                 }
             </div>
         </div>
