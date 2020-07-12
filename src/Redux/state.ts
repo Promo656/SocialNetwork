@@ -1,9 +1,7 @@
-
 export type DialogsType = {
     name: string
     id: number
 }
-
 export type MessageType = {
     id: number
     text: string
@@ -12,12 +10,10 @@ export type ChatPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
 }
-
 export type PostType = {
     id: number
     text: string
 }
-
 export type AppStateType = {
     chatPgage: ChatPageType
     postPage: Array<PostType>

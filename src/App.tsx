@@ -20,8 +20,8 @@ function App(props:PropsType) {
                 <Header/>
                 <div className={s.container}>
                     <Nav/>
-                    <Route path='/profile' render={()=><Main posts={props.state.postPage}/>}/>
-                    <Route path='/dialogs' render={()=><Dialogs dialogs={props.state.chatPgage} />}/>
+                    <Route path='/profile' render={()=><Main state={props.state.postPage}/>}/>
+                    {/*<Route path='/dialogs' render={()=><Dialogs dialogs={props.state.chatPgage} />}/>*/}
                     <Route path='/news' component={News}/>
                     <Route path='/homework' component={Homeworks}/>
                 </div>

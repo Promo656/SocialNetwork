@@ -1,10 +1,13 @@
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import s from "./OldPosts.module.css"
-import {OldPostPropsType} from "../ProfileWall";
+/*import {PropsType} from "../ProfileWall";*/
+import {PostType} from "../../../../Redux/state";
+type PropsType={
+    text:Array<PostType>
+}
 
-
-export function OldPosts(props:OldPostPropsType) {
+export function OldPosts(props:PropsType) {
     return (
         <section className={s.oldPost}>
             <div className={s.circle}></div>
