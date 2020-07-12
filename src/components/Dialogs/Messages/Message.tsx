@@ -1,9 +1,12 @@
 import React from "react";
-type MessageProps={
-    text:string
+import {MessageType} from "../../../Redux/state";
+
+type PropsType = {
+    message: MessageType
 }
-export function Message(props: MessageProps) {
+
+export function Message(props: PropsType) {
     return (
-        <p>{props.text}</p>
+        <p>{props.message.text}</p>
     )
 }

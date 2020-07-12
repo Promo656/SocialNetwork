@@ -11,19 +11,13 @@ type PropsType = {
 }
 
 export function ProfileWall(props: PropsType) {
-    let func = props.state.postPage.map(() => {
-        <OldPosts text={props.state.postPage}/>
-    })
+    let oldPostsElement = props.state.postPage.map((p) => <OldPosts key={p.id} post={p}/>)
     return (
         <article className={s.post}>
             <h1>My posts</h1>
             <NewPost/>
             <hr className={s.hr}/>
-            {func}
-
-
-            {/* <OldPosts text="Hello, everyone!!"/>
-            <OldPosts text="It's my first site!"/>*/}
+            {oldPostsElement}
         </article>
     )
 }

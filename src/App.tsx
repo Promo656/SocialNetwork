@@ -12,16 +12,16 @@ import {AppStateType} from "./Redux/state";
 type PropsType = {
     state: AppStateType
 }
-function App(props:PropsType) {
-    debugger
+
+function App(props: PropsType) {
     return (
         <BrowserRouter>
             <div className={s.mainContainer}>
                 <Header/>
                 <div className={s.container}>
                     <Nav/>
-                    <Route path='/profile' render={()=><Main state={props.state.postPage}/>}/>
-                    {/*<Route path='/dialogs' render={()=><Dialogs dialogs={props.state.chatPgage} />}/>*/}
+                    <Route path='/profile' render={() => <Main state={props.state}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={props.state}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/homework' component={Homeworks}/>
                 </div>

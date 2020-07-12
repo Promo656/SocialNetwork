@@ -1,6 +1,6 @@
 export type DialogsType = {
-    name: string
     id: number
+    name: string
 }
 export type MessageType = {
     id: number
@@ -38,6 +38,10 @@ export let state: AppStateType = {
         {id:1,text:"Hello, everyone!!"},
         {id:2,text:"It's my first site!"},
         {id:3,text:"Yoo!"},
+        {id:4,text:"Yoo!"},
+        {id:5,text:"Yoo!"},
+        {id:6,text:"Yoo!"},
+        {id:7,text:"Yoo!"},
 
     ]
 }
