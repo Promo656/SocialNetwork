@@ -3,17 +3,24 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
 
-export function Dialogs() {
+type Props={
+    name:string
+    id:number
+}
+export function Dialogs(props:any) {
+debugger
+
+  /*  let dialogsItem=props.state.dialogs.map(()=> <DialogItem name={props.state.name} id={props.state.id}/>)*/
+    debugger
+/*    let messagesItem=props.messages.map(()=> <Message text={props.text}/>)*/
+
     return (
         <div className={s.container}>
             <div className={s.dialogs}>
-                <DialogItem name="Valera" id={1}/>
-                <DialogItem name="Gosha" id={2}/>
-                <DialogItem name="Ilya" id={3}/>
+              {/*  {dialogsItem}*/}
             </div>
             <div className={s.message}>
-                <Message text="Hello"/>
-                <Message text="Bro"/>
+                {/*{messagesItem}*/}
             </div>
         </div>
     )

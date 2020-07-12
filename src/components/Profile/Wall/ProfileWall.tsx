@@ -8,7 +8,7 @@ export type OldPostPropsType={
     text:string
 }
 
-export function ProfileWall() {
+export function ProfileWall(props:any) {
     return (
         <article className={s.post}>
             <h1>My posts</h1>

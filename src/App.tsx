@@ -7,16 +7,21 @@ import {Main} from "./components/Profile/Main";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Homeworks} from "./components/homework/Homeworks";
+import {AppStateType} from "./Redux/state";
 
-function App() {
+type PropsType = {
+    state: AppStateType
+}
+function App(props:PropsType) {
+    debugger
     return (
         <BrowserRouter>
             <div className={s.mainContainer}>
                 <Header/>
                 <div className={s.container}>
                     <Nav/>
-                    <Route path='/profile' component={Main}/>
-                    <Route path='/dialogs' component={Dialogs}/>
+                    <Route path='/profile' render={()=><Main posts={props.state.postPage}/>}/>
+                    <Route path='/dialogs' render={()=><Dialogs dialogs={props.state.chatPgage} />}/>
                     <Route path='/news' component={News}/>
                     <Route path='/homework' component={Homeworks}/>
                 </div>
