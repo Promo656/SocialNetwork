@@ -1,17 +1,24 @@
 .header {
-/*    background-color: #61dafb;
-    border-radius: 20px;
-    height: 70px;
-    width: 100%;
-    margin-bottom: 10px;*/
+    /*    background-color: #61dafb;
+        border-radius: 20px;
+        height: 70px;
+        width: 100%;
+        margin-bottom: 10px;*/
     background-color: #ffffff;
     height: 75px;
     margin-bottom: 10px;
     width: 100%;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5)
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
 }
 
 .photo {
     width: 70px;
     height: 70px;
+}
+
+.search {
+    height: 40px;
+    border-radius: 10px;
 }
