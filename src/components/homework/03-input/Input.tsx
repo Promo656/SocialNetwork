@@ -1,18 +1,21 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import s from "./Input.module.css"
 import {v1} from "uuid";
-type ArrType={
-    id:string
-    name:string
+import {MyInput} from "../../Common/MyInput/Myinput";
+import {MyButton} from "../../Common/MyButton/MyButton";
+
+type ArrType = {
+    id: string
+    name: string
 }
 
 export function Input() {
     let [name, setHi] = useState("")
 
-    let [newNameArr, setNewNameArr] = useState <Array<ArrType>> ([])
+    let [newNameArr, setNewNameArr] = useState<Array<ArrType>>([])
 
     function addName() {
-        if (name!=="") {
+        if (name !== "") {
             alert(`Hi ${name}!`)
             let newName = {id: v1(), name: name}
 
@@ -38,13 +41,14 @@ export function Input() {
 
     return (
         <div className={s.item}>
-            <input
+            <MyInput
+                placeholder={"Write something..."}
                 type="text"
                 value={name}
                 onChange={takeValue}
                 onKeyPress={sayHi}
             />
-            <button onClick={addName}>OK</button>
+            <MyButton btnName="OK" onClick={addName}/>
             <div>
                 {
                     newNameArr.length

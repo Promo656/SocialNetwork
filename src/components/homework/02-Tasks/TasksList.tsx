@@ -1,6 +1,7 @@
 import React from "react";
 import {PropsType} from "../Homeworks";
 import s from "./TasksList.module.css"
+import {MyButton} from "../../Common/MyButton/MyButton";
 
 
 export function TasksList(props: PropsType) {
@@ -18,10 +19,10 @@ export function TasksList(props: PropsType) {
                         </li>)
                 })}
             </ul>
-            <button onClick={()=>props.filterTasks("all")}>All</button>
-            <button onClick={()=>props.filterTasks("low")}>Low</button>
-            <button onClick={()=>props.filterTasks("middle")}>Middle</button>
-            <button onClick={()=>props.filterTasks("high")}>High</button>
+            <MyButton btnName={"All"} onClick={()=>props.filterTasks("all")}></MyButton>
+            <MyButton btnName={"LOW"} onClick={()=>props.filterTasks("low")}></MyButton>
+            <MyButton btnName={"MIDDLE"} onClick={()=>props.filterTasks("middle")}></MyButton>
+            <MyButton btnName={"HIGH"} onClick={()=>props.filterTasks("high")}></MyButton>
         </div>
     )
 }
