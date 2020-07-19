@@ -3,6 +3,7 @@ import Message from "./01-Messages/Message";
 import s from "./Homeworks.module.css"
 import {TasksList} from "./02-Tasks/TasksList";
 import {Input} from "./03-input/Input";
+import {Common} from "./04-common/Common";
 
 export type FilterType = "low" | "middle" | "high" | "all"
 export type PropsType = {
@@ -53,18 +54,12 @@ export function Homeworks() {
     if (filter === "high") {
         filteredTasks = tasks.filter((t) => t.priority === "high")
     }
-
-
-
-
-
-
-
     return (
         <div className={s.container}>
             <Message name='Egor' text='Hello, my friends! It is my first homework! ' time='13:38'/>
             <TasksList title="My daily tasks" tasks={filteredTasks} delTask={delTask} filterTasks={filterTasks}/>
             <Input />
+            <Common/>
         </div>
     )
 }

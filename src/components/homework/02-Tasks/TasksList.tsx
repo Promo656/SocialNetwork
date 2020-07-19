@@ -14,7 +14,7 @@ export function TasksList(props: PropsType) {
                     return (
                         <li key={t.id}>
                             <button onClick={()=>{props.delTask(t.id)}}>X</button>
-                            <span>{t.title}</span>
+                            <span>{t.title}-</span>
                             <span>{t.priority}</span>
                         </li>)
                 })}
