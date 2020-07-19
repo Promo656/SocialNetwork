@@ -4,10 +4,11 @@ import Message from '../../homework/01-Messages/Message';
 import {NewPost} from "./NewPost/NewPost";
 import {OldPosts} from "./OldPosts/OldPosts";
 import s from "./ProfileWall.module.css"
-import {AppStateType, PostType} from "../../../Redux/state";
+import {addPost, AppStateType, PostType} from "../../../Redux/state";
 
 type PropsType = {
     state: AppStateType
+    addPost:(postText:string)=>void
 }
 
 export function ProfileWall(props: PropsType) {
@@ -15,7 +16,7 @@ export function ProfileWall(props: PropsType) {
     return (
         <article className={s.post}>
             <h1>My posts</h1>
-            <NewPost/>
+            <NewPost addPost={props.addPost}/>
             <hr className={s.hr}/>
             {oldPostsElement}
         </article>

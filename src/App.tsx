@@ -7,10 +7,11 @@ import {Main} from "./components/Profile/Main";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Homeworks} from "./components/homework/Homeworks";
-import {AppStateType} from "./Redux/state";
+import {addPost, AppStateType} from "./Redux/state";
 
 type PropsType = {
     state: AppStateType
+    addPost:(postText:string)=>void
 }
 
 function App(props: PropsType) {
@@ -20,7 +21,7 @@ function App(props: PropsType) {
                 <Header/>
                 <div className={s.container}>
                     <Nav/>
-                    <Route path='/profile' render={() => <Main state={props.state}/>}/>
+                    <Route path='/profile' render={() => <Main state={props.state} addPost={props.addPost}/>}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/homework' component={Homeworks}/>

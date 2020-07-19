@@ -1,3 +1,5 @@
+import {reRender} from "./../render"
+
 export type DialogsType = {
     id: number
     name: string
@@ -34,14 +36,21 @@ export let state: AppStateType = {
             {id: 4, text: "Fine"},
         ]
     },
-    postPage:[
-        {id:1,text:"Hello, everyone!!"},
-        {id:2,text:"It's my first site!"},
-        {id:3,text:"Yoo!"},
-        {id:4,text:"Yoo!"},
-        {id:5,text:"Yoo!"},
-        {id:6,text:"Yoo!"},
-        {id:7,text:"Yoo!"},
+    postPage: [
+        {id: 1, text: "Hello, everyone!!"},
+        {id: 2, text: "It's my first site!"},
+        {id: 3, text: "Yoo!"},
+        {id: 4, text: "Yoo!"},
+        {id: 5, text: "Yoo!"},
+        {id: 6, text: "Yoo!"},
+        {id: 7, text: "Yoo!"},
 
     ]
+}
+
+
+export function addPost(postText: string) {
+    let newPost = {id: 8, text: postText}
+    state.postPage.push(newPost)
+    reRender(state)
 }
