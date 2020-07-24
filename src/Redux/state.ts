@@ -32,7 +32,7 @@ export let state: AppStateType = {
         messages: [
             {id: 1, text: "Hello"},
             {id: 2, text: "Where are you?"},
-            {id: 3, text: "Bro"},
+            {id: 3, text: "Brooo"},
             {id: 4, text: "Fine"},
         ]
     },
