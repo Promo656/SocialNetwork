@@ -6,13 +6,18 @@ import {addPost, AppStateType} from "../../Redux/state";
 type PropsType = {
     state:AppStateType
     addPost:(postText:string)=>void
+    updateNewPostText:(newText: string)=>void
 }
 export function Main(props:PropsType) {
 
     return (
         <div className={s.container}>
             <ProfileInfo/>
-            <ProfileWall state={props.state} addPost={props.addPost}/>
+            <ProfileWall
+                state={props.state}
+                addPost={props.addPost}
+            updateNewPostText={props.updateNewPostText}
+            />
         </div>
     )
 }

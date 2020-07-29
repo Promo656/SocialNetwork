@@ -1,11 +1,12 @@
 import {reRender} from "./../render"
+import {v1} from "uuid";
 
 export type DialogsType = {
-    id: number
+    id: string
     name: string
 }
 export type MessageType = {
-    id: number
+    id: string
     text: string
 }
 export type ChatPageType = {
@@ -13,44 +14,51 @@ export type ChatPageType = {
     messages: Array<MessageType>
 }
 export type PostType = {
-    id: number
+    id: string
     text: string
 }
 export type AppStateType = {
     chatPgage: ChatPageType
     postPage: Array<PostType>
+    newPostText:string
 }
 
 export let state: AppStateType = {
     chatPgage: {
         dialogs: [
-            {name: "Valera", id: 1},
-            {name: "Gosha", id: 2},
-            {name: "Ilya", id: 3},
-            {name: "Yura", id: 4}
+            {name: "Valera", id: v1()},
+            {name: "Gosha", id: v1()},
+            {name: "Ilya", id: v1()},
+            {name: "Yura", id: v1()}
         ],
         messages: [
-            {id: 1, text: "Hello"},
-            {id: 2, text: "Where are you?"},
-            {id: 3, text: "Brooo"},
-            {id: 4, text: "Fine"},
+            {id: v1(), text: "Hello"},
+            {id: v1(), text: "Where are you?"},
+            {id: v1(), text: "Brooo"},
+            {id: v1(), text: "Fine"},
         ]
     },
     postPage: [
-        {id: 1, text: "Hello, everyone!!"},
-        {id: 2, text: "It's my first site!"},
-        {id: 3, text: "Yoo!"},
-        {id: 4, text: "Yoo!"},
-        {id: 5, text: "Yoo!"},
-        {id: 6, text: "Yoo!"},
-        {id: 7, text: "Yoo!"},
+        {id: v1(), text: "Hello, everyone!!"},
+        {id: v1(), text: "It's my first site!"},
+        {id: v1(), text: "Yoo!"},
+        {id: v1(), text: "Yoo!"},
+        {id: v1(), text: "Yoo!"},
+        {id: v1(), text: "Yoo!"},
+        {id: v1(), text: "Yoo!"},
 
-    ]
+    ],
+    newPostText:"it-kamasutra.com"
 }
 
 
 export function addPost(postText: string) {
-    let newPost = {id: 8, text: postText}
-    state.postPage.push(newPost)
+    let newPost = {id: v1(), text: postText}
+    state.postPage.unshift(newPost)
+    reRender(state)
+}
+
+export function updateNewPostText(newText: string) {
+    state.newPostText=newText
     reRender(state)
 }

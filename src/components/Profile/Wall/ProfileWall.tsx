@@ -8,7 +8,8 @@ import {addPost, AppStateType, PostType} from "../../../Redux/state";
 
 type PropsType = {
     state: AppStateType
-    addPost:(postText:string)=>void
+    addPost: (postText: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 export function ProfileWall(props: PropsType) {
@@ -16,7 +17,11 @@ export function ProfileWall(props: PropsType) {
     return (
         <article className={s.post}>
             <h1>My posts</h1>
-            <NewPost addPost={props.addPost}/>
+            <NewPost
+                addPost={props.addPost}
+                newPostText={props.state.newPostText}
+                updateNewPostText={props.updateNewPostText}
+            />
             <hr className={s.hr}/>
             {oldPostsElement}
         </article>

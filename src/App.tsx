@@ -11,7 +11,8 @@ import {addPost, AppStateType} from "./Redux/state";
 
 type PropsType = {
     state: AppStateType
-    addPost:(postText:string)=>void
+    addPost: (postText: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 function App(props: PropsType) {
@@ -21,7 +22,11 @@ function App(props: PropsType) {
                 <Header/>
                 <div className={s.container}>
                     <Nav/>
-                    <Route path='/profile' render={() => <Main state={props.state} addPost={props.addPost}/>}/>
+                    <Route path='/profile' render={() => <Main
+                        state={props.state}
+                        addPost={props.addPost}
+                        updateNewPostText={props.updateNewPostText}
+                    />}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/homework' component={Homeworks}/>
