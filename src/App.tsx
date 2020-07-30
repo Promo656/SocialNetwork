@@ -7,7 +7,7 @@ import {Main} from "./components/Profile/Main";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Homeworks} from "./components/homework/Homeworks";
-import {addPost, AppStateType} from "./Redux/state";
+import {AppStateType} from "./Redux/state";
 
 type PropsType = {
     state: AppStateType
@@ -26,7 +26,8 @@ function App(props: PropsType) {
                         state={props.state}
                         addPost={props.addPost}
                         updateNewPostText={props.updateNewPostText}
-                    />}/>
+                    />}
+                    />
                     <Route path='/dialogs' render={() => <Dialogs state={props.state}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/homework' component={Homeworks}/>

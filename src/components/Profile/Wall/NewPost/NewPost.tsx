@@ -1,6 +1,5 @@
 import React from "react";
 import s from "./NewPost.module.css"
-import {state} from "../../../../Redux/state";
 
 type PropsType = {
     addPost: (postText: string) => void
