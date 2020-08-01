@@ -3,6 +3,7 @@ import {v1} from "uuid";
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const ADD_MESSAGE = "ADD-MESSAGE";
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export let store = {
     _state: {
@@ -28,10 +29,9 @@ export let store = {
             {id: v1(), text: "Yoo!"},
             {id: v1(), text: "Yoo!"},
             {id: v1(), text: "Yoo!"},
-
         ],
         newPostText: "",
-        newMessageText:""
+        newMessageText: ""
     },
     _callSubscriber(state: AppStateType) {
         console.log("State changed")
@@ -52,20 +52,26 @@ export let store = {
             this._callSubscriber(this._state)
         } else if (action.type === ADD_MESSAGE) {
             let newMessage = {id: v1(), MessageText: this._state.newMessageText}
-            this._state.chatPgage.messages.shift(newMessage)
+            this._state.chatPgage.messages.push(newMessage)
+            this._callSubscriber(this._state)
+        } else if(action.type===UPDATE_NEW_MESSAGE_TEXT){
+            this._state.newMessageText=action.MessageText
             this._callSubscriber(this._state)
         }
     }
 }
 
-export const addPostActionCreator = (text: string) =>
+export const addPostActionCreator = (text: string):ActionType3 =>
     ({type: ADD_POST, newText: text})
 
-export const updateNewPostActionCreator = (text: string) =>
+export const updateNewPostActionCreator = (text: string):ActionType2 =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text})
 
-export const addMessageActionCreator = (text: string) =>
+export const addMessageActionCreator = (text: string):ActionType1 =>
     ({type: ADD_MESSAGE, MessageText: text})
+
+export const updateNewMessageActionCreator = (text: string):ActionType4 =>
+    ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
 
 export type DialogsType = {
     id: string
@@ -88,12 +94,23 @@ export type AppStateType = {
     postPage: Array<PostType>
     newPostText: string
 }
-export type ActionType = {
-    type: string
-    newText: string
+export type ActionType1 = {
+    type:typeof ADD_MESSAGE
     MessageText: string
 }
-
+export type ActionType2 = {
+    type: typeof UPDATE_NEW_POST_TEXT
+    newText: string
+}
+export type ActionType3 = {
+    type: typeof ADD_POST
+    newText: string
+}
+export type ActionType4 = {
+    type: typeof UPDATE_NEW_MESSAGE_TEXT
+    MessageText: string
+}
+export type ActionType=ActionType1|ActionType2|ActionType3|ActionType4
 
 
 

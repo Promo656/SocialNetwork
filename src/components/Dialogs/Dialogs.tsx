@@ -2,7 +2,12 @@ import React from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
-import {ActionType, addMessageActionCreator, AppStateType, DialogsType} from "../../Redux/state";
+import {
+    ActionType,
+    addMessageActionCreator,
+    AppStateType,
+    DialogsType, updateNewMessageActionCreator,
+} from "../../Redux/state";
 
 type PropsType = {
     state: AppStateType
@@ -26,6 +31,14 @@ export function Dialogs(props: PropsType) {
         }
     }
 
+    let onMessageChange = () => {
+        if (newTextElement.current) {
+            let text = newTextElement.current.value
+            let action = updateNewMessageActionCreator(text);
+            props.dispatch(action)
+        }
+    }
+
     return (
         <div className={s.container}>
             <div className={s.dialogs}>
@@ -33,8 +46,16 @@ export function Dialogs(props: PropsType) {
             </div>
             <div className={s.message}>
                 {messageItem}
-                <input type="text" ref={newTextElement}/>
-                <input type="button" value="sent" onClick={addMessage}/>
+                <input
+                    type="text"
+                    ref={newTextElement}
+                    onChange={onMessageChange}
+
+                />
+                <input
+                    type="button"
+                    value="sent"
+                    onClick={addMessage}/>
             </div>
         </div>
     )
