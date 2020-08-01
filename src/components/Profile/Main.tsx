@@ -2,11 +2,10 @@ import React from "react";
 import {ProfileInfo} from "./info/ProfileInfo";
 import {ProfileWall} from "./Wall/ProfileWall";
 import s from './Main.module.css'
-import {AppStateType} from "../../Redux/state";
+import {ActionType, AppStateType} from "../../Redux/state";
 type PropsType = {
     state:AppStateType
-    addPost:(postText:string)=>void
-    updateNewPostText:(newText: string)=>void
+    dispatch: (action: ActionType) => void
 }
 export function Main(props:PropsType) {
 
@@ -15,8 +14,7 @@ export function Main(props:PropsType) {
             <ProfileInfo/>
             <ProfileWall
                 state={props.state}
-                addPost={props.addPost}
-            updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
             />
         </div>
     )

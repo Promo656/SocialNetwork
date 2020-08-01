@@ -1,26 +1,29 @@
 import React from "react";
 import s from "./NewPost.module.css"
+import {ActionType, addPostActionCreator, updateNewPostActionCreator} from "../../../../Redux/state";
 
 type PropsType = {
-    addPost: (postText: string) => void
-    newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 export function NewPost(props: PropsType) {
+
     let newPostElement = React.createRef<HTMLInputElement>()
+
     let addPost = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            props.addPost(text)
-            props.updateNewPostText("")
+            let action = addPostActionCreator(text);
+            props.dispatch(action)
+            newPostElement.current.value=""
         }
     }
 
     let onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            props.updateNewPostText(text)
+            let action = updateNewPostActionCreator(text);
+            props.dispatch(action)
         }
     }
     return (
@@ -31,7 +34,6 @@ export function NewPost(props: PropsType) {
                 placeholder='your news...'
                 ref={newPostElement}
                 onChange={onPostChange}
-                value={props.newPostText}
             />
             <input className={s.button} type="submit" onClick={addPost}/>
         </div>

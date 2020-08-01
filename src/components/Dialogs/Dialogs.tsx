@@ -2,10 +2,11 @@ import React from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
-import {AppStateType, DialogsType} from "../../Redux/state";
+import {ActionType, addMessageActionCreator, AppStateType, DialogsType} from "../../Redux/state";
 
 type PropsType = {
     state: AppStateType
+    dispatch: (action: ActionType) => void
 }
 
 export function Dialogs(props: PropsType) {
@@ -13,12 +14,15 @@ export function Dialogs(props: PropsType) {
     let chatItem = props.state.chatPgage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
     let messageItem = props.state.chatPgage.messages.map((m) => <Message key={m.id} message={m}/>)
 
-    let newTextElement=React.createRef<HTMLInputElement>()
+    let newTextElement = React.createRef<HTMLInputElement>()
 
     let addMessage = () => {
-        if(newTextElement.current){
-            let text=newTextElement.current.value
-            alert(text)
+        if (newTextElement.current) {
+            let text = newTextElement.current.value
+            //alert(text)
+            let action = addMessageActionCreator(text)
+            props.dispatch(action)
+            newTextElement.current.value = ""
         }
     }
 
@@ -30,7 +34,7 @@ export function Dialogs(props: PropsType) {
             <div className={s.message}>
                 {messageItem}
                 <input type="text" ref={newTextElement}/>
-                <input type="button" value="sent"  onClick={addMessage}/>
+                <input type="button" value="sent" onClick={addMessage}/>
             </div>
         </div>
     )

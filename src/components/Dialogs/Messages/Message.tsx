@@ -8,7 +8,7 @@ type PropsType = {
 export function Message(props: PropsType) {
     return (
         <div>
-        <p>{props.message.text}</p>
+        <p>{props.message.MessageText}</p>
         </div>
     )
 }
