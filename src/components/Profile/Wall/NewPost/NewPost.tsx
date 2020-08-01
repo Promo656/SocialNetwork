@@ -15,7 +15,7 @@ export function NewPost(props: PropsType) {
             let text = newPostElement.current.value
             let action = addPostActionCreator(text);
             props.dispatch(action)
-            newPostElement.current.value=""
+            newPostElement.current.value = ""
         }
     }
 
@@ -26,6 +26,7 @@ export function NewPost(props: PropsType) {
             props.dispatch(action)
         }
     }
+
     return (
         <div>
             <input

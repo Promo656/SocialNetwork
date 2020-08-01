@@ -19,12 +19,12 @@ export function Dialogs(props: PropsType) {
     let chatItem = props.state.chatPgage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
     let messageItem = props.state.chatPgage.messages.map((m) => <Message key={m.id} message={m}/>)
 
+
     let newTextElement = React.createRef<HTMLInputElement>()
 
     let addMessage = () => {
         if (newTextElement.current) {
             let text = newTextElement.current.value
-            //alert(text)
             let action = addMessageActionCreator(text)
             props.dispatch(action)
             newTextElement.current.value = ""

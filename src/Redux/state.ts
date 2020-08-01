@@ -5,7 +5,7 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
-export let store = {
+export const store: StoreType = {
     _state: {
         chatPgage: {
             dialogs: [
@@ -39,13 +39,14 @@ export let store = {
     getState() {
         return this._state
     },
-    subscribe(observer: (state: AppStateType) => void) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
         if (action.type === ADD_POST) {
             let newPost = {id: v1(), text: this._state.newPostText}
             this._state.postPage.unshift(newPost)
+            this._state.newPostText = ""
             this._callSubscriber(this._state)
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.newPostText = action.newText
@@ -53,24 +54,25 @@ export let store = {
         } else if (action.type === ADD_MESSAGE) {
             let newMessage = {id: v1(), MessageText: this._state.newMessageText}
             this._state.chatPgage.messages.push(newMessage)
+            this._state.newMessageText = ""
             this._callSubscriber(this._state)
-        } else if(action.type===UPDATE_NEW_MESSAGE_TEXT){
-            this._state.newMessageText=action.MessageText
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.newMessageText = action.MessageText
             this._callSubscriber(this._state)
         }
     }
 }
 
-export const addPostActionCreator = (text: string):ActionType3 =>
+export const addPostActionCreator = (text: string): AddPostActionType =>
     ({type: ADD_POST, newText: text})
 
-export const updateNewPostActionCreator = (text: string):ActionType2 =>
+export const updateNewPostActionCreator = (text: string): UpdateNewPostTextActionType =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text})
 
-export const addMessageActionCreator = (text: string):ActionType1 =>
+export const addMessageActionCreator = (text: string): AddMessageActionType =>
     ({type: ADD_MESSAGE, MessageText: text})
 
-export const updateNewMessageActionCreator = (text: string):ActionType4 =>
+export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextActionType =>
     ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
 
 export type DialogsType = {
@@ -93,24 +95,33 @@ export type AppStateType = {
     chatPgage: ChatPageType
     postPage: Array<PostType>
     newPostText: string
+    newMessageText: string
 }
-export type ActionType1 = {
-    type:typeof ADD_MESSAGE
+export type StoreType = {
+    _state: AppStateType
+    _callSubscriber: (state: AppStateType) => void
+    getState: () => AppStateType
+    subscribe: (observer: (state: AppStateType) => void) => void
+    dispatch:(action:any)=>void
+}
+export type ActionType = AddMessageActionType | UpdateNewPostTextActionType | AddPostActionType | UpdateNewMessageTextActionType
+export type AddMessageActionType = {
+    type: "ADD-MESSAGE"
     MessageText: string
 }
-export type ActionType2 = {
-    type: typeof UPDATE_NEW_POST_TEXT
+export type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
     newText: string
 }
-export type ActionType3 = {
-    type: typeof ADD_POST
+export type AddPostActionType = {
+    type:  "ADD-POST"
     newText: string
 }
-export type ActionType4 = {
-    type: typeof UPDATE_NEW_MESSAGE_TEXT
+export type UpdateNewMessageTextActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
     MessageText: string
 }
-export type ActionType=ActionType1|ActionType2|ActionType3|ActionType4
+
 
 
 
