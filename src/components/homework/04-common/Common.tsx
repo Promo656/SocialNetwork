@@ -10,7 +10,7 @@ return (
     <div className={s.item}>
         <MyInput placeholder="Write something" />
         <MyButton btnName={"Button"}/>
-        <MyCheckBox checked={true}/>
+        <MyCheckBox />
     </div>
 )
 }

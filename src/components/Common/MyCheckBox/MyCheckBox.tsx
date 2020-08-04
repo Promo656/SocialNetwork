@@ -1,12 +1,10 @@
 import React from "react";
 import s from "./MyCheckBox.module.css"
 
-type CheckBoxType={
-    checked:boolean
-}
 
-export function MyCheckBox(props:CheckBoxType) {
+
+export function MyCheckBox() {
 return(
-    <input className={s.checkBox} type="checkbox" checked={props.checked}/>
+    <input className={s.checkBox} type="checkbox" />
 )
 }
