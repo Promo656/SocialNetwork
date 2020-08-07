@@ -25,7 +25,6 @@ export function Input() {
         } else {
             alert("Enter a valid name!")
         }
-
     }
 
     function takeValue(e: ChangeEvent<HTMLInputElement>) {
@@ -33,7 +32,6 @@ export function Input() {
     }
 
     function sayHi(event: KeyboardEvent<HTMLInputElement>) {
-
         if (event.key === "Enter") {
             addName()
         }
