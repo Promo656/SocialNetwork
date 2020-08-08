@@ -12,7 +12,7 @@ type PropsType = {
 }
 
 export function ProfileWall(props: PropsType) {
-    let oldPostsElement = props.state.postPage.map((p) => <OldPosts key={p.id} post={p}/>)
+    let oldPostsElement = props.state.postPage.posts.map((p) => <OldPosts key={p.id} post={p}/>)
     return (
         <div className={s.post}>
             <h1>My posts</h1>

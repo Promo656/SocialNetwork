@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {postReducer} from "./postReducer";
+import {chatReducer} from "./chatReducer";
 
 const ADD_POST = "ADD-POST"
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -19,19 +21,22 @@ export const store: StoreType = {
                 {id: v1(), MessageText: "Where are you?"},
                 {id: v1(), MessageText: "Brooo"},
                 {id: v1(), MessageText: "Fine"},
-            ]
+            ],
+            newMessageText: ""
         },
-        postPage: [
-            {id: v1(), text: "Hello, everyone!!"},
-            {id: v1(), text: "It's my first site!"},
-            {id: v1(), text: "Yoo!"},
-            {id: v1(), text: "Yoo!"},
-            {id: v1(), text: "Yoo!"},
-            {id: v1(), text: "Yoo!"},
-            {id: v1(), text: "Yoo!"},
-        ],
-        newPostText: "",
-        newMessageText: ""
+        postPage: {
+            posts: [
+                {id: v1(), text: "Hello, everyone!!"},
+                {id: v1(), text: "It's my first site!"},
+                {id: v1(), text: "Yoo!"},
+                {id: v1(), text: "Yoo!"},
+                {id: v1(), text: "Yoo!"},
+                {id: v1(), text: "Yoo!"},
+                {id: v1(), text: "Yoo!"},
+            ],
+            newPostText: ""
+        }
+
     },
     _callSubscriber(state: AppStateType) {
         console.log("State changed")
@@ -43,23 +48,10 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
-        if (action.type === ADD_POST) {
-            let newPost = {id: v1(), text: this._state.newPostText}
-            this._state.postPage.unshift(newPost)
-            this._state.newPostText = ""
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.newPostText = action.newText
-            this._callSubscriber(this._state)
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage = {id: v1(), MessageText: this._state.newMessageText}
-            this._state.chatPgage.messages.push(newMessage)
-            this._state.newMessageText = ""
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.newMessageText = action.MessageText
-            this._callSubscriber(this._state)
-        }
+        this._state.postPage = postReducer(this._state.postPage, action)
+        this._state.chatPgage = chatReducer(this._state.chatPgage, action)
+
+        this._callSubscriber(this._state)
     }
 }
 
@@ -86,25 +78,33 @@ export type MessageType = {
 export type ChatPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 export type PostType = {
     id: string
     text: string
+
+}
+export  type PostPageType = {
+    newPostText: string
+    posts: Array<PostType>
 }
 export type AppStateType = {
     chatPgage: ChatPageType
-    postPage: Array<PostType>
-    newPostText: string
-    newMessageText: string
+    postPage: PostPageType
 }
 export type StoreType = {
     _state: AppStateType
     _callSubscriber: (state: AppStateType) => void
     getState: () => AppStateType
     subscribe: (observer: (state: AppStateType) => void) => void
-    dispatch:(action:any)=>void
+    dispatch: (action: any) => void
 }
-export type ActionType = AddMessageActionType | UpdateNewPostTextActionType | AddPostActionType | UpdateNewMessageTextActionType
+export type ActionType =
+    AddMessageActionType
+    | UpdateNewPostTextActionType
+    | AddPostActionType
+    | UpdateNewMessageTextActionType
 export type AddMessageActionType = {
     type: "ADD-MESSAGE"
     MessageText: string
@@ -114,7 +114,7 @@ export type UpdateNewPostTextActionType = {
     newText: string
 }
 export type AddPostActionType = {
-    type:  "ADD-POST"
+    type: "ADD-POST"
     newText: string
 }
 export type UpdateNewMessageTextActionType = {

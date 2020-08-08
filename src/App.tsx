@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './App.module.css'
 import {BrowserRouter, Route} from "react-router-dom";
 import {Header} from "./components/Header/Header";
@@ -15,6 +15,10 @@ type PropsType = {
 }
 
 function App(props: PropsType) {
+
+
+
+
     return (
         <div className={s.mainContainer}>
             <Header/>
