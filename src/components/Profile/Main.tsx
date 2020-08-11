@@ -2,7 +2,7 @@ import React from "react";
 import {ProfileInfo} from "./info/ProfileInfo";
 import {ProfileWall} from "./Wall/ProfileWall";
 import s from './Main.module.css'
-import {ActionType, AppStateType} from "../../Redux/state";
+import {ActionType, AppStateType} from "../../Redux/store";
 type PropsType = {
     state:AppStateType
     dispatch: (action: ActionType) => void

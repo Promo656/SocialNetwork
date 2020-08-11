@@ -4,7 +4,7 @@ import Message from '../../homework/01-Messages/Message';
 import {NewPost} from "./NewPost/NewPost";
 import {OldPosts} from "./OldPosts/OldPosts";
 import s from "./ProfileWall.module.css"
-import {ActionType, AppStateType} from "../../../Redux/state";
+import {ActionType, AppStateType} from "../../../Redux/store";
 
 type PropsType = {
     state: AppStateType

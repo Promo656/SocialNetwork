@@ -7,7 +7,7 @@ import {
     addMessageActionCreator,
     AppStateType,
     DialogsType, updateNewMessageActionCreator,
-} from "../../Redux/state";
+} from "../../Redux/store";
 
 type PropsType = {
     state: AppStateType
@@ -16,8 +16,8 @@ type PropsType = {
 
 export function Dialogs(props: PropsType) {
 
-    let chatItem = props.state.chatPgage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
-    let messageItem = props.state.chatPgage.messages.map((m) => <Message key={m.id} message={m}/>)
+    let chatItem = props.state.chatPage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
+    let messageItem = props.state.chatPage.messages.map((m) => <Message key={m.id} message={m}/>)
 
 
     let newTextElement = React.createRef<HTMLInputElement>()

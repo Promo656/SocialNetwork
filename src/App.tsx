@@ -7,7 +7,7 @@ import {Main} from "./components/Profile/Main";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Homeworks} from "./components/homework/Homeworks";
-import {ActionType, AppStateType} from "./Redux/state";
+import {ActionType, AppStateType} from "./Redux/store";
 
 type PropsType = {
     state: AppStateType

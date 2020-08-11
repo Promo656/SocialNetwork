@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import s from "./OldPosts.module.css"
 /*import {PropsType} from "../ProfileWall";*/
-import {PostType} from "../../../../Redux/state";
+import {PostType} from "../../../../Redux/store";
 type PropsType={
     post:PostType
 }

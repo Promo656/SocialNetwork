@@ -7,9 +7,64 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
+export type DialogsType = {
+    id: string
+    name: string
+}
+export type MessageType = {
+    id: string
+    MessageText: string
+}
+export type ChatPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessageType>
+    newMessageText: string
+}
+export type PostType = {
+    id: string
+    text: string
+}
+export  type PostPageType = {
+    newPostText: string
+    posts: Array<PostType>
+}
+export type AppStateType = {
+    chatPage: ChatPageType
+    postPage: PostPageType
+}
+export type StoreType = {
+    _state: AppStateType
+    _callSubscriber: (state: AppStateType) => void
+    getState: () => AppStateType
+    subscribe: (observer: (state: AppStateType) => void) => void
+    dispatch: (action: any) => void
+}
+export type ActionType =
+    AddMessageActionType
+    | UpdateNewPostTextActionType
+    | AddPostActionType
+    | UpdateNewMessageTextActionType
+
+export type AddMessageActionType = {
+    type: "ADD-MESSAGE"
+    MessageText: string
+}
+export type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+export type AddPostActionType = {
+    type: "ADD-POST"
+    newText: string
+}
+export type UpdateNewMessageTextActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
+    MessageText: string
+}
+
 export const store: StoreType = {
     _state: {
-        chatPgage: {
+        chatPage: {
             dialogs: [
                 {name: "Valera", id: v1()},
                 {name: "Gosha", id: v1()},
@@ -36,7 +91,6 @@ export const store: StoreType = {
             ],
             newPostText: ""
         }
-
     },
     _callSubscriber(state: AppStateType) {
         console.log("State changed")
@@ -49,8 +103,7 @@ export const store: StoreType = {
     },
     dispatch(action: ActionType) {
         this._state.postPage = postReducer(this._state.postPage, action)
-        this._state.chatPgage = chatReducer(this._state.chatPgage, action)
-
+        this._state.chatPage = chatReducer(this._state.chatPage, action)
         this._callSubscriber(this._state)
     }
 }
@@ -67,60 +120,7 @@ export const addMessageActionCreator = (text: string): AddMessageActionType =>
 export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextActionType =>
     ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
 
-export type DialogsType = {
-    id: string
-    name: string
-}
-export type MessageType = {
-    id: string
-    MessageText: string
-}
-export type ChatPageType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessageType>
-    newMessageText: string
-}
-export type PostType = {
-    id: string
-    text: string
 
-}
-export  type PostPageType = {
-    newPostText: string
-    posts: Array<PostType>
-}
-export type AppStateType = {
-    chatPgage: ChatPageType
-    postPage: PostPageType
-}
-export type StoreType = {
-    _state: AppStateType
-    _callSubscriber: (state: AppStateType) => void
-    getState: () => AppStateType
-    subscribe: (observer: (state: AppStateType) => void) => void
-    dispatch: (action: any) => void
-}
-export type ActionType =
-    AddMessageActionType
-    | UpdateNewPostTextActionType
-    | AddPostActionType
-    | UpdateNewMessageTextActionType
-export type AddMessageActionType = {
-    type: "ADD-MESSAGE"
-    MessageText: string
-}
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
-export type AddPostActionType = {
-    type: "ADD-POST"
-    newText: string
-}
-export type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    MessageText: string
-}
 
 
 
