@@ -75,7 +75,7 @@ export const store: StoreType = {
                 {id: v1(), MessageText: "Hello"},
                 {id: v1(), MessageText: "Where are you?"},
                 {id: v1(), MessageText: "Brooo"},
-                {id: v1(), MessageText: "Fine!!"},
+                {id: v1(), MessageText: "Fine!!!"},
             ],
             newMessageText: ""
         },
