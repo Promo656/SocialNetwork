@@ -28,6 +28,6 @@ export function NewPostContainer(props: PropsType) {
     }
 
     return (
-        <NewPost />
+        <div></div>
     )
 }

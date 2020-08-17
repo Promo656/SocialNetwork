@@ -3,10 +3,10 @@ import s from './ProfileInfo.module.css'
 
 export function ProfileInfo() {
     return (
-            <article className={s.container}>
-                <section className={s.BGPhoto}>
-                </section>
-                <section className={s.aboutPerson}>
+            <div className={s.container}>
+                <div className={s.BGPhoto}>
+                </div>
+                <div className={s.aboutPerson}>
                     <div className={s.PPhoto}>
                     </div>
                     <div className={s.description}>
@@ -18,7 +18,7 @@ export function ProfileInfo() {
                             <li>Website: github</li>
                         </ul>
                     </div>
-                </section>
-            </article>
+                </div>
+            </div>
     )
 }
