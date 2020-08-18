@@ -12,10 +12,7 @@ export function Main(props:PropsType) {
     return (
         <div className={s.container}>
             <ProfileInfo/>
-            <ProfileWall
-                state={props.state}
-                dispatch={props.dispatch}
-            />
+            <ProfileWall state={props.state} dispatch={props.dispatch}/>
         </div>
     )
 }
