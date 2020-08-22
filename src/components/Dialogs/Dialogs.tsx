@@ -18,8 +18,6 @@ export function Dialogs(props: PropsType) {
 
     let chatItem = props.state.chatPage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
     let messageItem = props.state.chatPage.messages.map((m) => <Message key={m.id} message={m}/>)
-
-
     let newTextElement = React.createRef<HTMLInputElement>()
 
     let addMessage = () => {
@@ -50,7 +48,6 @@ export function Dialogs(props: PropsType) {
                     type="text"
                     ref={newTextElement}
                     onChange={onMessageChange}
-
                 />
                 <input
                     type="button"
