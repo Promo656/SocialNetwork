@@ -7,6 +7,18 @@ const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
+export const addPostActionCreator = (text: string): AddPostActionType =>
+    ({type: ADD_POST, newText: text})
+
+export const updateNewPostActionCreator = (text: string): UpdateNewPostTextActionType =>
+    ({type: UPDATE_NEW_POST_TEXT, newText: text})
+
+export const addMessageActionCreator = (text: string): AddMessageActionType =>
+    ({type: ADD_MESSAGE, MessageText: text})
+
+export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextActionType =>
+    ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
+
 export type DialogsType = {
     id: string
     name: string
@@ -108,17 +120,7 @@ export const store: StoreType = {
     }
 }
 
-export const addPostActionCreator = (text: string): AddPostActionType =>
-    ({type: ADD_POST, newText: text})
 
-export const updateNewPostActionCreator = (text: string): UpdateNewPostTextActionType =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: text})
-
-export const addMessageActionCreator = (text: string): AddMessageActionType =>
-    ({type: ADD_MESSAGE, MessageText: text})
-
-export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextActionType =>
-    ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
 
 
 

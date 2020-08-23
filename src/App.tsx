@@ -29,7 +29,7 @@ function App(props: PropsType) {
                     <Route path='/news' component={News}/>
                 </div>
                 <div>
-                    <RightNav/>
+                   {/* <RightNav/>*/}
                 </div>
             </div>
         </div>
