@@ -2,23 +2,52 @@ import {v1} from "uuid";
 import {postReducer} from "./postReducer";
 import {chatReducer} from "./chatReducer";
 
+//-----------------------------------START ACTION CREATORS-------------------------------------
+export type ActionType =
+    AddMessageActionType
+    | UpdateNewPostTextActionType
+    | AddPostActionType
+    | UpdateNewMessageTextActionType
+//--------------------------------------ADD-POST-----------------------------------------
 const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
-
+export type AddPostActionType = {
+    type: "ADD-POST"
+    newText: string
+}
 export const addPostActionCreator = (text: string): AddPostActionType =>
     ({type: ADD_POST, newText: text})
 
+//-----------------------------------UPDATE-NEW-POST-TEXT--------------------------------
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+export type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
 export const updateNewPostActionCreator = (text: string): UpdateNewPostTextActionType =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text})
 
+//---------------------------------------ADD-MESSAGE-----------------------------------
+const ADD_MESSAGE = "ADD-MESSAGE";
+export type AddMessageActionType = {
+    type: "ADD-MESSAGE"
+    MessageText: string
+}
 export const addMessageActionCreator = (text: string): AddMessageActionType =>
     ({type: ADD_MESSAGE, MessageText: text})
 
+//------------------------------------UPDATE-NEW-MESSAGE-TEXT----------------------
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+export type UpdateNewMessageTextActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
+    MessageText: string
+}
 export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextActionType =>
     ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
+//-----------------------------------END ACTION CREATORS------------------------------------
 
+//------------------------------------------------------------------------------------------
+
+//-----------------------------------START CREATE TYPES-------------------------------------
 export type DialogsType = {
     id: string
     name: string
@@ -51,29 +80,11 @@ export type StoreType = {
     subscribe: (observer: (state: AppStateType) => void) => void
     dispatch: (action: any) => void
 }
-export type ActionType =
-    AddMessageActionType
-    | UpdateNewPostTextActionType
-    | AddPostActionType
-    | UpdateNewMessageTextActionType
+//-----------------------------------END CREATE TYPES-------------------------------------
 
-export type AddMessageActionType = {
-    type: "ADD-MESSAGE"
-    MessageText: string
-}
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
-export type AddPostActionType = {
-    type: "ADD-POST"
-    newText: string
-}
-export type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    MessageText: string
-}
+//------------------------------------------------------------------------------------------
 
+//-----------------------------------START CREATE STORE-------------------------------------
 export const store: StoreType = {
     _state: {
         chatPage: {
@@ -93,7 +104,7 @@ export const store: StoreType = {
         },
         postPage: {
             posts: [
-                {id: v1(), text: "Hello, everyone!!"},
+                {id: v1(), text: "Hello, everyone!!!!!!!!!!!!!"},
                 {id: v1(), text: "It's my first site!"},
                 {id: v1(), text: "Yoo!"},
                 {id: v1(), text: "Yoo!"},
@@ -119,7 +130,7 @@ export const store: StoreType = {
         this._callSubscriber(this._state)
     }
 }
-
+//-----------------------------------END CREATE STORE-------------------------------------
 
 
 
