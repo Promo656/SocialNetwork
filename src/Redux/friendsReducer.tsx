@@ -17,7 +17,7 @@ let initialState ={
         {id: v1(), MessageText: "Brooo"},
         {id: v1(), MessageText: "Fine"},
     ],
-    newMessageText: "s"
+    newMessageText: ""
 }
 
 export const chatReducer = (state: ChatPageType=initialState, action: ActionType) => {

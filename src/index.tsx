@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import {AppStateType} from "./Redux/store";
 import {BrowserRouter} from "react-router-dom";
+import {v1} from "uuid";
 
 let reRender = (state: AppStateType) => {
     ReactDOM.render(

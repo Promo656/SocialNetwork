@@ -69,9 +69,17 @@ export  type PostPageType = {
     newPostText: string
     posts: Array<PostType>
 }
+export type FriendType = {
+    id: string
+    name: string
+}
+export type FriendsPageType = {
+    friends: FriendType[]
+}
 export type AppStateType = {
     chatPage: ChatPageType
     postPage: PostPageType
+//    friendsPage: FriendsPageType
 }
 export type StoreType = {
     _state: AppStateType
@@ -92,7 +100,7 @@ export const store: StoreType = {
                 {name: "Valera", id: v1()},
                 {name: "Gosha", id: v1()},
                 {name: "Ilya", id: v1()},
-                {name: "Yuraa", id: v1()}
+                {name: "Yura", id: v1()}
             ],
             messages: [
                 {id: v1(), MessageText: "Hello"},
@@ -113,7 +121,15 @@ export const store: StoreType = {
                 {id: v1(), text: "Yoo!"},
             ],
             newPostText: ""
-        }
+        }/*,
+        friendsPage:{
+            friends:[
+                {id:v1(),name:"Valera"},
+                {id:v1(),name:"Gosha"},
+                {id:v1(),name:"Ilya"},
+                {id:v1(),name:"Yura"}
+            ]
+        }*/
     },
     _callSubscriber(state: AppStateType) {
         console.log("State changed")
@@ -133,6 +149,21 @@ export const store: StoreType = {
 //-----------------------------------END CREATE STORE-------------------------------------
 
 
+export type FriendTestType={
+    id:string
+    name:string
+}
+export type TestStoreType={
+    friends: FriendTestType[]
+}
+
+export let testStore:TestStoreType={
+    friends:[
+        {id:v1(),name:"Egor"},
+        {id:v1(),name:"Dima"},
+        {id:v1(),name:"Vova"},
+    ]
+}
 
 
 
