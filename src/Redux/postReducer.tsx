@@ -1,9 +1,6 @@
 import {ActionType, PostPageType, StoreType} from "./store";
 import {v1} from "uuid";
 
-const ADD_POST = "ADD-POST"
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-
 let initialState= {
     posts: [
         {id: v1(), text: "Hello, everyone!!!!!!!!!"},
@@ -32,3 +29,20 @@ export const postReducer = (state: PostPageType=initialState, action: ActionType
     }
 }
 
+//--------------------------------------ADD-POST----------------------------------
+const ADD_POST = "ADD-POST"
+export type AddPostActionType = {
+    type: "ADD-POST"
+    newText: string
+}
+export const addPostActionCreator = (text: string): AddPostActionType =>
+    ({type: ADD_POST, newText: text})
+
+//-----------------------------------UPDATE-NEW-POST-TEXT--------------------------------
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+export type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+export const updateNewPostActionCreator = (text: string): UpdateNewPostTextActionType =>
+    ({type: UPDATE_NEW_POST_TEXT, newText: text})

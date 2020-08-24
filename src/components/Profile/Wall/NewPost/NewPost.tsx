@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./NewPost.module.css"
-import {ActionType, addPostActionCreator, updateNewPostActionCreator} from "../../../../Redux/store";
+import { addPostActionCreator, updateNewPostActionCreator} from "../../../../Redux/postReducer";
+import {ActionType} from './../../../../Redux/store'
 
 type PropsType = {
     dispatch: (action: ActionType) => void

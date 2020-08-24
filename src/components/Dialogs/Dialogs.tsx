@@ -2,12 +2,8 @@ import React from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
-import {
-    ActionType,
-    addMessageActionCreator,
-    AppStateType,
-    DialogsType, updateNewMessageActionCreator,
-} from "../../Redux/store";
+import {addMessageActionCreator, updateNewMessageActionCreator,} from "../../Redux/chatReducer";
+import {ActionType, AppStateType} from './../../Redux/store'
 
 type PropsType = {
     state: AppStateType
