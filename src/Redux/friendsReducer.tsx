@@ -1,37 +1,26 @@
-import {ActionType, AppStateType, ChatPageType} from "./store";
+import {ActionType, FriendsPageType} from "./store";
 import {v1} from "uuid";
 
-const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
-
-let initialState ={
-    dialogs: [
-        {name: "Valera", id: v1()},
-        {name: "Gosha", id: v1()},
-        {name: "Ilya", id: v1()},
-        {name: "Yura", id: v1()}
+let itialState={
+    friends:[
+        {id:v1(),name:"Valera"},
+        {id:v1(),name:"Gosha"},
+        {id:v1(),name:"Ilya"},
+        {id:v1(),name:"Yura"}
     ],
-    messages: [
-        {id: v1(), MessageText: "Hello"},
-        {id: v1(), MessageText: "Where are you?"},
-        {id: v1(), MessageText: "Brooo"},
-        {id: v1(), MessageText: "Fine"},
-    ],
-    newMessageText: ""
+    newFriendsText:""
 }
 
-export const chatReducer = (state: ChatPageType=initialState, action: ActionType) => {
-    switch (action.type) {
-        case ADD_MESSAGE:
-            let newMessage = {id: v1(), MessageText: state.newMessageText}
-            state.messages.push(newMessage)
-            state.newMessageText = ""
-            return state
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.MessageText
-            return state
-        default:
-            return state
+export const friendsReducer=(state:FriendsPageType=itialState, action:ActionType)=>{
+    switch (action.type){
+
     }
 }
-
+//--------------------------------------ADD-FRIEND----------------------------------
+const ADD_FRIEND="ADD-FRIEND"
+export type AddFriendActionType={
+    type: "ADD-FRIEND"
+    newText:string
+}
+export const addFriendActionCreator=(text:string):AddFriendActionType=>
+    ({type:ADD_FRIEND,newText:text})

@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {AddPostActionType, postReducer, UpdateNewPostTextActionType} from "./postReducer";
 import {AddMessageActionType, chatReducer, UpdateNewMessageTextActionType} from "./chatReducer";
+import {friendsReducer} from "./friendsReducer";
 
 //-----------------------------------START CREATE TYPES-------------------------------------
 export type DialogsType = {
@@ -30,11 +31,12 @@ export type FriendType = {
 }
 export type FriendsPageType = {
     friends: FriendType[]
+    newFriendsText: string
 }
 export type AppStateType = {
     chatPage: ChatPageType
     postPage: PostPageType
-//    friendsPage: FriendsPageType
+    friendsPage: FriendsPageType
 }
 export type StoreType = {
     _state: AppStateType
@@ -81,15 +83,16 @@ export const store: StoreType = {
                 {id: v1(), text: "Yoo!"},
             ],
             newPostText: ""
-        }/*,
-        friendsPage:{
-            friends:[
-                {id:v1(),name:"Valera"},
-                {id:v1(),name:"Gosha"},
-                {id:v1(),name:"Ilya"},
-                {id:v1(),name:"Yura"}
-            ]
-        }*/
+        },
+        friendsPage: {
+            friends: [
+                {id: v1(), name: "Valera"},
+                {id: v1(), name: "Gosha"},
+                {id: v1(), name: "Ilya"},
+                {id: v1(), name: "Yura"}
+            ],
+            newFriendsText:""
+        }
     },
     _callSubscriber(state: AppStateType) {
         console.log("State changed")
@@ -103,13 +106,15 @@ export const store: StoreType = {
     dispatch(action: ActionType) {
         this._state.postPage = postReducer(this._state.postPage, action)
         this._state.chatPage = chatReducer(this._state.chatPage, action)
+        this._state.friendsPage = friendsReducer(this._state.friendsPage, action)
+
         this._callSubscriber(this._state)
     }
 }
 //-----------------------------------END CREATE STORE-------------------------------------
 
 
-export type FriendTestType={
+/*export type FriendTestType={
     id:string
     name:string
 }
@@ -123,7 +128,7 @@ export let testStore:TestStoreType={
         {id:v1(),name:"Dima"},
         {id:v1(),name:"Vova"},
     ]
-}
+}*/
 
 
 

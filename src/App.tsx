@@ -25,7 +25,7 @@ function App(props: PropsType) {
                 <div className={s.centerContainer}>
                     <Route path='/profile' render={() => <Main state={props.state} dispatch={props.dispatch}/>}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state} dispatch={props.dispatch}/>}/>
-                    {/*<Route path='/friends' render={() => <Friends friends={props.state.friendsPage.friends} dispatch={props.dispatch}/>}/>*/}
+                    <Route path='/friends' render={() => <Friends friends={props.state.friendsPage} dispatch={props.dispatch}/>}/>
                 </div>
                 <div>
                     {/* <RightNav/>*/}
