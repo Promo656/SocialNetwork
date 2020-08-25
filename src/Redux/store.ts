@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {AddPostActionType, postReducer, UpdateNewPostTextActionType} from "./postReducer";
 import {AddMessageActionType, chatReducer, UpdateNewMessageTextActionType} from "./chatReducer";
-import {friendsReducer} from "./friendsReducer";
+import {AddFriendActionType, friendsReducer, UpdateNewFriendTextActionType} from "./friendsReducer";
 
 //-----------------------------------START CREATE TYPES-------------------------------------
 export type DialogsType = {
@@ -50,6 +50,8 @@ export type ActionType =
     | UpdateNewPostTextActionType
     | AddPostActionType
     | UpdateNewMessageTextActionType
+    | AddFriendActionType
+    | UpdateNewFriendTextActionType
 //-----------------------------------END CREATE TYPES-------------------------------------
 
 //------------------------------------------------------------------------------------------
@@ -91,7 +93,7 @@ export const store: StoreType = {
                 {id: v1(), name: "Ilya"},
                 {id: v1(), name: "Yura"}
             ],
-            newFriendsText:""
+            newFriendsText: ""
         }
     },
     _callSubscriber(state: AppStateType) {

@@ -33,10 +33,10 @@ export const postReducer = (state: PostPageType=initialState, action: ActionType
 const ADD_POST = "ADD-POST"
 export type AddPostActionType = {
     type: "ADD-POST"
-    newText: string
+//    newText: string
 }
-export const addPostActionCreator = (text: string): AddPostActionType =>
-    ({type: ADD_POST, newText: text})
+export const addPostActionCreator = (): AddPostActionType =>
+    ({type: ADD_POST})
 
 //-----------------------------------UPDATE-NEW-POST-TEXT--------------------------------
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";

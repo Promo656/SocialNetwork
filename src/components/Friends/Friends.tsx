@@ -1,7 +1,8 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, InputHTMLAttributes} from "react";
 import {Button, TextField} from "@material-ui/core";
 import {ActionType, AppStateType, FriendsPageType, FriendType} from "../../Redux/store";
-import {addFriendActionCreator} from "../../Redux/friendsReducer";
+import {addFriendActionCreator, updateNewFriendTextActionCreator} from "../../Redux/friendsReducer";
+import {action} from "@storybook/addon-actions";
 
 type PropsType = {
     friends: FriendsPageType
@@ -14,11 +15,12 @@ export function Friends(props: PropsType) {
 
     let onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
         let text = e.target.value
-        let action = addFriendActionCreator(text)
+        let action = updateNewFriendTextActionCreator(text)
         props.dispatch(action)
     }
     let addFriend = () => {
-
+        let action = addFriendActionCreator()
+        props.dispatch(action)
     }
 
     return (
@@ -28,7 +30,8 @@ export function Friends(props: PropsType) {
                    onChange={onTextChange}
             />
             <input
-                type="Button"
+                type="button"
+                value="find"
                 onClick={addFriend}
             />
             <ul>

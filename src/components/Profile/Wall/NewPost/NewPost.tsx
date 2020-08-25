@@ -14,7 +14,7 @@ export function NewPost(props: PropsType) {
     let addPost = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            let action = addPostActionCreator(text);
+            let action = addPostActionCreator();
             props.dispatch(action)
             newPostElement.current.value = ""
         }

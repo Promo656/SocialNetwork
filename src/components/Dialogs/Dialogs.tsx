@@ -19,7 +19,7 @@ export function Dialogs(props: PropsType) {
     let addMessage = () => {
         if (newTextElement.current) {
             let text = newTextElement.current.value
-            let action = addMessageActionCreator(text)
+            let action = addMessageActionCreator()
             props.dispatch(action)
             newTextElement.current.value = ""
         }

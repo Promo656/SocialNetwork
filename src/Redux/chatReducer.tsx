@@ -1,4 +1,4 @@
-import {ActionType, AppStateType, ChatPageType} from "./store";
+import {ActionType, ChatPageType} from "./store";
 import {v1} from "uuid";
 
 let initialState ={
@@ -36,10 +36,10 @@ export const chatReducer = (state: ChatPageType=initialState, action: ActionType
 const ADD_MESSAGE = "ADD-MESSAGE";
 export type AddMessageActionType = {
     type: "ADD-MESSAGE"
-    MessageText: string
+  //  MessageText: string
 }
-export const addMessageActionCreator = (text: string): AddMessageActionType =>
-    ({type: ADD_MESSAGE, MessageText: text})
+export const addMessageActionCreator = (): AddMessageActionType =>
+    ({type: ADD_MESSAGE})
 //------------------------------------UPDATE-NEW-MESSAGE-TEXT----------------------
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 export type UpdateNewMessageTextActionType = {
