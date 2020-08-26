@@ -2,6 +2,8 @@ import {v1} from "uuid";
 import {AddPostActionType, postReducer, UpdateNewPostTextActionType} from "./postReducer";
 import {AddMessageActionType, chatReducer, UpdateNewMessageTextActionType} from "./chatReducer";
 import {AddFriendActionType, friendsReducer, UpdateNewFriendTextActionType} from "./friendsReducer";
+import {AddGroupActionType, groupReducer, UpdateNewGroupTextActionType} from "./groupsReducer";
+
 
 //-----------------------------------START CREATE TYPES-------------------------------------
 export type DialogsType = {
@@ -33,10 +35,19 @@ export type FriendsPageType = {
     friends: FriendType[]
     newFriendsText: string
 }
+export type GroupType = {
+    id: string
+    name: string
+}
+export type GroupsPageType = {
+    groups: GroupType[]
+    newGroupText: string
+}
 export type AppStateType = {
     chatPage: ChatPageType
     postPage: PostPageType
     friendsPage: FriendsPageType
+    groupPage: GroupsPageType
 }
 export type StoreType = {
     _state: AppStateType
@@ -52,6 +63,8 @@ export type ActionType =
     | UpdateNewMessageTextActionType
     | AddFriendActionType
     | UpdateNewFriendTextActionType
+
+
 //-----------------------------------END CREATE TYPES-------------------------------------
 
 //------------------------------------------------------------------------------------------
@@ -94,6 +107,14 @@ export const store: StoreType = {
                 {id: v1(), name: "Yura"}
             ],
             newFriendsText: ""
+        },
+        groupPage: {
+            groups: [
+                {id: v1(), name: "Car"},
+                {id: v1(), name: "Bike"},
+                {id: v1(), name: "Moto"}
+            ],
+            newGroupText: ""
         }
     },
     _callSubscriber(state: AppStateType) {
@@ -110,27 +131,13 @@ export const store: StoreType = {
         this._state.chatPage = chatReducer(this._state.chatPage, action)
         this._state.friendsPage = friendsReducer(this._state.friendsPage, action)
 
+
         this._callSubscriber(this._state)
     }
 }
 //-----------------------------------END CREATE STORE-------------------------------------
 
 
-/*export type FriendTestType={
-    id:string
-    name:string
-}
-export type TestStoreType={
-    friends: FriendTestType[]
-}
-
-export let testStore:TestStoreType={
-    friends:[
-        {id:v1(),name:"Egor"},
-        {id:v1(),name:"Dima"},
-        {id:v1(),name:"Vova"},
-    ]
-}*/
 
 
 
