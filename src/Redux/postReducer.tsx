@@ -1,4 +1,4 @@
-import {ActionType, PostPageType, StoreType} from "./store";
+import {ActionType, PostPageType} from "./store";
 import {v1} from "uuid";
 
 let initialState= {

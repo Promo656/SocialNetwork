@@ -4,20 +4,21 @@ import Message from '../../homework/01-Messages/Message';
 import {NewPost} from "./NewPost/NewPost";
 import {OldPosts} from "./OldPosts/OldPosts";
 import s from "./ProfileWall.module.css"
-import {ActionType, AppStateType} from "../../../Redux/store";
+import {ActionType, AppStateType, StoreType} from "../../../Redux/store";
+import {NewPostContainer} from "./NewPost/NewPostContainer";
 
 type PropsType = {
-    state: AppStateType
+    store: StoreType
     dispatch: (action: ActionType) => void
 }
 
 export function ProfileWall(props: PropsType) {
-    let oldPostsElement = props.state.postPage.posts.map((p) => <OldPosts key={p.id} post={p}/>)
+    let oldPostsElement = props.store.getState((p) => <OldPosts key={p.id} post={p}/>)
     return (
         <div className={s.post}>
             <h1>My posts</h1>
-            <NewPost
-                dispatch={props.dispatch}
+            <NewPostContainer
+                store={props.}
             />
             <hr className={s.hr}/>
             {oldPostsElement}

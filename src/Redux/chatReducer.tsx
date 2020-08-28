@@ -31,7 +31,6 @@ export const chatReducer = (state: ChatPageType=initialState, action: ActionType
             return state
     }
 }
-
 //---------------------------------------ADD-MESSAGE-----------------------------------
 const ADD_MESSAGE = "ADD-MESSAGE";
 export type AddMessageActionType = {

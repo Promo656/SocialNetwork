@@ -27,7 +27,7 @@ function App(props: PropsType) {
                     <Route path='/profile' render={() => <Main state={props.state} dispatch={props.dispatch}/>}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state} dispatch={props.dispatch}/>}/>
                     <Route path='/friends' render={() => <Friends friends={props.state.friendsPage} dispatch={props.dispatch}/>}/>
-                    <Route path='/community' render={() => <Groups groups={props.state.groupPage} dispatch={props.dispatch}/>}/>
+                    {/*<Route path='/community' render={() => <Groups groups={props.state.groupPage} dispatch={props.dispatch}/>}/>*/}
                 </div>
                 <div>
                     {/* <RightNav/>*/}
