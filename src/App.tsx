@@ -6,16 +6,16 @@ import {LeftNav} from "./components/Nav/Left/LeftNav";
 import {Main} from "./components/Profile/Main";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
-import {ActionType, AppStateType} from "./Redux/store";
+import {ActionType, AppStateType, StoreType} from "./Redux/store";
 import {Friends} from "./components/Friends/Friends";
 import {Groups} from "./components/Groups/Groups";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type PropsType = {
-    state: AppStateType
-    dispatch: (action: ActionType) => void
-}
+/*type PropsType = {
 
-function App(props: PropsType) {
+}*/
+
+function App() {
     return (
         <div className={s.generalContainer}>
             <Header/>
@@ -24,9 +24,9 @@ function App(props: PropsType) {
                     <LeftNav/>
                 </div>
                 <div className={s.centerContainer}>
-                    <Route path='/profile' render={() => <Main state={props.state} dispatch={props.dispatch}/>}/>
-                    <Route path='/dialogs' render={() => <Dialogs state={props.state} dispatch={props.dispatch}/>}/>
-                    <Route path='/friends' render={() => <Friends friends={props.state.friendsPage} dispatch={props.dispatch}/>}/>
+                    <Route path='/profile' render={() => <Main />} />
+                    {/*<Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>*/}
+                   {/* <Route path='/friends' render={() => <Friends friends={props.state.friendsPage} dispatch={props.dispatch}/>}/>*/}
                     {/*<Route path='/community' render={() => <Groups groups={props.state.groupPage} dispatch={props.dispatch}/>}/>*/}
                 </div>
                 <div>

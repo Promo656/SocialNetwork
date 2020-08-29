@@ -1,36 +1,28 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
 import {addMessageActionCreator, updateNewMessageActionCreator,} from "../../Redux/chatReducer";
-import {ActionType, AppStateType} from './../../Redux/store'
+import {ActionType, AppStateType, ChatPageType, DialogsType, MessageType} from './../../Redux/store'
 
 type PropsType = {
-    state: AppStateType
-    dispatch: (action: ActionType) => void
+    store: ChatPageType
+    addMessage: () => void
+    onMessageChange: (text: string) => void
 }
 
 export function Dialogs(props: PropsType) {
 
-    let chatItem = props.state.chatPage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
-    let messageItem = props.state.chatPage.messages.map((m) => <Message key={m.id} message={m}/>)
-    let newTextElement = React.createRef<HTMLInputElement>()
+    let chatItem = props.store.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
+    let messageItem = props.store.messages.map((m) => <Message key={m.id} message={m}/>)
 
     let addMessage = () => {
-        if (newTextElement.current) {
-            let text = newTextElement.current.value
-            let action = addMessageActionCreator()
-            props.dispatch(action)
-            newTextElement.current.value = ""
-        }
+        props.addMessage()
     }
 
-    let onMessageChange = () => {
-        if (newTextElement.current) {
-            let text = newTextElement.current.value
-            let action = updateNewMessageActionCreator(text);
-            props.dispatch(action)
-        }
+    let onMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let text = e.currentTarget.value
+        props.onMessageChange(text)
     }
 
     return (
@@ -42,7 +34,7 @@ export function Dialogs(props: PropsType) {
                 {messageItem}
                 <input
                     type="text"
-                    ref={newTextElement}
+                    value={props.store.newMessageText}
                     onChange={onMessageChange}
                 />
                 <input

@@ -6,23 +6,30 @@ import {OldPosts} from "./OldPosts/OldPosts";
 import s from "./ProfileWall.module.css"
 import {ActionType, AppStateType, StoreType} from "../../../Redux/store";
 import {NewPostContainer} from "./NewPost/NewPostContainer";
+import {StoreContext} from "../../../StoreContext";
 
-type PropsType = {
+/*type PropsType = {
     store: StoreType
-    dispatch: (action: ActionType) => void
-}
+}*/
 
-export function ProfileWall(props: PropsType) {
-    let oldPostsElement = props.store.getState((p) => <OldPosts key={p.id} post={p}/>)
+export function ProfileWall() {
+
+
     return (
-        <div className={s.post}>
-            <h1>My posts</h1>
-            <NewPostContainer
-                store={props.}
-            />
-            <hr className={s.hr}/>
-            {oldPostsElement}
-        </div>
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    let oldPostsElement = store.getState().postPage.posts.map((p) => <OldPosts key={p.id} post={p}/>)
+                    return <div className={s.post}>
+                        <h1>My posts</h1>
+                        <NewPostContainer/>
+                        <hr className={s.hr}/>
+                        {oldPostsElement}
+                    </div>
+                }
+            }
+        </StoreContext.Consumer>
+
     )
 }
 

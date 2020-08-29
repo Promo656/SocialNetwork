@@ -1,29 +1,39 @@
 import React from "react";
-import {ActionType, AppStateType} from './../../../../Redux/store'
+import {ActionType, AppStateType, StoreType} from './../../../../Redux/store'
 import {NewPost} from "./NewPost";
 import {addPostActionCreator, updateNewPostActionCreator} from "../../../../Redux/postReducer";
+import {StoreContext} from "../../../../StoreContext";
 
-type PropsType = {
-    dispatch: (action: ActionType) => void
-    state: AppStateType
-}
+/*type PropsType = {
 
-export function NewPostContainer(props: PropsType) {
+    store: StoreType
+}*/
 
-    let onPostChange=(text:string)=>{
-        let action = updateNewPostActionCreator(text);
-        props.dispatch(action)
-        props.state.postPage.newPostText=""
-    }
+export function NewPostContainer() {
 
-    let addPost=()=>{
-        let action = addPostActionCreator();
-        props.dispatch(action)
-    }
 
     return (
-        <div>
-            <NewPost onPostChange={onPostChange} addPost={addPost}/>
-        </div>
+        <StoreContext.Consumer>
+            {
+                (store) =>
+                {
+                    let onPostChange = (text: string) => {
+                        let action = updateNewPostActionCreator(text);
+                        store.dispatch(action)
+                        store.getState().postPage.newPostText = ""
+                    }
+
+                    let addPost = () => {
+                        let action = addPostActionCreator();
+                        store.dispatch(action)
+                    }
+
+                    return <NewPost
+                        onPostChange={onPostChange}
+                        addPost={addPost}
+                    />
+                }
+            }
+        </StoreContext.Consumer>
     )
 }
