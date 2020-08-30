@@ -16,10 +16,9 @@ function App() {
                     <LeftNav/>
                 </div>
                 <div className={s.centerContainer}>
-                    <Route path='/profile' render={() => <Main/>}/>
+                    <Route path='/profile' render={() => <Main />}/>
                     <Route path='/dialogs' render={() => <DialogsContainer />} />
                     <Route path='/friends' render={() => <FriendsContainer />}/>
-                    {/*<Route path='/community' render={() => <Groups groups={props.state.groupPage} dispatch={props.dispatch}/>}/>*/}
                 </div>
                 <div>
                     {/* <RightNav/>*/}

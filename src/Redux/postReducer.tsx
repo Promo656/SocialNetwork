@@ -17,10 +17,8 @@ let initialState = {
 export const postReducer = (state: PostPageType = initialState, action: ActionType) => {
     switch (action.type) {
         case ADD_POST: {
-            let newPost = {id: v1(), text: state.newPostText}
             let stateCopy = {...state}
-            stateCopy.posts = [...state.posts]
-            stateCopy.posts.unshift(newPost)
+            stateCopy.posts = [{id: v1(), text: state.newPostText},...state.posts]
             stateCopy.newPostText = ""
             return stateCopy
         }

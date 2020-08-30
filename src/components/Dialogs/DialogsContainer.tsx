@@ -1,35 +1,24 @@
 import React from "react";
 import {addMessageActionCreator, updateNewMessageActionCreator,} from "../../Redux/chatReducer";
-import {AppStateType, ChatPageType} from './../../Redux/store'
+import {AppStateType} from './../../Redux/store'
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
-/*type MapDispatchPropsType = {
-    addMessage: () => void
-    onMessageChange: (text: string) => void
-}
-
-type MapStatePropsType = {
-    chatPage: ChatPageType
-}
-
-type PropsTypes = MapDispatchPropsType & MapStatePropsType*/
-
-let mapStateToProps=(state:AppStateType)=>{
+let mapStateToProps = (state: AppStateType) => {
     return {
-        chatPage:state.chatPage
+        chatPage: state.chatPage
     }
 }
-let mapDispatchToProps=(dispatch:Dispatch)=>{
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        addMessage:()=>{
+        addMessage: () => {
             dispatch(addMessageActionCreator())
         },
-        onMessageChange:(text:string)=>{
+        onMessageChange: (text: string) => {
             dispatch(updateNewMessageActionCreator(text))
         }
     }
 }
 
-export const DialogsContainer=connect(mapStateToProps,mapDispatchToProps)(Dialogs)
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

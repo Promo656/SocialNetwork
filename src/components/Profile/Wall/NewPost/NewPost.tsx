@@ -5,12 +5,10 @@ import {PostPageType} from "../../../../Redux/store";
 type PropsType = {
     onPostChange: (text: string) => void
     addPost: () => void
-    postPage:PostPageType
+    postPage: PostPageType
 }
 
 export function NewPost(props: PropsType) {
-
-
 
     let addPost = () => {
         props.addPost()

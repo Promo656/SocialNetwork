@@ -14,10 +14,8 @@ let itialState = {
 export const friendsReducer = (state: FriendsPageType = itialState, action: ActionType) => {
     switch (action.type) {
         case ADD_FRIEND: {
-            let newFriend = {id: v1(), name: state.newFriendsText}
             let stateCopy = {...state}
-            stateCopy.friends = [...state.friends]
-            stateCopy.friends.unshift(newFriend)
+            stateCopy.friends = [{id: v1(), name: state.newFriendsText},...state.friends]
             stateCopy.newFriendsText = ""
             return stateCopy
         }
