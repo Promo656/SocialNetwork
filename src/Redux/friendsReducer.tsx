@@ -13,14 +13,19 @@ let itialState = {
 
 export const friendsReducer = (state: FriendsPageType = itialState, action: ActionType) => {
     switch (action.type) {
-        case ADD_FRIEND:
+        case ADD_FRIEND: {
             let newFriend = {id: v1(), name: state.newFriendsText}
-            state.friends.unshift(newFriend)
-            state.newFriendsText = ""
-            return state
-        case UPDATE_NEW_FRIEND_TEXT:
-            state.newFriendsText = action.newText
-            return state
+            let stateCopy = {...state}
+            stateCopy.friends = [...state.friends]
+            stateCopy.friends.unshift(newFriend)
+            stateCopy.newFriendsText = ""
+            return stateCopy
+        }
+        case UPDATE_NEW_FRIEND_TEXT: {
+            let stateCopy={...state}
+            stateCopy.newFriendsText = action.newText
+            return stateCopy
+        }
         default:
             return state
     }

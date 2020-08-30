@@ -5,24 +5,19 @@ import './index.css';
 import App from './App';
 import {AppStateType} from "./Redux/store";
 import {BrowserRouter} from "react-router-dom";
-import {v1} from "uuid";
-import {StoreContext} from "./StoreContext";
+import {Provider} from "react-redux"
 
-let reRender = (state: AppStateType) => {
+
+
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <StoreContext.Provider value={store}>
+                <Provider store={store}>
                     <App/>
-                </StoreContext.Provider>
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
 
-reRender(store.getState());
-store.subscribe(() => {
-    let state = store.getState()
-    reRender(state)
-})
+

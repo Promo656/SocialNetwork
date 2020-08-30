@@ -19,14 +19,19 @@ let initialState ={
 
 export const chatReducer = (state: ChatPageType=initialState, action: ActionType) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_MESSAGE: {
             let newMessage = {id: v1(), MessageText: state.newMessageText}
-            state.messages.push(newMessage)
-            state.newMessageText = ""
-            return state
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.MessageText
-            return state
+            let stateCopy = {...state}
+            stateCopy.messages = [...state.messages]
+            stateCopy.messages.push(newMessage)
+            stateCopy.newMessageText = ""
+            return stateCopy
+        }
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            let stateCopy = {...state}
+            stateCopy.newMessageText = action.MessageText
+            return stateCopy
+        }
         default:
             return state
     }

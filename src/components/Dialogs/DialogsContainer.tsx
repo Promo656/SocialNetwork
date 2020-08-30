@@ -1,36 +1,35 @@
 import React from "react";
-import s from "./Dialogs.module.css"
-import {Message} from "./Messages/Message";
-import {DialogItem} from "./DialogsItem/Dialog";
 import {addMessageActionCreator, updateNewMessageActionCreator,} from "../../Redux/chatReducer";
-import {ActionType, AppStateType, StoreType} from './../../Redux/store'
-import {Container} from "@material-ui/core";
+import {AppStateType, ChatPageType} from './../../Redux/store'
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-type PropsType = {
-    store: StoreType
+/*type MapDispatchPropsType = {
+    addMessage: () => void
+    onMessageChange: (text: string) => void
 }
 
-export function DialogsContainer(props: PropsType) {
-
-    let newTextElement = React.createRef<HTMLInputElement>()
-
-    let addMessage = () => {
-        let action = addMessageActionCreator()
-        props.store.dispatch(action)
-        props.store.getState().chatPage.newMessageText = ""
-    }
-
-    let onMessageChange = (text: string) => {
-        let action = updateNewMessageActionCreator(text);
-        props.store.dispatch(action)
-    }
-
-    return (
-            <Dialogs
-                addMessage={addMessage}
-                onMessageChange={onMessageChange}
-                store={props.store.getState().chatPage}
-            />
-    )
+type MapStatePropsType = {
+    chatPage: ChatPageType
 }
+
+type PropsTypes = MapDispatchPropsType & MapStatePropsType*/
+
+let mapStateToProps=(state:AppStateType)=>{
+    return {
+        chatPage:state.chatPage
+    }
+}
+let mapDispatchToProps=(dispatch:Dispatch)=>{
+    return {
+        addMessage:()=>{
+            dispatch(addMessageActionCreator())
+        },
+        onMessageChange:(text:string)=>{
+            dispatch(updateNewMessageActionCreator(text))
+        }
+    }
+}
+
+export const DialogsContainer=connect(mapStateToProps,mapDispatchToProps)(Dialogs)

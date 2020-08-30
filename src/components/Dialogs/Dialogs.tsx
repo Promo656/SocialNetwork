@@ -2,19 +2,18 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
-import {addMessageActionCreator, updateNewMessageActionCreator,} from "../../Redux/chatReducer";
-import {ActionType, AppStateType, ChatPageType, DialogsType, MessageType} from './../../Redux/store'
+import {ChatPageType} from './../../Redux/store'
 
 type PropsType = {
-    store: ChatPageType
+    chatPage: ChatPageType
     addMessage: () => void
     onMessageChange: (text: string) => void
 }
 
 export function Dialogs(props: PropsType) {
 
-    let chatItem = props.store.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
-    let messageItem = props.store.messages.map((m) => <Message key={m.id} message={m}/>)
+    let chatItem = props.chatPage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
+    let messageItem = props.chatPage.messages.map((m) => <Message key={m.id} message={m}/>)
 
     let addMessage = () => {
         props.addMessage()
@@ -34,7 +33,7 @@ export function Dialogs(props: PropsType) {
                 {messageItem}
                 <input
                     type="text"
-                    value={props.store.newMessageText}
+                    value={props.chatPage.newMessageText}
                     onChange={onMessageChange}
                 />
                 <input

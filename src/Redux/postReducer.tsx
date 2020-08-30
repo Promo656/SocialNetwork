@@ -1,7 +1,7 @@
 import {ActionType, PostPageType} from "./store";
 import {v1} from "uuid";
 
-let initialState= {
+let initialState = {
     posts: [
         {id: v1(), text: "Hello, everyone!!!!!!!!!"},
         {id: v1(), text: "It's my first site!"},
@@ -14,16 +14,21 @@ let initialState= {
     newPostText: ""
 }
 
-export const postReducer = (state: PostPageType=initialState, action: ActionType) => {
+export const postReducer = (state: PostPageType = initialState, action: ActionType) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPost = {id: v1(), text: state.newPostText}
-            state.posts.unshift(newPost)
-            state.newPostText = ""
-            return state
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return state
+            let stateCopy = {...state}
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.unshift(newPost)
+            stateCopy.newPostText = ""
+            return stateCopy
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText
+            return stateCopy
+        }
         default :
             return state
     }
