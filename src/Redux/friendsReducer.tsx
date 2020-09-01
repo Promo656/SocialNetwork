@@ -3,10 +3,26 @@ import {v1} from "uuid";
 
 let itialState = {
     friends: [
-        {id: v1(), name: "Valera"},
-        {id: v1(), name: "Gosha"},
-        {id: v1(), name: "Ilya"},
-        {id: v1(), name: "Yura"}
+        {
+            id: v1(),
+            name: "Valera",
+            followed: true,
+            status: "Hello, there!",
+            location: {
+                country: "Russia",
+                city: "Moscow"
+            }
+        },
+        {
+            id: v1(),
+            name: "Gosha",
+            followed: false,
+            status: "Hello, boys!",
+            location: {
+                country: "Russia",
+                city: "Vologda"
+            }
+        }
     ],
     newFriendsText: ""
 }
@@ -15,12 +31,12 @@ export const friendsReducer = (state: FriendsPageType = itialState, action: Acti
     switch (action.type) {
         case ADD_FRIEND: {
             let stateCopy = {...state}
-            stateCopy.friends = [{id: v1(), name: state.newFriendsText},...state.friends]
+            stateCopy.friends = [{id: v1(), name: state.newFriendsText}, ...state.friends]
             stateCopy.newFriendsText = ""
             return stateCopy
         }
         case UPDATE_NEW_FRIEND_TEXT: {
-            let stateCopy={...state}
+            let stateCopy = {...state}
             stateCopy.newFriendsText = action.newText
             return stateCopy
         }

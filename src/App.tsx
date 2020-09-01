@@ -3,7 +3,7 @@ import s from './App.module.css'
 import {Route} from "react-router-dom";
 import {Header} from "./components/Header/Header";
 import {LeftNav} from "./components/Nav/Left/LeftNav";
-import {Main} from "./components/Profile/Main";
+import {Profile} from "./components/Profile/Profile";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Friends/FriendsContainer";
 
@@ -16,7 +16,7 @@ function App() {
                     <LeftNav/>
                 </div>
                 <div className={s.centerContainer}>
-                    <Route path='/profile' render={() => <Main />}/>
+                    <Route path='/profile' render={() => <Profile />}/>
                     <Route path='/dialogs' render={() => <DialogsContainer />} />
                     <Route path='/friends' render={() => <FriendsContainer />}/>
                 </div>

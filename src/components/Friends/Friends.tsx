@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from "react";
 import {FriendsPageType} from "../../Redux/store";
+import {FriendsList} from "./FriendsList/FriendsList";
 
 
 type PropsType = {
@@ -31,9 +32,9 @@ export function Friends(props: PropsType) {
                 value="find"
                 onClick={addFriend}
             />
-            <ul>
-                {friendsList}
-            </ul>
+            <FriendsList friendsList={props.friendsPage}/>
+            {friendsList}
         </div>
     )
 }
+
