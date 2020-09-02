@@ -1,7 +1,23 @@
-import {ActionType, ChatPageType} from "./store";
 import {v1} from "uuid";
 
-let initialState ={
+export type DialogsType = {
+    id: string
+    name: string
+}
+export type MessageType = {
+    id: string
+    MessageText: string
+}
+export type ChatPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessageType>
+    newMessageText: string
+}
+
+export type ChatReducerAT =
+    AddMessageActionType | UpdateNewMessageTextActionType
+
+let initialState = {
     dialogs: [
         {name: "Valera", id: v1()},
         {name: "Gosha", id: v1()},
@@ -17,11 +33,11 @@ let initialState ={
     newMessageText: ""
 }
 
-export const chatReducer = (state: ChatPageType=initialState, action: ActionType) => {
+export const chatReducer = (state: ChatPageType = initialState, action: ChatReducerAT) => {
     switch (action.type) {
         case ADD_MESSAGE: {
             let stateCopy = {...state}
-            stateCopy.messages = [...state.messages,{id: v1(), MessageText: state.newMessageText}]
+            stateCopy.messages = [...state.messages, {id: v1(), MessageText: state.newMessageText}]
             stateCopy.newMessageText = ""
             return stateCopy
         }
@@ -38,7 +54,7 @@ export const chatReducer = (state: ChatPageType=initialState, action: ActionType
 const ADD_MESSAGE = "ADD-MESSAGE";
 export type AddMessageActionType = {
     type: "ADD-MESSAGE"
-  //  MessageText: string
+    //  MessageText: string
 }
 export const addMessageActionCreator = (): AddMessageActionType =>
     ({type: ADD_MESSAGE})

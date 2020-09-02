@@ -1,11 +1,11 @@
 import React from "react";
 import {addMessageActionCreator, updateNewMessageActionCreator,} from "../../Redux/chatReducer";
-import {AppStateType} from './../../Redux/store'
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {StateType} from "../../Redux/redux-store";
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: StateType) => {
     return {
         chatPage: state.chatPage
     }

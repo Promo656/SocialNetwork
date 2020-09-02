@@ -2,8 +2,8 @@ import React from "react";
 import './ProfileWall.module.css'
 import {OldPosts} from "./OldPosts/OldPosts";
 import s from "./ProfileWall.module.css"
-import {PostType} from "../../../Redux/store";
 import {NewPostContainer} from "./NewPost/NewPostContainer";
+import {PostType} from "../../../Redux/postReducer";
 
 type PropsType = {
     posts: PostType[]

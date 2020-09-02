@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
-import {FriendsPageType} from "../../Redux/store";
 import {FriendsList} from "./FriendsList/FriendsList";
+import {FriendsPageType} from "../../Redux/friendsReducer";
 
 
 type PropsType = {
@@ -11,7 +11,7 @@ type PropsType = {
 
 export function Friends(props: PropsType) {
 
-    let friendsList = props.friendsPage.friends.map((f) => <li key={f.id}>{f.name}</li>)
+    let friendsList = props.friendsPage.friends.map((f) => <FriendsList key={f.name} friendsList={f}/>)
 
     let onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
         let text = e.target.value
@@ -32,7 +32,6 @@ export function Friends(props: PropsType) {
                 value="find"
                 onClick={addFriend}
             />
-            <FriendsList friendsList={props.friendsPage}/>
             {friendsList}
         </div>
     )

@@ -1,11 +1,11 @@
 import React from "react";
-import {AppStateType} from './../../../../Redux/store'
 import {NewPost} from "./NewPost";
 import {addPostActionCreator, updateNewPostActionCreator} from "../../../../Redux/postReducer";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
+import {StateType} from "../../../../Redux/redux-store";
 
-let mapStateToProps=(state:AppStateType)=>{
+let mapStateToProps=(state:StateType)=>{
     return {
         postPage:state.postPage
     }

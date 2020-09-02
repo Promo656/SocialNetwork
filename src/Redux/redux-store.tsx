@@ -1,13 +1,27 @@
 import {combineReducers, createStore} from "redux";
-import {postReducer} from "./postReducer";
-import {chatReducer} from "./chatReducer"
-import {friendsReducer} from "./friendsReducer";
+import {AddPostActionType, PostPageType, postReducer, UpdateNewPostTextActionType} from "./postReducer";
+import {AddMessageActionType, ChatPageType, chatReducer, UpdateNewMessageTextActionType} from "./chatReducer"
+import {AddFriendActionType, FriendsPageType, friendsReducer, UpdateNewFriendTextActionType} from "./friendsReducer";
 
-let reducers=combineReducers({
+export type StateType={
+    chatPage: ChatPageType
+    postPage: PostPageType
+    friendsPage: FriendsPageType
+}
+
+export type ActionType =
+    AddMessageActionType
+    | UpdateNewPostTextActionType
+    | AddPostActionType
+    | UpdateNewMessageTextActionType
+    | AddFriendActionType
+    | UpdateNewFriendTextActionType
+
+let reducers = combineReducers({
     postPage: postReducer,
     chatPage: chatReducer,
     friendsPage: friendsReducer,
 })
 
-export let store=createStore(reducers)
+export let store = createStore(reducers)
 

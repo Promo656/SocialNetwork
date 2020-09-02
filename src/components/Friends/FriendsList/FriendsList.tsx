@@ -1,12 +1,11 @@
 import s from "./FriendsList.module.css";
 import React from "react";
-import {FriendsPageType} from "../../../Redux/store";
+import {FriendsPageType, FriendType} from "../../../Redux/friendsReducer";
 
 type PropsType={
-    friendsList:FriendsPageType
+    friendsList:FriendType
 }
 export function FriendsList(props:PropsType) {
-    let name=props.friendsList.friends.map((f)=>f.name)
 
     return (
         <div className={s.userContainer}>

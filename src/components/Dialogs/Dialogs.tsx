@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
-import {ChatPageType} from './../../Redux/store'
+import {ChatPageType} from "../../Redux/chatReducer";
 
 type PropsType = {
     chatPage: ChatPageType

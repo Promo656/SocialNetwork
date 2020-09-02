@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from "./NewPost.module.css"
-import {PostPageType} from "../../../../Redux/store";
+import {PostPageType} from "../../../../Redux/postReducer";
 
 type PropsType = {
     onPostChange: (text: string) => void

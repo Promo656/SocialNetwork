@@ -1,7 +1,8 @@
+import React from "react";
+
+/*
 import {v1} from "uuid";
-import {AddPostActionType, postReducer, UpdateNewPostTextActionType} from "./postReducer";
-import {AddMessageActionType, chatReducer, UpdateNewMessageTextActionType} from "./chatReducer";
-import {AddFriendActionType, friendsReducer, UpdateNewFriendTextActionType} from "./friendsReducer";
+import {ActionType} from "./redux-store";
 //-----------------------------------START CREATE TYPES-------------------------------------
 export type DialogsType = {
     id: string
@@ -22,7 +23,7 @@ export type PostType = {
 }
 export  type PostPageType = {
     newPostText: string
-    posts: Array<PostType>
+    posts: PostType[]
 }
 export type FriendType = {
     id: string
@@ -31,14 +32,6 @@ export type FriendType = {
 export type FriendsPageType = {
     friends: FriendType[]
     newFriendsText: string
-}
-export type GroupType = {
-    id: string
-    name: string
-}
-export type GroupsPageType = {
-    groups: GroupType[]
-    newGroupText: string
 }
 export type AppStateType = {
     chatPage: ChatPageType
@@ -52,13 +45,7 @@ export type StoreType = {
     subscribe: (observer: (state: AppStateType) => void) => void
     dispatch: (action: any) => void
 }
-export type ActionType =
-    AddMessageActionType
-    | UpdateNewPostTextActionType
-    | AddPostActionType
-    | UpdateNewMessageTextActionType
-    | AddFriendActionType
-    | UpdateNewFriendTextActionType
+
 //-----------------------------------END CREATE TYPES-------------------------------------
 //------------------------------------------------------------------------------------------
 //-----------------------------------START CREATE STORE-------------------------------------
@@ -111,9 +98,9 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
-        this._state.postPage = postReducer(this._state.postPage, action)
-        this._state.chatPage = chatReducer(this._state.chatPage, action)
-        this._state.friendsPage = friendsReducer(this._state.friendsPage, action)
+        //this._state.postPage = postReducer(this._state.postPage, action)
+        //this._state.chatPage = chatReducer(this._state.chatPage, action)
+        //this._state.friendsPage = friendsReducer(this._state.friendsPage, action)
 
         this._callSubscriber(this._state)
     }
@@ -128,3 +115,4 @@ export const store: StoreType = {
 
 
 
+*/

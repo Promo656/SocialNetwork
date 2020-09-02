@@ -1,37 +1,70 @@
-import {ActionType, FriendsPageType} from "./store";
 import {v1} from "uuid";
 
-let itialState = {
+export type FriendsReducerAT =
+    AddFriendActionType | UpdateNewFriendTextActionType
+
+export type LocationType = {
+    country: string
+    city: string
+}
+export type FriendType = {
+    id: string
+    name: string
+    followed: boolean
+    status: string
+    location: LocationType[]
+}
+export type FriendsPageType = {
+    friends: FriendType[]
+    newFriendsText: string
+}
+
+let initialState: FriendsPageType = {
     friends: [
         {
             id: v1(),
             name: "Valera",
             followed: true,
             status: "Hello, there!",
-            location: {
-                country: "Russia",
-                city: "Moscow"
-            }
+            location: [
+                {
+                    country: "Russia",
+                    city: "Moscow"
+                }
+            ]
         },
         {
             id: v1(),
-            name: "Gosha",
+            name: "Goshaaaa",
             followed: false,
             status: "Hello, boys!",
-            location: {
-                country: "Russia",
-                city: "Vologda"
-            }
+            location: [
+                {
+                    country: "Russia",
+                    city: "Vologda"
+                }
+            ]
         }
     ],
     newFriendsText: ""
 }
 
-export const friendsReducer = (state: FriendsPageType = itialState, action: ActionType) => {
+export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
     switch (action.type) {
         case ADD_FRIEND: {
             let stateCopy = {...state}
-            stateCopy.friends = [{id: v1(), name: state.newFriendsText}, ...state.friends]
+            stateCopy.friends = [{
+                id: v1(),
+                name: state.newFriendsText,
+                followed: true,
+                status: "Hello, there!",
+                location: [
+                    {
+                        country: "Russia",
+                        city: "Moscow"
+                    }
+                ]
+            }, ...state.friends]
             stateCopy.newFriendsText = ""
             return stateCopy
         }
