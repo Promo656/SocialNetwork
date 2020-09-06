@@ -40,8 +40,8 @@ let initialState: FriendsPageType = {
             status: "Hello, boys!",
             location: [
                 {
-                    country: "Russia",
-                    city: "Vologda"
+                    country: "USA",
+                    city: "NY"
                 }
             ]
         }

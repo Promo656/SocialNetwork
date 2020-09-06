@@ -16,17 +16,17 @@ export function FriendsList(props:PropsType) {
                          alt=""/>
                 </div>
                 <div className={s.follow}>
-                    <button className={s.btn}>Follow</button>
+                    <button className={s.btn}>{props.friendsList.followed?"Followed":"Follow"}</button>
                 </div>
             </div>
             <div className={s.about}>
                 <div className={s.nameStatus}>
-                    <div className={s.name}>Eg</div>
-                    <div className={s.status}>Hi,Iam DEV</div>
+                    <div className={s.name}>{props.friendsList.name}</div>
+                    <div className={s.status}>{props.friendsList.status}</div>
                 </div>
                 <div className={s.location}>
-                    <div className={s.country}>Russia</div>
-                    <div className={s.city}>Moscow</div>
+                    <div className={s.country}>{props.friendsList.location.map((c)=>c.country)}</div>
+                    <div className={s.city}>{props.friendsList.location.map((c)=>c.city)}</div>
                 </div>
             </div>
         </div>
