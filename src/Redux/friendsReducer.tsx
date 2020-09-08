@@ -26,24 +26,21 @@ let initialState: FriendsPageType = {
             name: "Valera",
             followed: true,
             status: "Hello, there!",
-            location: [
-                {
+            location: {
                     country: "Russia",
                     city: "Moscow"
-                }
-            ]
+            }
         },
         {
             id: v1(),
             name: "Goshaaaa",
             followed: false,
             status: "Hello, boys!",
-            location: [
+            location: 
                 {
                     country: "USA",
                     city: "NY"
                 }
-            ]
         }
     ],
     newFriendsText: ""
