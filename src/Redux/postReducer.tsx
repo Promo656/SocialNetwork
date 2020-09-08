@@ -10,7 +10,7 @@ export  type PostPageType = {
 }
 
 export type PostReducerAT =
-    AddPostActionType | UpdateNewPostTextActionType
+    AddPostAT | UpdateNewPostTextAT
 
 let initialState = {
     posts: [
@@ -45,18 +45,18 @@ export const postReducer = (state: PostPageType = initialState, action: PostRedu
 
 //--------------------------------------ADD-POST----------------------------------
 const ADD_POST = "ADD-POST"
-export type AddPostActionType = {
+export type AddPostAT = {
     type: "ADD-POST"
 //    newText: string
 }
-export const addPostActionCreator = (): AddPostActionType =>
+export const addPostActionCreator = (): AddPostAT =>
     ({type: ADD_POST})
 
 //-----------------------------------UPDATE-NEW-POST-TEXT--------------------------------
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-export type UpdateNewPostTextActionType = {
+export type UpdateNewPostTextAT = {
     type: "UPDATE-NEW-POST-TEXT"
     newText: string
 }
-export const updateNewPostActionCreator = (text: string): UpdateNewPostTextActionType =>
+export const updateNewPostActionCreator = (text: string): UpdateNewPostTextAT =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text})

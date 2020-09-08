@@ -4,6 +4,8 @@ import {FriendsPageType, FriendType} from "../../../Redux/friendsReducer";
 
 type PropsType={
     friendsList:FriendType
+    follow:(userId:string)=>void
+    unFollow:(userId:string)=>void
 }
 export function FriendsList(props:PropsType) {
 
@@ -17,6 +19,7 @@ export function FriendsList(props:PropsType) {
                 </div>
                 <div className={s.follow}>
                     <button className={s.btn}>{props.friendsList.followed?"Followed":"Follow"}</button>
+
                 </div>
             </div>
             <div className={s.about}>
@@ -25,8 +28,8 @@ export function FriendsList(props:PropsType) {
                     <div className={s.status}>{props.friendsList.status}</div>
                 </div>
                 <div className={s.location}>
-                    <div className={s.country}>{props.friendsList.location.map((c)=>c.country)}</div>
-                    <div className={s.city}>{props.friendsList.location.map((c)=>c.city)}</div>
+                    <div className={s.country}>{props.friendsList.location.country}</div>
+                    <div className={s.city}>{props.friendsList.location.city}</div>
                 </div>
             </div>
         </div>

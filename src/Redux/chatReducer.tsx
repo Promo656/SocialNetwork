@@ -15,7 +15,7 @@ export type ChatPageType = {
 }
 
 export type ChatReducerAT =
-    AddMessageActionType | UpdateNewMessageTextActionType
+    AddMessageAT | UpdateNewMessageTextAT
 
 let initialState = {
     dialogs: [
@@ -52,17 +52,17 @@ export const chatReducer = (state: ChatPageType = initialState, action: ChatRedu
 }
 //---------------------------------------ADD-MESSAGE-----------------------------------
 const ADD_MESSAGE = "ADD-MESSAGE";
-export type AddMessageActionType = {
+export type AddMessageAT = {
     type: "ADD-MESSAGE"
     //  MessageText: string
 }
-export const addMessageActionCreator = (): AddMessageActionType =>
+export const addMessageActionCreator = (): AddMessageAT =>
     ({type: ADD_MESSAGE})
 //------------------------------------UPDATE-NEW-MESSAGE-TEXT----------------------
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
-export type UpdateNewMessageTextActionType = {
+export type UpdateNewMessageTextAT = {
     type: "UPDATE-NEW-MESSAGE-TEXT"
     MessageText: string
 }
-export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextActionType =>
+export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextAT =>
     ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
