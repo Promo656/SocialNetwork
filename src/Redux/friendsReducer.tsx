@@ -36,7 +36,7 @@ let initialState: FriendsPageType = {
             location:
                 {
                     country: "USA",
-                    city: "NY"
+                    city: "Boston"
                 }
         }
     ]
