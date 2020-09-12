@@ -20,7 +20,7 @@ let initialState = {
         {id: v1(), text: "Yoo!"},
         {id: v1(), text: "Yoo!"},
         {id: v1(), text: "Yoo!"},
-        {id: v1(), text: "Yoo!"},
+        {id: v1(), text: "Yoooo!"},
     ],
     newPostText: ""
 }
