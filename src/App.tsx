@@ -19,6 +19,7 @@ function App() {
                     <Route path='/profile' render={() => <Profile />}/>
                     <Route path='/dialogs' render={() => <DialogsContainer />} />
                     <Route path='/friends' render={() => <FriendsContainer />}/>
+
                 </div>
                 <div>
                     {/* <RightNav/>*/}

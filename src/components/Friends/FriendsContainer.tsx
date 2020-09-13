@@ -1,5 +1,5 @@
 import React from "react";
-import {addFriendActionCreator, updateNewFriendTextActionCreator} from "../../Redux/friendsReducer";
+import {FollowAC, FriendType, SetUsersAC, UnFollowAC} from "../../Redux/friendsReducer";
 import {Friends} from "./Friends";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -13,12 +13,14 @@ let mapStateToProps = (state: StateType) => {
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        onTextFriendChange: (text: string) => {
-            dispatch(updateNewFriendTextActionCreator(text))
+        follow: (userId:string) => {
+            dispatch(FollowAC(userId))
         },
-        addFriend: () => {
-            debugger
-            dispatch(addFriendActionCreator())
+        UnFollow: (userId:string) => {
+            dispatch(UnFollowAC(userId))
+        },
+        setUsers:(users:FriendType)=>{
+            dispatch(SetUsersAC(users))
         }
     }
 }
