@@ -28,28 +28,6 @@ let initialState: FriendsPageType = {
                 country: "Russia",
                 city: "Moscow"
             }
-        },
-        {
-            id: v1(),
-            name: "Goshaaaa",
-            followed: false,
-            status: "Hello, boys!",
-            location:
-                {
-                    country: "USA",
-                    city: "Boston"
-                }
-        },
-        {
-            id: v1(),
-            name: "Vova",
-            followed: true,
-            status: "Hey!",
-            location:
-                {
-                    country: "UK",
-                    city: "London"
-                }
         }
     ]
 }
@@ -100,7 +78,7 @@ export const updateNewFriendTextActionCreator = (text: string): UpdateNewFriendT
 
 export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
     switch (action.type) {
-        /*case FOLLOW: {
+        case FOLLOW: {
             return {
                 ...state,
                 users: [...state.users.map((u) => {
@@ -122,7 +100,7 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
         }
         case SET_USERS: {
             return {...state, users: [...state.users, ...action.users]}
-        }*/
+        }
         default:
             return state
     }
@@ -130,7 +108,7 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
 //--------------------------------------FOLLOW----------------------------------
 const FOLLOW = "FOLLOW"
 export type FollowAT = {
-    type: string
+    type: typeof FOLLOW
     userId: string
 }
 export const FollowAC = (userId: string): FollowAT => ({
@@ -140,7 +118,7 @@ export const FollowAC = (userId: string): FollowAT => ({
 //--------------------------------------UNFOLLOW----------------------------------
 const UNFOLLOW = "UNFOLLOW"
 export type UnFollowAT = {
-    type: string
+    type: typeof UNFOLLOW
     userId: string
 }
 export const UnFollowAC = (userId: string): UnFollowAT => ({
@@ -150,10 +128,10 @@ export const UnFollowAC = (userId: string): UnFollowAT => ({
 //--------------------------------------SET_USERS----------------------------------
 const SET_USERS = "SET_USERS"
 export type SetUsersAT = {
-    type: string
-    users: FriendType
+    type: typeof SET_USERS
+    users: FriendType[]
 }
-export const SetUsersAC = (users: FriendType): SetUsersAT => ({
+export const SetUsersAC = (users: FriendType[]): SetUsersAT => ({
     type: SET_USERS,
     users: users
 })
