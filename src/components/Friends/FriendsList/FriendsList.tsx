@@ -31,8 +31,8 @@ export function FriendsList(props:PropsType) {
                 <div className={s.location}>
                     <div className={s.country}>{props.friendsList.location.country}</div>
                     <div className={s.city}>{props.friendsList.location.city}</div>
-                    <div className={s.country}>{country}</div>
-                    <div className={s.city}>{city}</div>
+                    <div className={s.country}>{props.friendsList.location.country}</div>
+                    <div className={s.city}>{props.friendsList.location.city}</div>
                 </div>
             </div>
         </div>

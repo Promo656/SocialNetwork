@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {AddPostAT, PostPageType, postReducer, UpdateNewPostTextAT} from "./postReducer";
 import {AddMessageAT, ChatPageType, chatReducer, UpdateNewMessageTextAT} from "./chatReducer"
-import {AddFriendAT, FriendsPageType, friendsReducer, UpdateNewFriendTextAT} from "./friendsReducer";
+import {FriendsPageType, friendsReducer} from "./friendsReducer";
 
 export type StateType={
     chatPage: ChatPageType
@@ -14,8 +14,6 @@ export type ActionType =
     | UpdateNewPostTextAT
     | AddPostAT
     | UpdateNewMessageTextAT
-    | AddFriendAT
-    | UpdateNewFriendTextAT
 
 let reducers = combineReducers({
     postPage: postReducer,
