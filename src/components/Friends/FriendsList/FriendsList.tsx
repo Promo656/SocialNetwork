@@ -1,11 +1,13 @@
 import s from "./FriendsList.module.css";
 import React from "react";
-import {FriendsPageType, FriendType} from "../../../Redux/friendsReducer";
+import {FriendType} from "../../../Redux/friendsReducer";
 
 type PropsType={
     friendsList:FriendType
 }
 export function FriendsList(props:PropsType) {
+    let country=props.friendsList.location.map((l)=>l.country)
+    let city=props.friendsList.location.map((l)=>l.city)
 
     return (
         <div className={s.userContainer}>
@@ -16,17 +18,17 @@ export function FriendsList(props:PropsType) {
                          alt=""/>
                 </div>
                 <div className={s.follow}>
-                    <button className={s.btn}>Follow</button>
+                    <button className={s.btn}>{props.friendsList.followed?"Follow":"Unfollow"}</button>
                 </div>
             </div>
             <div className={s.about}>
                 <div className={s.nameStatus}>
-                    <div className={s.name}>Eg</div>
-                    <div className={s.status}>Hi,Iam DEV</div>
+                    <div className={s.name}>{props.friendsList.name}</div>
+                    <div className={s.status}>{props.friendsList.status}</div>
                 </div>
                 <div className={s.location}>
-                    <div className={s.country}>Russia</div>
-                    <div className={s.city}>Moscow</div>
+                    <div className={s.country}>{country}</div>
+                    <div className={s.city}>{city}</div>
                 </div>
             </div>
         </div>
