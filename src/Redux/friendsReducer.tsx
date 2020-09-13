@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 
 export type FriendsReducerAT = FollowAT | UnFollowAT | SetUsersAT
+
 export type LocationType = {
     country: string
     city: string
@@ -37,6 +38,17 @@ let initialState: FriendsPageType = {
                 {
                     country: "USA",
                     city: "Boston"
+                }
+        },
+        {
+            id: v1(),
+            name: "Vova",
+            followed: true,
+            status: "Hey!",
+            location:
+                {
+                    country: "UK",
+                    city: "London"
                 }
         }
     ]
@@ -86,9 +98,9 @@ export type UpdateNewFriendTextAT = {
 export const updateNewFriendTextActionCreator = (text: string): UpdateNewFriendTextAT =>
     ({type: UPDATE_NEW_FRIEND_TEXT, newText: text})*/
 
-export const friendsReducer = (state: FriendsPageType, action: FriendsReducerAT) => {
+export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
     switch (action.type) {
-        case FOLLOW: {
+        /*case FOLLOW: {
             return {
                 ...state,
                 users: [...state.users.map((u) => {
@@ -110,7 +122,7 @@ export const friendsReducer = (state: FriendsPageType, action: FriendsReducerAT)
         }
         case SET_USERS: {
             return {...state, users: [...state.users, ...action.users]}
-        }
+        }*/
         default:
             return state
     }
