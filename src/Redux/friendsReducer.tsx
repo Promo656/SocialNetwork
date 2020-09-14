@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-export type FriendsReducerAT = FollowAT | UnFollowAT | SetUsersAT
+export type FriendsReducerAT = FollowAT | UnFollowAT | SetUsersAT | AddFriendAT | UpdateNewFriendTextAT
 
 export type LocationType = {
     country: string
@@ -15,21 +15,14 @@ export type FriendType = {
 }
 export type FriendsPageType = {
     users: FriendType[]
+    newFriendsText: string
 }
 
 let initialState: FriendsPageType = {
     users: [
-        {
-            id: v1(),
-            name: "Valera",
-            followed: true,
-            status: "Hello, there!",
-            location: {
-                country: "Russia",
-                city: "Moscow"
-            }
-        }
-    ]
+
+    ],
+    newFriendsText: ""
 }
 
 /*export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
@@ -77,6 +70,7 @@ export const updateNewFriendTextActionCreator = (text: string): UpdateNewFriendT
     ({type: UPDATE_NEW_FRIEND_TEXT, newText: text})*/
 
 export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
+    debugger
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -100,6 +94,27 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
         }
         case SET_USERS: {
             return {...state, users: [...state.users, ...action.users]}
+        }
+        case UPDATE_NEW_FRIEND_TEXT: {
+            let stateCopy = {...state}
+            stateCopy.newFriendsText = action.newText
+            return stateCopy
+        }
+        case ADD_FRIEND: {
+            let stateCopy = {...state}
+            stateCopy.users = [{
+                id: v1(),
+                name: state.newFriendsText,
+                followed: true,
+                status: "Hello, there!",
+                location:
+                    {
+                        country: "Russia",
+                        city: "Moscow"
+                    }
+            }, ...state.users]
+            stateCopy.newFriendsText = ""
+            return stateCopy
         }
         default:
             return state
@@ -135,3 +150,18 @@ export const SetUsersAC = (users: FriendType[]): SetUsersAT => ({
     type: SET_USERS,
     users: users
 })
+//--------------------------------------ADD-FRIEND----------------------------------
+const ADD_FRIEND = "ADD-FRIEND"
+export type AddFriendAT = {
+    type: typeof ADD_FRIEND
+}
+export const addFriendAC = (): AddFriendAT =>
+    ({type: ADD_FRIEND})
+//------------------------------------UPDATE-NEW-FRIEND-TEXT----------------------
+const UPDATE_NEW_FRIEND_TEXT = "UPDATE-NEW-FRIEND-TEXT"
+export type UpdateNewFriendTextAT = {
+    type: typeof UPDATE_NEW_FRIEND_TEXT
+    newText: string
+}
+export const updateNewFriendTextAC = (text: string): UpdateNewFriendTextAT =>
+    ({type: UPDATE_NEW_FRIEND_TEXT, newText: text})

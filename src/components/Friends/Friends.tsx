@@ -1,16 +1,37 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {FriendsPageType, FriendType} from "../../Redux/friendsReducer";
 import s from "./Friends.module.css";
 
 type PropsType = {
-    Follow: (userId: string) => void
-    UnFollow: (userId: string) => void
+    addFriend: () => void
+    updateNewFriendText: (text: string) => void
+    follow: (userId: string) => void
+    unFollow: (userId: string) => void
     friendsPage: FriendsPageType
 }
 
 export function Friends(props: PropsType) {
     debugger
+    let onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let text = e.currentTarget.value
+        props.updateNewFriendText(text)
+    }
+
+    let addFriend = () => {
+        props.addFriend()
+    }
+
     return <div>
+        <input
+            type="text"
+            value={props.friendsPage.newFriendsText}
+            onChange={onTextChange}
+        />
+        <input
+            type="button"
+            value="Find"
+            onClick={addFriend}
+        />
         {props.friendsPage.users.map((u) =>
             <div key={u.id} className={s.userContainer}>
                 <div className={s.followlogo}>
@@ -21,8 +42,12 @@ export function Friends(props: PropsType) {
                     </div>
                     <div className={s.follow}>
                         {u.followed
-                                ? <button onClick={() => {props.UnFollow(u.id)}}>Unfollow</button>
-                                : <button onClick={() => {props.Follow(u.id)}}>Follow</button>}
+                            ? <button onClick={() => {
+                                props.unFollow(u.id)
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                props.follow(u.id)
+                            }}>Follow</button>}
                     </div>
                 </div>
                 <div className={s.about}>
