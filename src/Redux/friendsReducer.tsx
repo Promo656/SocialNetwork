@@ -19,102 +19,55 @@ export type FriendsPageType = {
 }
 
 let initialState: FriendsPageType = {
-    users: [
-
-    ],
+    users: [],
     newFriendsText: ""
 }
 
-/*export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
-    switch (action.type) {
-        case ADD_FRIEND: {
-            let stateCopy = {...state}
-            stateCopy.friends = [{
-                id: v1(),
-                name: state.newFriendsText,
-                followed: true,
-                status: "Hello, there!",
-                location:
-                    {
-                        country: "Russia",
-                        city: "Moscow"
-                    }
-            }, ...state.friends]
-            stateCopy.newFriendsText = ""
-            return stateCopy
-        }
-        case UPDATE_NEW_FRIEND_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newFriendsText = action.newText
-            return stateCopy
-        }
-        default:
-            return state
-    }
-}
-//--------------------------------------ADD-FRIEND----------------------------------
-const ADD_FRIEND = "ADD-FRIEND"
-export type AddFriendAT = {
-    type: "ADD-FRIEND"
- //   newText: string
-}
-export const addFriendActionCreator = (): AddFriendAT =>
-    ({type: ADD_FRIEND})
-//------------------------------------UPDATE-NEW-FRIEND-TEXT----------------------
-const UPDATE_NEW_FRIEND_TEXT = "UPDATE-NEW-FRIEND-TEXT"
-export type UpdateNewFriendTextAT = {
-    type: "UPDATE-NEW-FRIEND-TEXT"
-    newText: string
-}
-export const updateNewFriendTextActionCreator = (text: string): UpdateNewFriendTextAT =>
-    ({type: UPDATE_NEW_FRIEND_TEXT, newText: text})*/
-
 export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
-    debugger
     switch (action.type) {
-        case FOLLOW: {
+        case FOLLOW:
             return {
                 ...state,
-                users: [...state.users.map((u) => {
+                users: state.users.map((u) => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
-                })]
+                    return u
+                })
             }
-        }
-        case UNFOLLOW: {
+        case UNFOLLOW:
             return {
                 ...state,
-                users: [...state.users.map((u) => {
+                users: state.users.map((u) => {
                     if (u.id === action.userId) {
                         return {...u, followed: false}
                     }
-                })]
+                    return u
+                })
             }
-        }
+
         case SET_USERS: {
             return {...state, users: [...state.users, ...action.users]}
         }
         case UPDATE_NEW_FRIEND_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newFriendsText = action.newText
-            return stateCopy
+            return {...state, newFriendsText: state.newFriendsText = action.newText}
         }
         case ADD_FRIEND: {
-            let stateCopy = {...state}
-            stateCopy.users = [{
-                id: v1(),
-                name: state.newFriendsText,
-                followed: true,
-                status: "Hello, there!",
-                location:
-                    {
-                        country: "Russia",
-                        city: "Moscow"
-                    }
-            }, ...state.users]
-            stateCopy.newFriendsText = ""
-            return stateCopy
+            return {
+                ...state, users: state.users = [{
+                    id: v1(),
+                    name: state.newFriendsText,
+                    followed: true,
+                    status: "Hello, there!",
+                    location:
+                        {
+                            country: "Russia",
+                            city: "Moscow"
+                        }
+                },
+                    ...state.users],
+                newFriendsText: state.newFriendsText = ""
+            }
         }
         default:
             return state

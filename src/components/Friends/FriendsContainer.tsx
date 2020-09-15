@@ -13,7 +13,6 @@ import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
 
 let mapStateToProps = (state: StateType) => {
-    debugger
     return {
         friendsPage: state.friendsPage
     }
