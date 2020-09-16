@@ -8,6 +8,7 @@ import {
     updateNewFriendTextAC
 } from "../../Redux/friendsReducer";
 import {Friends} from "./Friends";
+import FriendsClass from "./FriendsClass";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
@@ -38,4 +39,4 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends)
+export const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsClass)

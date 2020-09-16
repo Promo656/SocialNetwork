@@ -14,11 +14,14 @@ type PropsType = {
 }
 
 export function Friends(props: PropsType) {
-    if (props.friendsPage.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            props.setUsers(response.data.items)
-        })
+    let getFriends=()=>{
+        if (props.friendsPage.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
+
 
     let onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
         let text = e.currentTarget.value
@@ -40,6 +43,9 @@ export function Friends(props: PropsType) {
             value="Find"
             onClick={addFriend}
         />
+
+        <button onClick={getFriends}>Get Friends</button>
+
         {props.friendsPage.users.map((u) =>
             <div key={u.id} className={s.userContainer}>
                 <div className={s.followlogo}>
