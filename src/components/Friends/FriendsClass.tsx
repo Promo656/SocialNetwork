@@ -13,29 +13,32 @@ type PropsType = {
 
 }
 
-class FriendsClass extends React.Component{
+class FriendsClass extends React.Component<PropsType> {
 
-    constructor(props) {
-        super(props);
-
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
             this.props.setUsers(response.data.items)
         })
 
     }
 
+    /*    getFriends = () => {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                this.props.setUsers(response.data.items)
+            })
+        }*/
 
-    onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-        let text = e.currentTarget.value
-        this.props.updateNewFriendText(text)
-    }
-    addFriend = () => {
-        this.props.addFriend()
-    }
+    /*    onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+            let text = e.currentTarget.value
+            this.props.updateNewFriendText(text)
+        }
+        addFriend = () => {
+            this.props.addFriend()
+        }*/
 
     render() {
         return <div>
-            <input
+            {/*<input
                 type="text"
                 value={this.props.friendsPage.newFriendsText}
                 onChange={this.onTextChange}
@@ -44,9 +47,9 @@ class FriendsClass extends React.Component{
                 type="button"
                 value="Find"
                 onClick={this.addFriend}
-            />
+            />*/}
 
-            <button onClick={this.getFriends}>Get Friends</button>
+            {/*<button onClick={this.getFriends}>Get Friends</button>*/}
 
             {this.props.friendsPage.users.map((u) =>
                 <div key={u.id} className={s.userContainer}>
@@ -81,4 +84,4 @@ class FriendsClass extends React.Component{
     }
 }
 
-export default Friends
+export default FriendsClass
