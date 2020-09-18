@@ -1,6 +1,13 @@
 import {v1} from "uuid";
 
-export type FriendsReducerAT = FollowAT | UnFollowAT | SetUsersAT | AddFriendAT | UpdateNewFriendTextAT
+export type FriendsReducerAT =
+    FollowAT
+    | UnFollowAT
+    | SetUsersAT
+    | AddFriendAT
+    | UpdateNewFriendTextAT
+    | SetCurrentPageAT
+    | SetTotalUsersCountAT
 
 export type LocationType = {
     country: string
@@ -15,16 +22,42 @@ export type FriendType = {
 }
 export type FriendsPageType = {
     users: FriendType[]
+    pageSize: number
+    TotalUsersCount: number
+    currentPage: number
     newFriendsText: string
 }
 
 let initialState: FriendsPageType = {
     users: [],
+    pageSize: 10,
+    TotalUsersCount: 0,
+    currentPage: 1,
     newFriendsText: ""
 }
 
 export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
     switch (action.type) {
+        case ADD_FRIEND: {
+            return {
+                ...state, users: state.users = [{
+                    id: v1(),
+                    name: state.newFriendsText,
+                    followed: true,
+                    status: "Hello, there!",
+                    location:
+                        {
+                            country: "Russia",
+                            city: "Moscow"
+                        }
+                },
+                    ...state.users],
+                newFriendsText: state.newFriendsText = ""
+            }
+        }
+        case UPDATE_NEW_FRIEND_TEXT: {
+            return {...state, newFriendsText: state.newFriendsText = action.newText}
+        }
         case FOLLOW:
             return {
                 ...state,
@@ -45,29 +78,14 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
                     return u
                 })
             }
-
         case SET_USERS: {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
         }
-        case UPDATE_NEW_FRIEND_TEXT: {
-            return {...state, newFriendsText: state.newFriendsText = action.newText}
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.pageNumber}
         }
-        case ADD_FRIEND: {
-            return {
-                ...state, users: state.users = [{
-                    id: v1(),
-                    name: state.newFriendsText,
-                    followed: true,
-                    status: "Hello, there!",
-                    location:
-                        {
-                            country: "Russia",
-                            city: "Moscow"
-                        }
-                },
-                    ...state.users],
-                newFriendsText: state.newFriendsText = ""
-            }
+        case SET_TOTAL_USERS_COUNT:{
+            return {...state, TotalUsersCount:action.totalCount}
         }
         default:
             return state
@@ -116,5 +134,27 @@ export type UpdateNewFriendTextAT = {
     type: typeof UPDATE_NEW_FRIEND_TEXT
     newText: string
 }
-export const updateNewFriendTextAC = (text: string): UpdateNewFriendTextAT =>
-    ({type: UPDATE_NEW_FRIEND_TEXT, newText: text})
+export const updateNewFriendTextAC = (text: string): UpdateNewFriendTextAT => ({
+    type: UPDATE_NEW_FRIEND_TEXT,
+    newText: text
+})
+//------------------------------------SET-CURRENT-PAGE----------------------
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+export type SetCurrentPageAT = {
+    type: typeof SET_CURRENT_PAGE
+    pageNumber: number
+}
+export const SetCurrentPageAC = (pageNumber: number): SetCurrentPageAT => ({
+    type: SET_CURRENT_PAGE,
+    pageNumber: pageNumber
+})
+//------------------------------------SET-TOTAL-USERS-COUNT----------------------
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
+export type SetTotalUsersCountAT = {
+    type: typeof SET_TOTAL_USERS_COUNT
+    totalCount:number
+}
+export const SetTotalUsersCountAC=(totalCount:number):SetTotalUsersCountAT=>({
+    type:SET_TOTAL_USERS_COUNT,
+    totalCount:totalCount
+})
