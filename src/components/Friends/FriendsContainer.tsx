@@ -1,20 +1,21 @@
 import React from "react";
 import {
-    addFriendAC,
-    FollowAC,
+    addFriend,
+    follow,
     FriendsPageType,
     FriendType,
-    SetCurrentPageAC,
-    SetTotalUsersCountAC,
-    SetUsersAC,
-    UnFollowAC,
-    updateNewFriendTextAC
+    isFetching,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    unFollow,
+    updateNewFriendText
 } from "../../Redux/friendsReducer";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
 import axios from "axios";
 import {Users} from "./Users";
+import {PreLoader} from "../Common/PreLoader/PreLoader";
 
 type PropsType = {
     addFriend: () => void
@@ -28,15 +29,18 @@ type PropsType = {
     pageSize: number
     TotalUsersCount: number
     currentPage: number
+    isFetching: (isFetching: boolean) => void
 }
 
 class UsersApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
+        this.props.isFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.isFetching(false)
                 this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                //this.props.setTotalUsersCount(response.data.totalCount)
             })
     }
 
@@ -45,7 +49,6 @@ class UsersApiComponent extends React.Component<PropsType> {
                 this.props.setUsers(response.data.items)
             })
         }*/
-
     /*    onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
             let text = e.currentTarget.value
             this.props.updateNewFriendText(text)
@@ -56,22 +59,29 @@ class UsersApiComponent extends React.Component<PropsType> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
+        this.props.isFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.isFetching(false)
                 this.props.setUsers(response.data.items)
             })
     }
 
     render() {
-        return <Users
-            TotalUsersCount={this.props.TotalUsersCount}
-            pageSize={this.props.pageSize}
-            onPageChanged={this.onPageChanged}
-            users={this.props.friendsPage}
-            currentPage={this.props.currentPage}
-            follow={this.props.follow}
-            unFollow={this.props.unFollow}
-        />
+        return (
+            <>
+                {this.props.friendsPage.isFetching ? <PreLoader/> : null}
+                <Users
+                    TotalUsersCount={this.props.TotalUsersCount}
+                    pageSize={this.props.pageSize}
+                    onPageChanged={this.onPageChanged}
+                    users={this.props.friendsPage}
+                    currentPage={this.props.currentPage}
+                    follow={this.props.follow}
+                    unFollow={this.props.unFollow}
+                />
+            </>
+        )
     }
 }
 
@@ -80,11 +90,12 @@ let mapStateToProps = (state: StateType) => {
         friendsPage: state.friendsPage,
         pageSize: state.friendsPage.pageSize,
         TotalUsersCount: state.friendsPage.TotalUsersCount,
-        currentPage: state.friendsPage.currentPage
+        currentPage: state.friendsPage.currentPage,
+        isFetching: state.friendsPage.isFetching
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+/*let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         addFriend: () => {
             dispatch(addFriendAC())
@@ -106,8 +117,22 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         },
         setTotalUsersCount: (totalCount: number) => {
             dispatch(SetTotalUsersCountAC(totalCount))
+        },
+        isFetching: (isFetching: boolean) => {
+            dispatch(LoadingIconAC(isFetching))
         }
     }
-}
+}*/
 
-export const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiComponent)
+export const FriendsContainer = connect(
+    mapStateToProps, {
+        addFriend,
+        updateNewFriendText,
+        follow,
+        unFollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        isFetching
+    }
+)(UsersApiComponent)

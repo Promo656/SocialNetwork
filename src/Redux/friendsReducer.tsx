@@ -8,6 +8,7 @@ export type FriendsReducerAT =
     | UpdateNewFriendTextAT
     | SetCurrentPageAT
     | SetTotalUsersCountAT
+    | isFetchingAT
 
 export type LocationType = {
     country: string
@@ -25,14 +26,16 @@ export type FriendsPageType = {
     pageSize: number
     TotalUsersCount: number
     currentPage: number
+    isFetching: boolean
     newFriendsText: string
 }
 
 let initialState: FriendsPageType = {
     users: [],
     pageSize: 10,
-    TotalUsersCount: 0,
+    TotalUsersCount: 100,
     currentPage: 1,
+    isFetching: true,
     newFriendsText: ""
 }
 
@@ -84,8 +87,11 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.pageNumber}
         }
-        case SET_TOTAL_USERS_COUNT:{
-            return {...state, TotalUsersCount:action.totalCount}
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, TotalUsersCount: action.totalCount}
+        }
+        case "LOADING_ICON": {
+            return {...state, isFetching: action.isFetching}
         }
         default:
             return state
@@ -97,7 +103,7 @@ export type FollowAT = {
     type: typeof FOLLOW
     userId: string
 }
-export const FollowAC = (userId: string): FollowAT => ({
+export const follow = (userId: string): FollowAT => ({
     type: FOLLOW,
     userId: userId
 })
@@ -107,7 +113,7 @@ export type UnFollowAT = {
     type: typeof UNFOLLOW
     userId: string
 }
-export const UnFollowAC = (userId: string): UnFollowAT => ({
+export const unFollow = (userId: string): UnFollowAT => ({
     type: UNFOLLOW,
     userId: userId
 })
@@ -117,7 +123,7 @@ export type SetUsersAT = {
     type: typeof SET_USERS
     users: FriendType[]
 }
-export const SetUsersAC = (users: FriendType[]): SetUsersAT => ({
+export const setUsers = (users: FriendType[]): SetUsersAT => ({
     type: SET_USERS,
     users: users
 })
@@ -126,7 +132,7 @@ const ADD_FRIEND = "ADD-FRIEND"
 export type AddFriendAT = {
     type: typeof ADD_FRIEND
 }
-export const addFriendAC = (): AddFriendAT =>
+export const addFriend = (): AddFriendAT =>
     ({type: ADD_FRIEND})
 //------------------------------------UPDATE-NEW-FRIEND-TEXT----------------------
 const UPDATE_NEW_FRIEND_TEXT = "UPDATE-NEW-FRIEND-TEXT"
@@ -134,7 +140,7 @@ export type UpdateNewFriendTextAT = {
     type: typeof UPDATE_NEW_FRIEND_TEXT
     newText: string
 }
-export const updateNewFriendTextAC = (text: string): UpdateNewFriendTextAT => ({
+export const updateNewFriendText = (text: string): UpdateNewFriendTextAT => ({
     type: UPDATE_NEW_FRIEND_TEXT,
     newText: text
 })
@@ -144,7 +150,7 @@ export type SetCurrentPageAT = {
     type: typeof SET_CURRENT_PAGE
     pageNumber: number
 }
-export const SetCurrentPageAC = (pageNumber: number): SetCurrentPageAT => ({
+export const setCurrentPage = (pageNumber: number): SetCurrentPageAT => ({
     type: SET_CURRENT_PAGE,
     pageNumber: pageNumber
 })
@@ -152,9 +158,19 @@ export const SetCurrentPageAC = (pageNumber: number): SetCurrentPageAT => ({
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 export type SetTotalUsersCountAT = {
     type: typeof SET_TOTAL_USERS_COUNT
-    totalCount:number
+    totalCount: number
 }
-export const SetTotalUsersCountAC=(totalCount:number):SetTotalUsersCountAT=>({
-    type:SET_TOTAL_USERS_COUNT,
-    totalCount:totalCount
+export const setTotalUsersCount = (totalCount: number): SetTotalUsersCountAT => ({
+    type: SET_TOTAL_USERS_COUNT,
+    totalCount: totalCount
+})
+//------------------------------------Loading----------------------
+const LOADING_ICON = "LOADING_ICON"
+export type isFetchingAT = {
+    type: typeof LOADING_ICON
+    isFetching: boolean
+}
+export const isFetching = (isFetching: boolean): isFetchingAT => ({
+    type: LOADING_ICON,
+    isFetching: isFetching
 })

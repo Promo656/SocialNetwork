@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Friends.module.css";
 import {FriendsPageType} from "../../Redux/friendsReducer";
+import {NavLink} from "react-router-dom";
 
 export type PropsType = {
     users: FriendsPageType
@@ -33,9 +34,12 @@ export function Users(props: PropsType) {
                 <div key={u.id} className={s.userContainer}>
                     <div className={s.followlogo}>
                         <div className={s.logo}>
-                            <img className={s.photo}
-                                 src="https://avatars.mds.yandex.net/get-pdb/1605413/6f40644e-8150-4bd6-a28c-9a6ce0f22fd7/s1200?webp=false"
-                                 alt=""/>
+                            <NavLink to={"/profile"}>
+                                <img className={s.photo}
+                                     src="https://avatars.mds.yandex.net/get-pdb/1605413/6f40644e-8150-4bd6-a28c-9a6ce0f22fd7/s1200?webp=false"
+                                     alt=""/>
+                            </NavLink>
+
                         </div>
                         <div className={s.follow}>
                             {u.followed

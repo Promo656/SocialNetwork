@@ -3,9 +3,9 @@ import s from './App.module.css'
 import {Route} from "react-router-dom";
 import {Header} from "./components/Header/Header";
 import {LeftNav} from "./components/Nav/Left/LeftNav";
-import {Profile} from "./components/Profile/Profile";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Friends/FriendsContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
 function App() {
     return (
@@ -16,7 +16,7 @@ function App() {
                     <LeftNav/>
                 </div>
                 <div className={s.centerContainer}>
-                    <Route path='/profile' render={() => <Profile />}/>
+                    <Route path='/profile' render={() => <ProfileContainer />}/>
                     <Route path='/dialogs' render={() => <DialogsContainer />} />
                     <Route path='/friends' render={() => <FriendsContainer />}/>
                 </div>
