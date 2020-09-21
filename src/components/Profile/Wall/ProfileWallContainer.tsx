@@ -7,7 +7,7 @@ import {StateType} from "../../../Redux/redux-store";
 
 let mapStateToProps = (state: StateType) => {
     return {
-        posts: state.postPage.posts
+        posts: state.profilePage.posts
     }
 }
 

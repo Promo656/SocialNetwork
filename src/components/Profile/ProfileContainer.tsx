@@ -22,7 +22,7 @@ export class ProfileApiComponent extends React.Component<PropsType> {
     render() {
         return (
             <div className={s.container}>
-                <Profile profile={this.props}/>
+                {/*<Profile profile={this.props}/>*/}
             </div>
         )
     }
@@ -30,7 +30,7 @@ export class ProfileApiComponent extends React.Component<PropsType> {
 
 let mapStateToProps = (state: StateType) => {
     return {
-        profile: state.postPage.profile
+        profile: state.profilePage
     }
 }
 

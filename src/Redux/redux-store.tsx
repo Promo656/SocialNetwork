@@ -1,12 +1,12 @@
+import React from "react";
 import {combineReducers, createStore} from "redux";
 import {AddPostAT, PostPageType, postReducer, UpdateNewPostTextAT} from "./postReducer";
 import {AddMessageAT, ChatPageType, chatReducer, UpdateNewMessageTextAT} from "./chatReducer"
 import {FriendsPageType, friendsReducer} from "./friendsReducer";
-import React from "react";
 
 export type StateType = {
+    profilePage: PostPageType
     chatPage: ChatPageType
-    postPage: PostPageType
     friendsPage: FriendsPageType
 }
 

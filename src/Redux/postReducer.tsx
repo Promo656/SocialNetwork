@@ -52,7 +52,7 @@ export type AddPostAT = {
     type: "ADD-POST"
 //    newText: string
 }
-export const addPostActionCreator = (): AddPostAT =>
+export const addPost = (): AddPostAT =>
     ({type: ADD_POST})
 //-----------------------------------UPDATE-NEW-POST-TEXT--------------------------
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -60,7 +60,7 @@ export type UpdateNewPostTextAT = {
     type: "UPDATE-NEW-POST-TEXT"
     newText: string
 }
-export const updateNewPostActionCreator = (text: string): UpdateNewPostTextAT =>
+export const updateNewPost = (text: string): UpdateNewPostTextAT =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text})
 //-----------------------------------SET-USER-PROFILE--------------------------
 const SET_USER_PROFILE = "SET_USER_PROFILE"

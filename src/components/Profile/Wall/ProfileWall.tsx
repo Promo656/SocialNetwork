@@ -15,7 +15,7 @@ export function ProfileWall(props: PropsType) {
 
     return <div className={s.post}>
         <h1>My posts</h1>
-        <NewPostContainer/>
+        <NewPostContainer />
         <hr className={s.hr}/>
         {oldPostsElement}
     </div>

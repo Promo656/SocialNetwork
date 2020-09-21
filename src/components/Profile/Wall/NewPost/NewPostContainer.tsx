@@ -1,25 +1,18 @@
 import React from "react";
 import {NewPost} from "./NewPost";
-import {addPostActionCreator, updateNewPostActionCreator} from "../../../../Redux/postReducer";
-import {Dispatch} from "redux";
+import {addPost, updateNewPost} from "../../../../Redux/postReducer";
 import {connect} from "react-redux";
 import {StateType} from "../../../../Redux/redux-store";
 
-let mapStateToProps=(state:StateType)=>{
+let mapStateToProps = (state: StateType) => {
     return {
-        postPage:state.postPage
+        profilePage: state.profilePage
     }
 }
 
-let mapDispatchToProps=(dispatch:Dispatch)=>{
-    return{
-        onPostChange:(text:string)=>{
-            dispatch(updateNewPostActionCreator(text))
-        },
-        addPost:()=>{
-            dispatch(addPostActionCreator())
-        }
+export const NewPostContainer = connect(
+    mapStateToProps, {
+        addPost,
+        updateNewPost
     }
-}
-
-export const NewPostContainer=connect(mapStateToProps,mapDispatchToProps)(NewPost)
+)(NewPost)
