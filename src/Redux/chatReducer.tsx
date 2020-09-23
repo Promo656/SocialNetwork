@@ -25,7 +25,7 @@ let initialState = {
         {name: "Yura", id: v1()}
     ],
     messages: [
-        {id: v1(), MessageText: "Hello"},
+        {id: v1(), MessageText: "Hello!"},
         {id: v1(), MessageText: "Where are you?"},
         {id: v1(), MessageText: "Brooo"},
         {id: v1(), MessageText: "Fine"},
