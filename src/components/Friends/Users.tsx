@@ -34,7 +34,7 @@ export function Users(props: PropsType) {
                 <div key={u.id} className={s.userContainer}>
                     <div className={s.followlogo}>
                         <div className={s.logo}>
-                            <NavLink to={"/profile"}>
+                            <NavLink to={"/profile/"+ u.id}>
                                 <img className={s.photo}
                                      src="https://avatars.mds.yandex.net/get-pdb/1605413/6f40644e-8150-4bd6-a28c-9a6ce0f22fd7/s1200?webp=false"
                                      alt=""/>

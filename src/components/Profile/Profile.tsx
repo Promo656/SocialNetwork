@@ -2,16 +2,16 @@ import React from "react";
 import {ProfileInfo} from "./info/ProfileInfo";
 import s from './Profile.module.css'
 import {ProfileWallContainer} from "./Wall/ProfileWallContainer";
-import {PostPageType} from "../../Redux/postReducer";
+import {ProfileType} from "../../Redux/profileReducer";
 
 export type PropsType={
-    profile: PostPageType
+    profile: ProfileType
 }
 
 export function Profile(props:PropsType) {
     return (
         <div className={s.container}>
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile}/>
             <ProfileWallContainer />
         </div>
     )

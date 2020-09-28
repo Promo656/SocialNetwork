@@ -1,7 +1,18 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
+import {ProfileType} from "../../../Redux/profileReducer";
+import {PreLoader} from "../../Common/PreLoader/PreLoader";
 
-export function ProfileInfo() {
+type PropsType = {
+    profile: ProfileType
+}
+
+export function ProfileInfo(props: PropsType) {
+    debugger
+    if (!props.profile) {
+        return <PreLoader/>
+    }
+
     return (
         <div className={s.container}>
             <div className={s.BGPhotoContainer}>
@@ -10,7 +21,7 @@ export function ProfileInfo() {
             </div>
             <div className={s.PhotoContainer}>
                 <img className={s.Photo}
-                     src="https://avatars.mds.yandex.net/get-pdb/1552679/d24a4f83-bab4-44f3-b759-67f08a41fe6e/s1200?webp=false"
+                     src={props.profile.photos.small}
                      alt=""/>
             </div>
         </div>

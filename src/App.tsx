@@ -5,7 +5,7 @@ import {Header} from "./components/Header/Header";
 import {LeftNav} from "./components/Nav/Left/LeftNav";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {FriendsContainer} from "./components/Friends/FriendsContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import { ProfileContainer } from './components/Profile/ProfileContainer';
 
 function App() {
     return (
@@ -16,6 +16,7 @@ function App() {
                     <LeftNav/>
                 </div>
                 <div className={s.centerContainer}>
+                    <Route exact path='/profile/:userId' render={() => <ProfileContainer />}/>
                     <Route path='/profile' render={() => <ProfileContainer />}/>
                     <Route path='/dialogs' render={() => <DialogsContainer />} />
                     <Route path='/friends' render={() => <FriendsContainer />}/>

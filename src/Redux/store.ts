@@ -98,7 +98,7 @@ export const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
-        //this._state.postPage = postReducer(this._state.postPage, action)
+        //this._state.postPage = profileReducer(this._state.postPage, action)
         //this._state.chatPage = chatReducer(this._state.chatPage, action)
         //this._state.friendsPage = friendsReducer(this._state.friendsPage, action)
 

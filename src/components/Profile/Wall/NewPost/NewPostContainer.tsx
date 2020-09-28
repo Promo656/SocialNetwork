@@ -1,6 +1,6 @@
 import React from "react";
 import {NewPost} from "./NewPost";
-import {addPost, updateNewPost} from "../../../../Redux/postReducer";
+import {addPost, onPostChange} from "../../../../Redux/profileReducer";
 import {connect} from "react-redux";
 import {StateType} from "../../../../Redux/redux-store";
 
@@ -13,6 +13,6 @@ let mapStateToProps = (state: StateType) => {
 export const NewPostContainer = connect(
     mapStateToProps, {
         addPost,
-        updateNewPost
+        onPostChange
     }
 )(NewPost)

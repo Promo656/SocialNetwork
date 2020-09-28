@@ -3,7 +3,8 @@ import './ProfileWall.module.css'
 import {OldPosts} from "./OldPosts/OldPosts";
 import s from "./ProfileWall.module.css"
 import {NewPostContainer} from "./NewPost/NewPostContainer";
-import {PostType} from "../../../Redux/postReducer";
+import {PostType} from "../../../Redux/profileReducer";
+
 
 type PropsType = {
     posts: PostType[]

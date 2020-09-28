@@ -1,12 +1,17 @@
 import React, {ChangeEvent} from "react";
 import s from "./NewPost.module.css"
-import {PostPageType} from "../../../../Redux/postReducer";
+import {ProfilePageType,} from "../../../../Redux/profileReducer";
 
-type PropsType = {
+type MapStatePropsType = {
+    profilePage: ProfilePageType
+}
+
+type MapDispatchPropsType = {
     onPostChange: (text: string) => void
     addPost: () => void
-    postPage: PostPageType
 }
+
+type PropsType = MapStatePropsType & MapDispatchPropsType
 
 export function NewPost(props: PropsType) {
 
@@ -15,6 +20,7 @@ export function NewPost(props: PropsType) {
     }
 
     let onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
+        debugger
         let text = e.currentTarget.value
         props.onPostChange(text)
     }
@@ -25,11 +31,12 @@ export function NewPost(props: PropsType) {
                 className={s.placeholder}
                 type="text"
                 placeholder='your news...'
-                value={props.postPage.newPostText}
+                value={props.profilePage.newPostText}
                 onChange={onPostChange}
             />
             <input className={s.button} type="submit" onClick={addPost}/>
         </div>
     )
 }
+
 

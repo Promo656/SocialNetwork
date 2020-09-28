@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./OldPosts.module.css"
-import {PostType} from "../../../../Redux/postReducer";
+import {PostType} from "../../../../Redux/profileReducer";
 
 type PropsType={
     post:PostType
