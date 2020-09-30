@@ -7,13 +7,15 @@ import {ChatPageType} from "../../Redux/chatReducer";
 type PropsType = {
     chatPage: ChatPageType
     addMessage: () => void
-    onMessageChange: (text: string) => void
+    updateNewMessage: (text: string) => void
 }
 
 export function Dialogs(props: PropsType) {
-
-    let chatItem = props.chatPage.dialogs.map((d) => <DialogItem key={d.id} dialog={d}/>)
-    let messageItem = props.chatPage.messages.map((m) => <Message key={m.id} message={m}/>)
+    debugger
+    let chatItem = props.chatPage.dialogs.map((d) =>
+        <DialogItem key={d.id} dialog={d}/>)
+    let messageItem = props.chatPage.messages.map((m) =>
+        <Message key={m.id} message={m}/>)
 
     let addMessage = () => {
         props.addMessage()
@@ -21,7 +23,7 @@ export function Dialogs(props: PropsType) {
 
     let onMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
         let text = e.currentTarget.value
-        props.onMessageChange(text)
+        props.updateNewMessage(text)
     }
 
     return (

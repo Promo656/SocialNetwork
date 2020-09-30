@@ -54,9 +54,8 @@ export const chatReducer = (state: ChatPageType = initialState, action: ChatRedu
 const ADD_MESSAGE = "ADD-MESSAGE";
 export type AddMessageAT = {
     type: "ADD-MESSAGE"
-    //  MessageText: string
 }
-export const addMessageActionCreator = (): AddMessageAT =>
+export const addMessage = (): AddMessageAT =>
     ({type: ADD_MESSAGE})
 //------------------------------------UPDATE-NEW-MESSAGE-TEXT----------------------
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
@@ -64,5 +63,5 @@ export type UpdateNewMessageTextAT = {
     type: "UPDATE-NEW-MESSAGE-TEXT"
     MessageText: string
 }
-export const updateNewMessageActionCreator = (text: string): UpdateNewMessageTextAT =>
+export const updateNewMessage = (text: string): UpdateNewMessageTextAT =>
     ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})

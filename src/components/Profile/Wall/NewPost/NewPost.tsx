@@ -20,7 +20,6 @@ export function NewPost(props: PropsType) {
     }
 
     let onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
-        debugger
         let text = e.currentTarget.value
         props.onPostChange(text)
     }
@@ -34,7 +33,11 @@ export function NewPost(props: PropsType) {
                 value={props.profilePage.newPostText}
                 onChange={onPostChange}
             />
-            <input className={s.button} type="submit" onClick={addPost}/>
+            <input
+                className={s.button}
+                type="submit"
+                onClick={addPost}
+            />
         </div>
     )
 }
