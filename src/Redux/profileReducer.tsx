@@ -4,15 +4,15 @@ export type PostType = {
     id: string
     text: string
 }
-export type PhotosType={
-    small:string
-    large:string
+export type PhotosType = {
+    small: string
+    large: string
 }
 
-export type ContactsType={
-    facebook:string
-    website:string
-    vk:string
+export type ContactsType = {
+    facebook: string
+    website: string
+    vk: string
     twitter: string
     instagram: string
     youtube: string
@@ -21,16 +21,16 @@ export type ContactsType={
 }
 
 export type ProfileType = {
-    userId:number
-    aboutMe:string
-    lookingForAJob:boolean
-    lookingForAJobDescription:string
-    fullName:string
-    photos:PhotosType
-    contacts:ContactsType
+    userId: number
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    photos: PhotosType
+    contacts: ContactsType
 }
 
-export  type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
     profile: ProfileType
     newPostText: string
@@ -39,7 +39,7 @@ export  type ProfilePageType = {
 export type PostReducerAT =
     AddPostAT | UpdateNewPostTextAT | SetUserProfileAT
 
-let initialState:ProfilePageType = {
+let initialState: ProfilePageType = {
     posts: [
         {id: v1(), text: "Hello, everyone!!!!!!!!!"},
         {id: v1(), text: "It's my first site!"},
@@ -49,25 +49,25 @@ let initialState:ProfilePageType = {
         {id: v1(), text: "Yoo!"},
         {id: v1(), text: "Yoooo!"},
     ],
-    profile:{
-        userId:1,
-        aboutMe:"",
-        fullName:"",
-        lookingForAJob:false,
-        lookingForAJobDescription:"",
-        contacts:{
-            facebook:"",
-            github:"",
-            instagram:"",
-            mainLink:"",
-            twitter:"",
-            vk:"",
-            website:"",
-            youtube:""
+    profile: {
+        userId: 1,
+        aboutMe: "",
+        fullName: "",
+        lookingForAJob: false,
+        lookingForAJobDescription: "",
+        contacts: {
+            facebook: "",
+            github: "",
+            instagram: "",
+            mainLink: "",
+            twitter: "",
+            vk: "",
+            website: "",
+            youtube: ""
         },
-        photos:{
-            large:"",
-            small:""
+        photos: {
+            large: "",
+            small: ""
         }
     },
     newPostText: ""

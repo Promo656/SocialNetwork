@@ -16,6 +16,7 @@ import {StateType} from "../../Redux/redux-store";
 import axios from "axios";
 import {Users} from "./Users";
 import {PreLoader} from "../Common/PreLoader/PreLoader";
+import {ProfileType} from "../../Redux/profileReducer";
 
 type PropsType = {
     addFriend: () => void
@@ -26,6 +27,7 @@ type PropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     friendsPage: FriendsPageType
+    profile: ProfileType
     pageSize: number
     TotalUsersCount: number
     currentPage: number
@@ -36,7 +38,7 @@ class UsersApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.isFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials:true})
             .then(response => {
                 this.props.isFetching(false)
                 this.props.setUsers(response.data.items)
@@ -60,7 +62,7 @@ class UsersApiComponent extends React.Component<PropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.isFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{withCredentials:true})
             .then(response => {
                 this.props.isFetching(false)
                 this.props.setUsers(response.data.items)
@@ -79,6 +81,7 @@ class UsersApiComponent extends React.Component<PropsType> {
                     currentPage={this.props.currentPage}
                     follow={this.props.follow}
                     unFollow={this.props.unFollow}
+                    profile={this.props.profile}
                 />
             </>
         )
@@ -87,6 +90,7 @@ class UsersApiComponent extends React.Component<PropsType> {
 
 let mapStateToProps = (state: StateType) => {
     return {
+        profile: state.profilePage.profile,
         friendsPage: state.friendsPage,
         pageSize: state.friendsPage.pageSize,
         TotalUsersCount: state.friendsPage.TotalUsersCount,
@@ -94,35 +98,6 @@ let mapStateToProps = (state: StateType) => {
         isFetching: state.friendsPage.isFetching
     }
 }
-
-/*let mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        addFriend: () => {
-            dispatch(addFriendAC())
-        },
-        updateNewFriendText: (text: string) => {
-            dispatch(updateNewFriendTextAC(text))
-        },
-        follow: (userId: string) => {
-            dispatch(FollowAC(userId))
-        },
-        unFollow: (userId: string) => {
-            dispatch(UnFollowAC(userId))
-        },
-        setUsers: (users: FriendType[]) => {
-            dispatch(SetUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(SetCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(SetTotalUsersCountAC(totalCount))
-        },
-        isFetching: (isFetching: boolean) => {
-            dispatch(LoadingIconAC(isFetching))
-        }
-    }
-}*/
 
 export const FriendsContainer = connect(
     mapStateToProps, {

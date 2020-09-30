@@ -8,7 +8,6 @@ type PropsType = {
 }
 
 export function ProfileInfo(props: PropsType) {
-    debugger
     if (!props.profile) {
         return <PreLoader/>
     }
@@ -24,6 +23,7 @@ export function ProfileInfo(props: PropsType) {
                      src={props.profile.photos.small}
                      alt=""/>
             </div>
+            <div>{props.profile.fullName}</div>
         </div>
     )
 }

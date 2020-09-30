@@ -20,7 +20,8 @@ type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps
 export class ProfileApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
-        let userId = this.props.match.params.userId
+        // @ts-ignore
+        let userId = this.props.match.params.id
         if(!userId){
             userId=2
         }
