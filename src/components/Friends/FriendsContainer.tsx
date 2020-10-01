@@ -4,7 +4,7 @@ import {
     follow,
     FriendsPageType,
     FriendType,
-    isFetching,
+    isFetching, progressButton,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
@@ -17,6 +17,7 @@ import axios from "axios";
 import {Users} from "./Users";
 import {PreLoader} from "../Common/PreLoader/PreLoader";
 import {ProfileType} from "../../Redux/profileReducer";
+import {usersAPI} from "../../API/api";
 
 type PropsType = {
     addFriend: () => void
@@ -32,18 +33,18 @@ type PropsType = {
     TotalUsersCount: number
     currentPage: number
     isFetching: (isFetching: boolean) => void
+    progressButton:(isFetching: boolean) => void
+    followingInProgress:boolean
 }
 
 class UsersApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.isFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials:true})
-            .then(response => {
-                this.props.isFetching(false)
-                this.props.setUsers(response.data.items)
-                //this.props.setTotalUsersCount(response.data.totalCount)
-            })
+        usersAPI.getUsers(this.props.currentPage,this.props.pageSize).then(response => {
+            this.props.isFetching(false)
+            this.props.setUsers(response.items)
+        })
     }
 
     /*    getFriends = () => {
@@ -62,10 +63,9 @@ class UsersApiComponent extends React.Component<PropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.isFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{withCredentials:true})
-            .then(response => {
+        usersAPI.getUsers(pageNumber,this.props.pageSize).then(response => {
                 this.props.isFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.items)
             })
     }
 
@@ -82,6 +82,8 @@ class UsersApiComponent extends React.Component<PropsType> {
                     follow={this.props.follow}
                     unFollow={this.props.unFollow}
                     profile={this.props.profile}
+                    progressButton={this.props.progressButton}
+                    followingInProgress={this.props.followingInProgress}
                 />
             </>
         )
@@ -95,7 +97,8 @@ let mapStateToProps = (state: StateType) => {
         pageSize: state.friendsPage.pageSize,
         TotalUsersCount: state.friendsPage.TotalUsersCount,
         currentPage: state.friendsPage.currentPage,
-        isFetching: state.friendsPage.isFetching
+        isFetching: state.friendsPage.isFetching,
+        followingInProgress: state.friendsPage.followingInProgress
     }
 }
 
@@ -108,6 +111,7 @@ export const FriendsContainer = connect(
         setUsers,
         setCurrentPage,
         setTotalUsersCount,
-        isFetching
+        isFetching,
+        progressButton
     }
 )(UsersApiComponent)

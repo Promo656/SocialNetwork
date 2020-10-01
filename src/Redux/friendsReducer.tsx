@@ -9,6 +9,7 @@ export type FriendsReducerAT =
     | SetCurrentPageAT
     | SetTotalUsersCountAT
     | isFetchingAT
+    | ButtonProgressAT
 
 export type LocationType = {
     country: string
@@ -27,6 +28,7 @@ export type FriendsPageType = {
     TotalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: boolean
     newFriendsText: string
 }
 
@@ -36,6 +38,7 @@ let initialState: FriendsPageType = {
     TotalUsersCount: 100,
     currentPage: 1,
     isFetching: true,
+    followingInProgress: false,
     newFriendsText: ""
 }
 
@@ -90,8 +93,11 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
         case SET_TOTAL_USERS_COUNT: {
             return {...state, TotalUsersCount: action.totalCount}
         }
-        case "LOADING_ICON": {
-            return {...state, isFetching: action.isFetching}
+        case LOADING_ICON: {
+            return {...state, followingInProgress: action.isFetching}
+        }
+        case DISABLED_BUTTON:{
+            return {...state, }
         }
         default:
             return state
@@ -172,5 +178,15 @@ export type isFetchingAT = {
 }
 export const isFetching = (isFetching: boolean): isFetchingAT => ({
     type: LOADING_ICON,
+    isFetching: isFetching
+})
+//------------------------------------PROGRESS-BUTTON----------------------
+const DISABLED_BUTTON = "DISABLED_BUTTON"
+export type ButtonProgressAT = {
+    type: typeof DISABLED_BUTTON
+    isFetching: boolean
+}
+export const progressButton = (isFetching: boolean): ButtonProgressAT => ({
+    type: DISABLED_BUTTON,
     isFetching: isFetching
 })
