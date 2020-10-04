@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 export function Dialogs(props: PropsType) {
-    debugger
+    
     let chatItem = props.chatPage.dialogs.map((d) =>
         <DialogItem key={d.id} dialog={d}/>)
     let messageItem = props.chatPage.messages.map((m) =>

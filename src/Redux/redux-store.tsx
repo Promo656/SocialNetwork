@@ -19,7 +19,8 @@ let reducers = combineReducers({
     auth: authReducer
 })
 
-export let store = createStore(reducers)
+export let store = createStore(reducers,(window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__())
 
 // @ts-ignore
 window.store = store
