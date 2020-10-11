@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./LeftNav.module.css"
 import {NavLink} from "react-router-dom";
+import {weather} from "../../../API/api";
 
 export function LeftNav() {
     return (
@@ -13,7 +14,13 @@ export function LeftNav() {
                     <li><NavLink to="/community" activeClassName={s.activeLink}>Community</NavLink></li>
                     <li><NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink></li>
                     <li><NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink></li>
+                    <button onClick={()=>{
+                        weather.getWeather().then(response=>{
+                            return response.data
+                        })
+                    }}>X</button>
                 </ul>
+
             </nav>
     )
 }
