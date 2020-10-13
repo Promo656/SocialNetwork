@@ -4,7 +4,8 @@ import {
     follow,
     FriendsPageType,
     FriendType,
-    isFetching, progressButton,
+    isFetching,
+    progressButton,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
@@ -13,7 +14,6 @@ import {
 } from "../../Redux/friendsReducer";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
-import axios from "axios";
 import {Users} from "./Users";
 import {PreLoader} from "../Common/PreLoader/PreLoader";
 import {ProfileType} from "../../Redux/profileReducer";
@@ -46,19 +46,6 @@ class UsersApiComponent extends React.Component<PropsType> {
             this.props.setUsers(response.items)
         })
     }
-
-    /*    getFriends = () => {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                this.props.setUsers(response.data.items)
-            })
-        }*/
-    /*    onTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-            let text = e.currentTarget.value
-            this.props.updateNewFriendText(text)
-        }
-        addFriend = () => {
-            this.props.addFriend()
-        }*/
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
