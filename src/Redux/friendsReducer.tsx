@@ -28,7 +28,7 @@ export type FriendsPageType = {
     TotalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: boolean
+    followingInProgress: Array<number>
     newFriendsText: string
 }
 
@@ -37,8 +37,8 @@ let initialState: FriendsPageType = {
     pageSize: 10,
     TotalUsersCount: 100,
     currentPage: 1,
-    isFetching: true,
-    followingInProgress: false,
+    isFetching: false,
+    followingInProgress: [],
     newFriendsText: ""
 }
 
@@ -94,10 +94,15 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
             return {...state, TotalUsersCount: action.totalCount}
         }
         case LOADING_ICON: {
-            return {...state, followingInProgress: action.isFetching}
+            return {...state, isFetching: action.isFetching}
         }
-        case DISABLED_BUTTON:{
-            return {...state, }
+        case DISABLED_BUTTON: {
+            return {
+                ...state,
+                followingInProgress: action.isFetching ?
+                    [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter((id) => id != action.userId)
+            }
         }
         default:
             return state
@@ -176,7 +181,7 @@ export type isFetchingAT = {
     type: typeof LOADING_ICON
     isFetching: boolean
 }
-export const isFetching = (isFetching: boolean): isFetchingAT => ({
+export const setIsFetching = (isFetching: boolean): isFetchingAT => ({
     type: LOADING_ICON,
     isFetching: isFetching
 })
@@ -185,8 +190,10 @@ const DISABLED_BUTTON = "DISABLED_BUTTON"
 export type ButtonProgressAT = {
     type: typeof DISABLED_BUTTON
     isFetching: boolean
+    userId: number
 }
-export const progressButton = (isFetching: boolean): ButtonProgressAT => ({
+export const followingProgressButton = (isFetching: boolean, userId: number): ButtonProgressAT => ({
     type: DISABLED_BUTTON,
+    userId: userId,
     isFetching: isFetching
 })

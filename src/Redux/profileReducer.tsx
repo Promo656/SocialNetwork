@@ -76,7 +76,7 @@ let initialState: ProfilePageType = {
 
 export const profileReducer = (state: ProfilePageType = initialState, action: PostReducerAT) => {
     switch (action.type) {
-        case "SET_USER_PROFILE": {
+        case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
         case ADD_POST: {

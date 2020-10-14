@@ -25,22 +25,19 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    auth() {
+        return instance.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+    },
+    getProfileId(userId: number) {
+        return instance.get(`profile/${userId}`)
+            .then(response => {
+                return response.data
+            })
     }
 }
-
-
-
-
-/*const testinstance = axios.create({
-    headers: {
-        "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-        "x-rapidapi-key": "10e0cf49a1msh3eed3506720343fp142f02jsn8d98ae559127"
-    }
-})
-export const weather = {
-    getWeather() {
-        return testinstance.get(`https://community-open-weather-map.p.rapidapi.com/weather?lat=55.75396&lon=37.620393&callback=test&id=2172797&lang=null&units=%2522metric%2522%20or%20%2522imperial%2522&mode=xml%252C%20html&q=Moscow`)
-    }
-}*/
 
 
