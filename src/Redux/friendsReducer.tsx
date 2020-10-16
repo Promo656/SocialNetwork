@@ -1,4 +1,4 @@
-import {v1} from "uuid";
+import {usersAPI} from "../API/api";
 
 export type FriendsReducerAT =
     FollowAT
@@ -16,7 +16,7 @@ export type LocationType = {
     city: string
 }
 export type FriendType = {
-    id: string
+    id: number
     name: string
     followed: boolean
     status: string
@@ -44,26 +44,26 @@ let initialState: FriendsPageType = {
 
 export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsReducerAT) => {
     switch (action.type) {
-        case ADD_FRIEND: {
-            return {
-                ...state, users: state.users = [{
-                    id: v1(),
-                    name: state.newFriendsText,
-                    followed: true,
-                    status: "Hello, there!",
-                    location:
-                        {
-                            country: "Russia",
-                            city: "Moscow"
-                        }
-                },
-                    ...state.users],
-                newFriendsText: state.newFriendsText = ""
-            }
-        }
-        case UPDATE_NEW_FRIEND_TEXT: {
-            return {...state, newFriendsText: state.newFriendsText = action.newText}
-        }
+        /*        case ADD_FRIEND: {
+                    return {
+                        ...state, users: state.users = [{
+                            id: v1(),
+                            name: state.newFriendsText,
+                            followed: true,
+                            status: "Hello, there!",
+                            location:
+                                {
+                                    country: "Russia",
+                                    city: "Moscow"
+                                }
+                        },
+                            ...state.users],
+                        newFriendsText: state.newFriendsText = ""
+                    }
+                }*/
+        /*        case UPDATE_NEW_FRIEND_TEXT: {
+                    return {...state, newFriendsText: state.newFriendsText = action.newText}
+                }*/
         case FOLLOW:
             return {
                 ...state,
@@ -112,9 +112,9 @@ export const friendsReducer = (state: FriendsPageType = initialState, action: Fr
 const FOLLOW = "FOLLOW"
 export type FollowAT = {
     type: typeof FOLLOW
-    userId: string
+    userId: number
 }
-export const follow = (userId: string): FollowAT => ({
+export const follow = (userId: number): FollowAT => ({
     type: FOLLOW,
     userId: userId
 })
@@ -122,9 +122,9 @@ export const follow = (userId: string): FollowAT => ({
 const UNFOLLOW = "UNFOLLOW"
 export type UnFollowAT = {
     type: typeof UNFOLLOW
-    userId: string
+    userId: number
 }
-export const unFollow = (userId: string): UnFollowAT => ({
+export const unFollow = (userId: number): UnFollowAT => ({
     type: UNFOLLOW,
     userId: userId
 })
@@ -197,3 +197,48 @@ export const followingProgressButton = (isFetching: boolean, userId: number): Bu
     userId: userId,
     isFetching: isFetching
 })
+//------------------------------------THUNK-GET-USERS----------------------
+export const getUsersTC = (currentPage: number, pageSize: number) => {
+
+    return (dispatch: any) => {
+
+        dispatch(setIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(response => {
+                    dispatch(setIsFetching(false))
+                    dispatch(setUsers(response.items))
+                    dispatch(setCurrentPage(currentPage))
+                }
+            )
+    }
+}
+//------------------------------------THUNK-FOLLOW-----------------------
+export const followTC = (userId: number) => {
+
+    return (dispatch: any) => {
+
+        dispatch(followingProgressButton(true, userId))
+        usersAPI.follow(userId)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(follow(userId))
+                }
+                dispatch(followingProgressButton(false, userId))
+            })
+    }
+}
+//------------------------------------THUNK-UNFOLLOW-----------------------
+export const unFollowTC = (userId: number) => {
+
+    return (dispatch: any) => {
+
+        dispatch(followingProgressButton(true, userId))
+        usersAPI.unFollow(userId)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(unFollow(userId))
+                }
+                dispatch(followingProgressButton(false, userId))
+            })
+    }
+}

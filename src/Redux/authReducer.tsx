@@ -1,3 +1,5 @@
+import {usersAPI} from "../API/api";
+
 export type AuthReducerAT = SetUserDataAT
 
 export type AuthType = {
@@ -20,7 +22,7 @@ export const authReducer = (state: AuthType = initialState, action: AuthReducerA
             return {
                 ...state,
                 ...action.data,
-                isAuth:  true
+                isAuth: true
             }
         }
         default:
@@ -37,3 +39,16 @@ export const setAuthUserData = (data: AuthType): SetUserDataAT => ({
     type: SET_USER_DATA,
     data: data
 })
+//--------------------------------------THUNK-SET-USER-DATA--------------------------------
+export const setAuthUserDataTC = () => {
+
+    return (dispatch: any) => {
+
+        usersAPI.auth()
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(setAuthUserData(response.data))
+                }
+            })
+    }
+}

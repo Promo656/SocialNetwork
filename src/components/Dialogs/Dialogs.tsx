@@ -3,6 +3,7 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Messages/Message";
 import {DialogItem} from "./DialogsItem/Dialog";
 import {ChatPageType} from "../../Redux/chatReducer";
+import { Redirect } from "react-router-dom";
 
 type PropsType = {
     chatPage: ChatPageType

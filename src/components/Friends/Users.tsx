@@ -1,9 +1,8 @@
 import React from "react";
 import s from "./Friends.module.css";
-import {FriendsPageType, FriendType} from "../../Redux/friendsReducer";
+import {FriendType} from "../../Redux/friendsReducer";
 import {NavLink} from "react-router-dom";
 import {ProfileType} from "../../Redux/profileReducer";
-import {usersAPI} from "../../API/api";
 
 export type PropsType = {
     users: Array<FriendType>
@@ -12,10 +11,12 @@ export type PropsType = {
     TotalUsersCount: number
     currentPage: number
     onPageChanged: (p: number) => void
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
-    followingProgressButton: (isFetching: boolean, userId:number) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    followingProgressButton: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<number>
+    followTC: (userId: number) => void
+    unFollowTC: (userId: number) => void
 }
 
 export function Users(props: PropsType) {
@@ -31,9 +32,11 @@ export function Users(props: PropsType) {
         <div>
             {pages.map((p) => {
                 return <span onClick={() => {
+                    debugger
                     props.onPageChanged(p)
                 }} className={props.currentPage === p ? s.number : ""}> {p} </span>
             })}
+
             {props.users.map((u) =>
                 <div key={u.id} className={s.userContainer}>
                     <div className={s.followlogo}>
@@ -43,31 +46,18 @@ export function Users(props: PropsType) {
                                      src="https://avatars.mds.yandex.net/get-pdb/1605413/6f40644e-8150-4bd6-a28c-9a6ce0f22fd7/s1200?webp=false"
                                      alt=""/>
                             </NavLink>
-
                         </div>
                         <div className={s.follow}>
                             {u.followed
-                                ? <button disabled={props.followingInProgress.some((id)=>id === +u.id)} onClick={() => {
-                                    props.followingProgressButton(true, +u.id)
-                                    usersAPI.unFollow(u.id)
-                                        .then(response => {
-                                                if (response.resultCode === 0) {
-                                                    props.unFollow(u.id)
-                                                }
-                                                props.followingProgressButton(false, +u.id)
-                                            }
-                                        )
-                                }}>Unfollow</button>
-                                : <button disabled={props.followingInProgress.some((id)=>id === +u.id)} onClick={() => {
-                                    props.followingProgressButton(true, +u.id)
-                                    usersAPI.follow(u.id)
-                                        .then(response => {
-                                            if (response.resultCode === 0) {
-                                                props.follow(u.id)
-                                            }
-                                            props.followingProgressButton(false, +u.id)
-                                        })
-                                }}>Follow</button>}
+                                ? <button disabled={props.followingInProgress.some((id) => id === u.id)}
+                                          onClick={() => {
+                                              props.unFollowTC(u.id)
+                                          }}>Unfollow</button>
+                                : <button disabled={props.followingInProgress.some((id) => id === u.id)}
+                                          onClick={() => {
+                                              props.followTC(u.id)
+                                          }}>Follow</button>
+                            }
                         </div>
                     </div>
                     <div className={s.about}>
@@ -80,7 +70,8 @@ export function Users(props: PropsType) {
                             <div className={s.city}>{"u.location.city"}</div>
                         </div>
                     </div>
-                </div>)}
+                </div>)
+            }
         </div>
     )
 }

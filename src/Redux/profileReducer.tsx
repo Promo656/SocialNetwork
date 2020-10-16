@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {usersAPI} from "../API/api";
 
 export type PostType = {
     id: string
@@ -8,7 +9,6 @@ export type PhotosType = {
     small: string
     large: string
 }
-
 export type ContactsType = {
     facebook: string
     website: string
@@ -19,7 +19,6 @@ export type ContactsType = {
     github: string
     mainLink: string
 }
-
 export type ProfileType = {
     userId: number
     aboutMe: string
@@ -29,13 +28,11 @@ export type ProfileType = {
     photos: PhotosType
     contacts: ContactsType
 }
-
 export type ProfilePageType = {
     posts: Array<PostType>
     profile: ProfileType
     newPostText: string
 }
-
 export type PostReducerAT =
     AddPostAT | UpdateNewPostTextAT | SetUserProfileAT
 
@@ -117,3 +114,15 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileAT => ({
     type: SET_USER_PROFILE,
     profile: profile
 })
+//-----------------------------------THUNK-SET-USER-PROFILE--------------------------
+export const setUserProfileTC = (userId: number) => {
+
+    return (dispatch: any) => {
+
+        usersAPI.getProfileId(userId)
+            .then(response => {
+                    dispatch(setUserProfile(response))
+                }
+            )
+    }
+}

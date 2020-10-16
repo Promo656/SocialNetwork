@@ -1,16 +1,17 @@
 import React from "react";
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {profileReducer, ProfilePageType} from "./profileReducer";
 import {chatReducer, ChatPageType} from "./chatReducer"
 import {friendsReducer, FriendsPageType} from "./friendsReducer";
 import {authReducer, AuthType} from "./authReducer";
+import thunkMiddleware from "redux-thunk";
 
-export type StateType = {
-    profilePage: ProfilePageType
-    chatPage: ChatPageType
-    friendsPage: FriendsPageType
-    auth: AuthType
-}
+// export type StateType = {
+//     profilePage: ProfilePageType
+//     chatPage: ChatPageType
+//     friendsPage: FriendsPageType
+//     auth: AuthType
+// }
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -19,8 +20,9 @@ let reducers = combineReducers({
     auth: authReducer
 })
 
-export let store = createStore(reducers,(window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__())
+export type StateType = ReturnType<typeof reducers>
+
+export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 // @ts-ignore
 window.store = store

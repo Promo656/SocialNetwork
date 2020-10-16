@@ -6,8 +6,8 @@ import axios from "axios"
 type PropsType = {
     addFriend: () => void
     updateNewFriendText: (text: string) => void
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
     setUsers: (users: FriendType[]) => void
     friendsPage: FriendsPageType
 

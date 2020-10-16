@@ -1,29 +1,29 @@
 import React from "react";
 import {
     follow,
-    followingProgressButton,
-    FriendType,
+    followingProgressButton, followTC,
+    FriendType, getUsersTC,
     setCurrentPage,
-    setIsFetching,
     setTotalUsersCount,
-    setUsers,
-    unFollow
+    unFollow, unFollowTC
 } from "../../Redux/friendsReducer";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
 import {Users} from "./Users";
 import {PreLoader} from "../Common/PreLoader/PreLoader";
 import {ProfileType} from "../../Redux/profileReducer";
-import {usersAPI} from "../../API/api";
+import { Redirect } from "react-router-dom";
+
 
 type MapDispatchToPropsType = {
-    follow: (userId: string) => void
-    unFollow: (userId: string) => void
-    setUsers: (users: FriendType[]) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
-    setIsFetching: (isFetching: boolean) => void
-    followingProgressButton: (isFetching: boolean, userId:number ) => void
+    followingProgressButton: (isFetching: boolean, userId: number) => void
+    getUsersTC: (currentPage: number, pageSize: number) => void
+    followTC: (userId: number) => void
+    unFollowTC: (userId: number) => void
 }
 type MapStateToPropsType = {
     profile: ProfileType
@@ -40,25 +40,16 @@ type PropsType = MapDispatchToPropsType & MapStateToPropsType
 class UsersApiComponent extends React.Component<PropsType> {
 
     componentDidMount() {
-        this.props.setIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(response => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(response.items)
-            })
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.setIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(response => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(response.items)
-            })
+        this.props.getUsersTC(pageNumber, this.props.pageSize)
     }
 
     render() {
+
+
         return (
             <>
                 {this.props.isFetching ? <PreLoader/> : null}
@@ -73,6 +64,8 @@ class UsersApiComponent extends React.Component<PropsType> {
                     profile={this.props.profile}
                     followingProgressButton={this.props.followingProgressButton}
                     followingInProgress={this.props.followingInProgress}
+                    followTC={this.props.followTC}
+                    unFollowTC={this.props.unFollowTC}
                 />
             </>
         )
@@ -95,10 +88,11 @@ export const FriendsContainer = connect(
     mapStateToProps, {
         follow,
         unFollow,
-        setUsers,
         setCurrentPage,
         setTotalUsersCount,
-        setIsFetching,
-        followingProgressButton
+        followingProgressButton,
+        getUsersTC,
+        followTC,
+        unFollowTC
     }
 )(UsersApiComponent)

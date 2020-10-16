@@ -1,20 +1,21 @@
 import React from "react";
 import s from './Profile.module.css'
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
-import {ProfileType, setUserProfile} from "../../Redux/profileReducer";
-import {withRouter, RouteComponentProps} from "react-router-dom";
-import {usersAPI} from "../../API/api";
+import {ProfileType, setUserProfileTC} from "../../Redux/profileReducer";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 type MapStatePropsType = {
     profile: ProfileType
 }
 
 type MapDispatchPropsType = {
-    setUserProfile: (profile: ProfileType) => void
+    setUserProfileTC: (userId: number) => void
 }
+
 type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps
 
 export class ProfileApiComponent extends React.Component<PropsType> {
@@ -26,21 +27,20 @@ export class ProfileApiComponent extends React.Component<PropsType> {
         if (!userId) {
             userId = 2
         }
-        usersAPI.getProfileId(userId)
-            .then(response => {
-                    this.props.setUserProfile(response)
-                }
-            )
+        this.props.setUserProfileTC(userId)
     }
 
     render() {
         return (
             <div className={s.container}>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile profile={this.props.profile}/>
             </div>
         )
     }
 }
+
+
+
 
 let mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
@@ -48,11 +48,19 @@ let mapStateToProps = (state: StateType): MapStatePropsType => {
     }
 }
 
-let ProfileRouterComponent = withRouter(ProfileApiComponent)
+// let AuthRedirectComponent = withAuthRedirect(ProfileApiComponent)
+// let ProfileRouterComponent = withRouter(AuthRedirectComponent)
+//
+// export const ProfileContainer = connect(
+//     mapStateToProps, {
+//         setUserProfileTC
+//     }
+// )(ProfileRouterComponent)
 
-export const ProfileContainer = connect(
-    mapStateToProps, {
-        setUserProfile
-    }
-)(ProfileRouterComponent)
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {setUserProfileTC}),
+    withRouter,
+    withAuthRedirect
+)(ProfileApiComponent)
 

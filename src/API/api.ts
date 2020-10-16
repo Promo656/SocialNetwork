@@ -14,13 +14,13 @@ export const usersAPI = {
                 }
             )
     },
-    unFollow(id: string) {
+    unFollow(id: number) {
         return instance.delete(`follow/${id}`)
             .then(response => {
                 return response.data
             })
     },
-    follow(id: string) {
+    follow(id: number) {
         return instance.post(`follow/${id}`)
             .then(response => {
                 return response.data
