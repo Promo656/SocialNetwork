@@ -3,7 +3,8 @@ import {addMessage, updateNewMessage,} from "../../Redux/chatReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
-import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 let mapStateToProps = (state: StateType) => {
     return {
@@ -11,18 +12,14 @@ let mapStateToProps = (state: StateType) => {
     }
 }
 
-let AuthRedirectComponent = (props: any) => {
-    if (!props.isAuth) {
-        return <Redirect to={`/login`}/>
-    }
-    return <DialogsContainer/>
-}
-
-export const DialogsContainer = connect(
-    mapStateToProps,
-    {
-        updateNewMessage,
-        addMessage
-
-    }
+export default compose(
+    connect(
+        mapStateToProps,
+        {
+            updateNewMessage,
+            addMessage
+        }
+    ),
+    withAuthRedirect
 )(Dialogs)
+

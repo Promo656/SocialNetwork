@@ -13,6 +13,7 @@ import {Users} from "./Users";
 import {PreLoader} from "../Common/PreLoader/PreLoader";
 import {ProfileType} from "../../Redux/profileReducer";
 import { Redirect } from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 
 type MapDispatchToPropsType = {
@@ -48,8 +49,6 @@ class UsersApiComponent extends React.Component<PropsType> {
     }
 
     render() {
-
-
         return (
             <>
                 {this.props.isFetching ? <PreLoader/> : null}
@@ -71,6 +70,8 @@ class UsersApiComponent extends React.Component<PropsType> {
         )
     }
 }
+
+let AuthRedirectComponent=withAuthRedirect(UsersApiComponent)
 
 let mapStateToProps = (state: StateType) => {
     return {
@@ -95,4 +96,4 @@ export const FriendsContainer = connect(
         followTC,
         unFollowTC
     }
-)(UsersApiComponent)
+)(AuthRedirectComponent)

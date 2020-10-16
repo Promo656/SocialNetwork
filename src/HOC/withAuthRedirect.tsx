@@ -15,21 +15,14 @@ const mstp = (state: StateType): MSTPType => {
 }
 
 export const withAuthRedirect = (Component: any) => {
-debugger
 
     class RedirectComponent extends React.Component<any> {
 
         render() {
-            debugger
-            if (!this.props.isAuth) {
-                return <Redirect to={`/login`}/>
-            }
+            if (!this.props.isAuth) return <Redirect to={`/login`} />
             return <Component {...this.props}/>
         }
     }
-
-    debugger
     return connect(mstp)(RedirectComponent)
-
 }
 

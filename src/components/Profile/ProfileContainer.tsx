@@ -4,7 +4,7 @@ import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
 import {ProfileType, setUserProfileTC} from "../../Redux/profileReducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
@@ -38,8 +38,6 @@ export class ProfileApiComponent extends React.Component<PropsType> {
         )
     }
 }
-
-
 
 
 let mapStateToProps = (state: StateType): MapStatePropsType => {
