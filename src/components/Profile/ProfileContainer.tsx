@@ -46,14 +46,6 @@ let mapStateToProps = (state: StateType): MapStatePropsType => {
     }
 }
 
-// let AuthRedirectComponent = withAuthRedirect(ProfileApiComponent)
-// let ProfileRouterComponent = withRouter(AuthRedirectComponent)
-//
-// export const ProfileContainer = connect(
-//     mapStateToProps, {
-//         setUserProfileTC
-//     }
-// )(ProfileRouterComponent)
 
 
 export default compose<React.ComponentType>(

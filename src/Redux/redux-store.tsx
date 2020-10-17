@@ -1,23 +1,18 @@
 import React from "react";
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {profileReducer, ProfilePageType} from "./profileReducer";
-import {chatReducer, ChatPageType} from "./chatReducer"
-import {friendsReducer, FriendsPageType} from "./friendsReducer";
-import {authReducer, AuthType} from "./authReducer";
+import {profileReducer} from "./profileReducer";
+import {chatReducer} from "./chatReducer"
+import {friendsReducer} from "./friendsReducer";
+import {authReducer} from "./authReducer";
 import thunkMiddleware from "redux-thunk";
-
-// export type StateType = {
-//     profilePage: ProfilePageType
-//     chatPage: ChatPageType
-//     friendsPage: FriendsPageType
-//     auth: AuthType
-// }
+import {reducer as formReducer} from 'redux-form'
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     chatPage: chatReducer,
     friendsPage: friendsReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export type StateType = ReturnType<typeof reducers>

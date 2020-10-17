@@ -2,6 +2,7 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import {ProfileType} from "../../../Redux/profileReducer";
 import {PreLoader} from "../../Common/PreLoader/PreLoader";
+import {ProfileStatus} from "./ProfileStatus"
 
 type PropsType = {
     profile: ProfileType
@@ -22,6 +23,7 @@ export function ProfileInfo(props: PropsType) {
                 <img className={s.Photo}
                      src={props.profile.photos.small}
                      alt=""/>
+                     <span>{props.profile.aboutMe}</span>
             </div>
             <div>{props.profile.fullName}</div>
         </div>
