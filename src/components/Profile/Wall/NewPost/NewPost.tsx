@@ -1,45 +1,27 @@
-import React, {ChangeEvent} from "react";
-import s from "./NewPost.module.css"
+import React from "react";
 import {ProfilePageType,} from "../../../../Redux/profileReducer";
+import {NewPostReduxForm} from "./NewPostForm";
 
 type MapStatePropsType = {
     profilePage: ProfilePageType
 }
 
 type MapDispatchPropsType = {
-    onPostChange: (text: string) => void
-    addPost: () => void
+    addPost: (newPostText: string) => void
 }
 
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
 export function NewPost(props: PropsType) {
 
-    let addPost = () => {
-        props.addPost()
-    }
-
-    let onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
-        let text = e.currentTarget.value
-        props.onPostChange(text)
+    let addPost = (formData: any) => {
+        props.addPost(formData.newPostText)
     }
 
     return (
         <div>
-            <input
-                className={s.placeholder}
-                type="text"
-                placeholder='your news...'
-                value={props.profilePage.newPostText}
-                onChange={onPostChange}
-            />
-            <input
-                className={s.button}
-                type="submit"
-                onClick={addPost}
-            />
+            <NewPostReduxForm onSubmit={addPost}/>
         </div>
     )
 }
-
 

@@ -37,7 +37,11 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    signIn(login:string, password:string){
+        return instance.post(`auth/login`)
     }
+
 }
 
 

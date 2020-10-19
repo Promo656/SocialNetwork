@@ -15,7 +15,7 @@ export type ChatPageType = {
 }
 
 export type ChatReducerAT =
-    AddMessageAT | UpdateNewMessageTextAT
+    AddMessageAT
 
 let initialState = {
     dialogs: [
@@ -37,13 +37,8 @@ export const chatReducer = (state: ChatPageType = initialState, action: ChatRedu
     switch (action.type) {
         case ADD_MESSAGE: {
             let stateCopy = {...state}
-            stateCopy.messages = [...state.messages, {id: v1(), MessageText: state.newMessageText}]
+            stateCopy.messages = [...state.messages, {id: v1(), MessageText: action.newMessage}]
             stateCopy.newMessageText = ""
-            return stateCopy
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newMessageText = action.MessageText
             return stateCopy
         }
         default:
@@ -54,14 +49,9 @@ export const chatReducer = (state: ChatPageType = initialState, action: ChatRedu
 const ADD_MESSAGE = "ADD-MESSAGE";
 export type AddMessageAT = {
     type: "ADD-MESSAGE"
+    newMessage:string
 }
-export const addMessage = (): AddMessageAT =>
-    ({type: ADD_MESSAGE})
-//------------------------------------UPDATE-NEW-MESSAGE-TEXT----------------------
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
-export type UpdateNewMessageTextAT = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    MessageText: string
-}
-export const updateNewMessage = (text: string): UpdateNewMessageTextAT =>
-    ({type: UPDATE_NEW_MESSAGE_TEXT, MessageText: text})
+export const addMessage = (newMessage:string): AddMessageAT =>
+    ({type: ADD_MESSAGE,
+    newMessage:newMessage
+    })

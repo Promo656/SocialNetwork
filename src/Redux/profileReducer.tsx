@@ -31,10 +31,9 @@ export type ProfileType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     profile: ProfileType
-    newPostText: string
 }
 export type PostReducerAT =
-    AddPostAT | UpdateNewPostTextAT | SetUserProfileAT
+    AddPostAT  | SetUserProfileAT
 
 let initialState: ProfilePageType = {
     posts: [
@@ -66,8 +65,7 @@ let initialState: ProfilePageType = {
             large: "",
             small: ""
         }
-    },
-    newPostText: ""
+    }
 
 }
 
@@ -78,13 +76,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Po
         }
         case ADD_POST: {
             let stateCopy = {...state}
-            stateCopy.posts = [{id: v1(), text: state.newPostText}, ...state.posts]
-            stateCopy.newPostText = ""
+            stateCopy.posts = [{id: v1(), text: action.newPostText}, ...state.posts]
+            //stateCopy.newPostText = ""
             return stateCopy
         }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, newPostText: action.newText}
-        }
+
         default :
             return state
     }
@@ -93,17 +89,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Po
 const ADD_POST = "ADD-POST"
 export type AddPostAT = {
     type: "ADD-POST"
+    newPostText: string
 }
-export const addPost = (): AddPostAT =>
-    ({type: ADD_POST})
-//-----------------------------------UPDATE-NEW-POST-TEXT--------------------------
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-export type UpdateNewPostTextAT = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
-export const onPostChange = (text: string): UpdateNewPostTextAT =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const addPost = (newPostText:string): AddPostAT =>
+    ({
+        type: ADD_POST,
+        newPostText:newPostText
+    })
 //-----------------------------------SET-USER-PROFILE--------------------------
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 export type SetUserProfileAT = {
