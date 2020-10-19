@@ -21,8 +21,7 @@ export const authReducer = (state: AuthType = initialState, action: AuthReducerA
         case "SET_USER_DATA": {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
         }
         default:
@@ -33,22 +32,48 @@ export const authReducer = (state: AuthType = initialState, action: AuthReducerA
 const SET_USER_DATA = "SET_USER_DATA"
 export type SetUserDataAT = {
     type: typeof SET_USER_DATA
-    data: AuthType
+    payload: AuthType
 }
-export const setAuthUserData = (data: AuthType): SetUserDataAT => ({
+export const setAuthUserData = ({id, login, email, isAuth}: AuthType): SetUserDataAT => ({
     type: SET_USER_DATA,
-    data: data
+    payload: {id, login, email, isAuth}
 })
 //--------------------------------------THUNK-SET-USER-DATA--------------------------------
 export const setAuthUserDataTC = () => {
 
     return (dispatch: any) => {
 
-        usersAPI.auth()
+        usersAPI.authMe()
             .then(response => {
                 if (response.resultCode === 0) {
-                    dispatch(setAuthUserData(response.data))
+                    let {id, login, email} = response.data
+                    dispatch(setAuthUserData({id, login, email, isAuth: true}))
                 }
+            })
+    }
+}
+//-------------------------------------THUNK-LOGIN--------------------------------
+export const loginTC = (email: string, password: string, rememberMe: boolean) => {
+    debugger
+    return (dispatch: any) => {
+
+        usersAPI.login(email, password, rememberMe)
+            .then(response => {
+                if (response.resultCode === 0) {
+                    dispatch(setAuthUserDataTC())
+                }
+            })
+    }
+}
+//-------------------------------------THUNK-LOGOUT--------------------------------
+export const logoutTC = () => {
+    debugger
+    return (dispatch: any) => {
+        usersAPI.logout()
+            .then(response => {
+                let {id = 0, login = "", email = "", isAuth = false} = response.data
+                dispatch(setAuthUserData({id, login, email, isAuth}))
+                debugger
             })
     }
 }

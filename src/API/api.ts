@@ -26,7 +26,7 @@ export const usersAPI = {
                 return response.data
             })
     },
-    auth() {
+    authMe() {
         return instance.get(`auth/me`)
             .then(response => {
                 return response.data
@@ -38,8 +38,18 @@ export const usersAPI = {
                 return response.data
             })
     },
-    signIn(login:string, password:string){
-        return instance.post(`auth/login`)
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+            .then(response => {
+                return response.data
+            })
+    },
+    logout() {
+        debugger
+        return instance.delete(`auth/login`)
+            .then(response => {
+                return response.data
+            })
     }
 
 }

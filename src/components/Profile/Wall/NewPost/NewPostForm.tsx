@@ -20,7 +20,7 @@ export function NewPostForm(props: PropsType) {
                 name={"newPostText"}
                 component={TextArea}
                 placeholder={'your news...'}
-               validate={[required, maxLength10]}
+                validate={[required, maxLength10]}
             />
             <button className={s.button}>submit</button>
         </form>
