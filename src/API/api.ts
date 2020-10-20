@@ -1,4 +1,5 @@
 import axios from "axios";
+import logo from "../2863718.jpg"
 
 const instance = axios.create({
     withCredentials: true,
@@ -45,10 +46,15 @@ export const usersAPI = {
             })
     },
     logout() {
-        debugger
         return instance.delete(`auth/login`)
             .then(response => {
                 return response.data
+            })
+    },
+    uploadPhoto(){
+        return instance.put(`/profile/photo`, {image:logo})
+            .then(response=>{
+                return response
             })
     }
 

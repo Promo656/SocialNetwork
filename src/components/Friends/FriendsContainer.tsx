@@ -16,7 +16,6 @@ import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
-
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unFollow: (userId: number) => void

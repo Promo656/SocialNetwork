@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css'
 import {ProfileType} from "../../../Redux/profileReducer";
 import {PreLoader} from "../../Common/PreLoader/PreLoader";
 import {ProfileStatus} from "./ProfileStatus"
+import {usersAPI} from "../../../API/api";
 
 type PropsType = {
     profile: ProfileType
@@ -25,6 +26,12 @@ export function ProfileInfo(props: PropsType) {
                      alt=""/>
                      <span>{props.profile.aboutMe}</span>
             </div>
+            <button onClick={()=>{
+                usersAPI.uploadPhoto()
+                    .then(response=>{
+                        console.log(response)
+                    })
+            }}>upload photo</button>
             <div>{props.profile.fullName}</div>
         </div>
     )
