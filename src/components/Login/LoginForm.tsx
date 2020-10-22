@@ -1,11 +1,11 @@
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import React from "react";
 import {Input} from "../Common/FormsControl/FormsControl";
 import {maxLengthCreator, required} from "../../Utility/Validators/validator";
 
 const maxLength20=maxLengthCreator(20)
 
-export function LoginForm(props: any) {
+export function LoginForm(props: InjectedFormProps) {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -35,6 +35,7 @@ export function LoginForm(props: any) {
             <div>
                 <button>Login</button>
             </div>
+            {props.error&& <div style={{color: "red"}}>{props.error}</div>}
         </form>
     )
 }

@@ -6,7 +6,6 @@ import {ProfileType} from "../../Redux/profileReducer";
 
 export type PropsType = {
     users: Array<FriendType>
-    profile: ProfileType
     pageSize: number
     TotalUsersCount: number
     currentPage: number

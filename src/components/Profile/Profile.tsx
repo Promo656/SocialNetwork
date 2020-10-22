@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 
 export type PropsType={
     profile: ProfileType
+
 }
 
 export function Profile(props:PropsType) {

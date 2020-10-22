@@ -15,6 +15,13 @@ import {ProfileType} from "../../Redux/profileReducer";
 import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress, getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../Redux/usersSelector";
 
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
@@ -60,7 +67,6 @@ class UsersApiComponent extends React.Component<PropsType> {
                     currentPage={this.props.currentPage}
                     follow={this.props.follow}
                     unFollow={this.props.unFollow}
-                    profile={this.props.profile}
                     followingProgressButton={this.props.followingProgressButton}
                     followingInProgress={this.props.followingInProgress}
                     followTC={this.props.followTC}
@@ -72,7 +78,7 @@ class UsersApiComponent extends React.Component<PropsType> {
 }
 
 
-let mapStateToProps = (state: StateType) => {
+/*let mapStateToProps = (state: StateType) => {
     return {
         profile: state.profilePage.profile,
         users: state.friendsPage.users,
@@ -81,6 +87,17 @@ let mapStateToProps = (state: StateType) => {
         TotalUsersCount: state.friendsPage.TotalUsersCount,
         currentPage: state.friendsPage.currentPage,
         followingInProgress: state.friendsPage.followingInProgress,
+    }
+}*/
+
+let mapStateToProps = (state: StateType) => {
+    return {
+        users: getUsers(state),
+        isFetching: getIsFetching(state),
+        pageSize: getPageSize(state),
+        TotalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 
