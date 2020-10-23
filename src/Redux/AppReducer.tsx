@@ -13,9 +13,7 @@ let initialState: initializedType = {
 export const AppReducer = (state: initializedType = initialState, action: AuthReducerAT) => {
     switch (action.type) {
         case "SET-INITIALIZED": {
-
             return {
-
                 ...state,
                 initialized: true
             }
@@ -36,7 +34,6 @@ export const setInitializedAC = (): SetInitializedAT => ({
 export const initializeAppTC = () => (dispatch: any) => {
     dispatch(setAuthUserDataTC())
         .then(() => {
-
             dispatch(setInitializedAC())
         })
 }

@@ -77,19 +77,6 @@ class UsersApiComponent extends React.Component<PropsType> {
     }
 }
 
-
-/*let mapStateToProps = (state: StateType) => {
-    return {
-        profile: state.profilePage.profile,
-        users: state.friendsPage.users,
-        isFetching: state.friendsPage.isFetching,
-        pageSize: state.friendsPage.pageSize,
-        TotalUsersCount: state.friendsPage.TotalUsersCount,
-        currentPage: state.friendsPage.currentPage,
-        followingInProgress: state.friendsPage.followingInProgress,
-    }
-}*/
-
 let mapStateToProps = (state: StateType) => {
     return {
         users: getUsers(state),
@@ -102,6 +89,7 @@ let mapStateToProps = (state: StateType) => {
 }
 
 let withAuthComponent = withAuthRedirect(UsersApiComponent)
+
 export const FriendsContainer = connect(
     mapStateToProps, {
         follow,
