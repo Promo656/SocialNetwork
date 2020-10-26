@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {loginTC} from "../../Redux/authReducer";
 import {StateType} from "../../Redux/redux-store";
 import {Redirect} from "react-router-dom";
+import {getIsAuth} from "../../Redux/usersSelector";
 
 type MDTP = {
     loginTC: (email: string, password: string, rememberMe: boolean) => void
@@ -20,20 +21,20 @@ function Login(props: PropsType) {
         props.loginTC(formData.email, formData.password, formData.rememberMe)
     }
 
-    if (props.isAuth){
+    if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
 
-        return <div>
-            <h1>LOGIN</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
-        </div>
+    return <div>
+        <h1>LOGIN</h1>
+        <LoginReduxForm onSubmit={onSubmit}/>
+    </div>
 }
 
 
 const mapStateToProps = (state: StateType) => (
     {
-        isAuth:state.auth.isAuth
+        isAuth: getIsAuth(state)
     }
 )
 export default connect(

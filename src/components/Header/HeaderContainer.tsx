@@ -3,6 +3,7 @@ import {Header} from "./Header";
 import {connect} from "react-redux";
 import {logoutTC, setAuthUserDataTC} from "../../Redux/authReducer";
 import {StateType} from "../../Redux/redux-store";
+import {getIsAuth, getLogin} from "../../Redux/usersSelector";
 
 
 type mapStateToPropsType={
@@ -25,8 +26,8 @@ export class AuthDataContainer extends React.Component<PropsType> {
 }
 
 const mapStateToProps = (state: StateType) => ({
-    isAuth: state.auth.isAuth,
-    login: state.auth.login
+    isAuth: getIsAuth(state),
+    login: getLogin(state)
 })
 
 export const HeaderContainer = connect

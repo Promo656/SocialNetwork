@@ -7,6 +7,7 @@ import {ProfileType, setUserProfileTC} from "../../Redux/profileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {getIsAuth, getProfile, getUserId} from "../../Redux/usersSelector";
 
 type MapStatePropsType = {
     profile: ProfileType
@@ -22,13 +23,14 @@ type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps
 
 export class ProfileApiComponent extends React.Component<PropsType> {
 
+
     componentDidMount() {
 
         // @ts-ignore
         let userId = this.props.match.params.id
         if (!userId) {
             userId = this.props.userId
-            if(!userId){
+            if (!userId) {
                 this.props.history.push(`/login`)
             }
         }
@@ -38,7 +40,7 @@ export class ProfileApiComponent extends React.Component<PropsType> {
     render() {
         return (
             <div className={s.container}>
-                <Profile profile={this.props.profile} />
+                <Profile profile={this.props.profile}/>
             </div>
         )
     }
@@ -47,9 +49,9 @@ export class ProfileApiComponent extends React.Component<PropsType> {
 
 let mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
-        profile: state.profilePage.profile,
-        userId: state.auth.id,
-        isAuth: state.auth.isAuth
+        profile: getProfile(state),
+        userId: getUserId(state),
+        isAuth: getIsAuth(state)
     }
 }
 

@@ -43,6 +43,7 @@ class App extends React.Component<PropsType> {
                         </div>
                         <div className={s.centerContainer}>
                             <Route path='/profile/:id?' render={() => <ProfileContainer/>}/>
+                            <Route exact path='/' render={() => <ProfileContainer/>}/>
                             <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                             <Route path='/friends' render={() => <FriendsContainer/>}/>
                             <Route path='/login' render={() => <Login/>}/>

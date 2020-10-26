@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Friends.module.css";
 import {FriendType} from "../../Redux/friendsReducer";
 import {NavLink} from "react-router-dom";
-import {ProfileType} from "../../Redux/profileReducer";
+
 
 export type PropsType = {
     users: Array<FriendType>
@@ -31,7 +31,6 @@ export function Users(props: PropsType) {
         <div>
             {pages.map((p) => {
                 return <span onClick={() => {
-                    debugger
                     props.onPageChanged(p)
                 }} className={props.currentPage === p ? s.number : ""}> {p} </span>
             })}

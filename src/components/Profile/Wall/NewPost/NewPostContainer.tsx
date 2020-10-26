@@ -3,10 +3,11 @@ import {NewPost} from "./NewPost";
 import {addPost} from "../../../../Redux/profileReducer";
 import {connect} from "react-redux";
 import {StateType} from "../../../../Redux/redux-store";
+import {getProfilePage} from "../../../../Redux/usersSelector";
 
 let mapStateToProps = (state: StateType) => {
     return {
-        profilePage: state.profilePage
+        profilePage: getProfilePage(state)
     }
 }
 

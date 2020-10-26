@@ -23,3 +23,31 @@ export const getFollowingInProgress=(state:StateType)=>{
 export const getIsFetching=(state:StateType)=>{
     return state.friendsPage.newFriendsText
 }
+
+export const getProfile=(state:StateType)=>{
+    return state.profilePage.profile
+}
+
+export const getUserId=(state:StateType)=>{
+    return state.auth.id
+}
+
+export const getIsAuth=(state:StateType)=>{
+    return state.auth.isAuth
+}
+
+export const getLogin=(state:StateType)=>{
+    return state.auth.login
+}
+
+export const getPosts=(state:StateType)=>{
+    return state.profilePage.posts
+}
+
+export const getProfilePage=(state:StateType)=>{
+    return state.profilePage
+}
+
+export const getChatPage=(state:StateType)=>{
+    return state.chatPage
+}

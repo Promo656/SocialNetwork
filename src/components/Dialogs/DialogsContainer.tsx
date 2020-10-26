@@ -4,11 +4,12 @@ import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {getChatPage} from "../../Redux/usersSelector";
 
 
 let mapStateToProps = (state: StateType) => {
     return {
-        chatPage: state.chatPage,
+        chatPage: getChatPage(state)
     }
 }
 
