@@ -198,47 +198,40 @@ export const followingProgressButton = (isFetching: boolean, userId: number): Bu
     isFetching: isFetching
 })
 //------------------------------------THUNK-GET-USERS----------------------
-export const getUsersTC = (currentPage: number, pageSize: number) => {
+export const getUsersTC = (currentPage: number, pageSize: number) => async (dispatch: any) => {
 
-    return (dispatch: any) => {
+    dispatch(setIsFetching(true))
 
-        dispatch(setIsFetching(true))
-        usersAPI.getUsers(currentPage, pageSize)
-            .then(response => {
-                    dispatch(setIsFetching(false))
-                    dispatch(setUsers(response.items))
-                    dispatch(setCurrentPage(currentPage))
-                }
-            )
-    }
+    let response = await usersAPI.getUsers(currentPage, pageSize)
+
+    dispatch(setIsFetching(false))
+    dispatch(setUsers(response.items))
+    dispatch(setCurrentPage(currentPage))
 }
+
 //------------------------------------THUNK-FOLLOW-----------------------
-export const followTC = (userId: number) => {
+export const followTC = (userId: number) => async (dispatch: any) => {
 
-    return (dispatch: any) => {
+    dispatch(followingProgressButton(true, userId))
 
-        dispatch(followingProgressButton(true, userId))
-        usersAPI.follow(userId)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(follow(userId))
-                }
-                dispatch(followingProgressButton(false, userId))
-            })
+    let response = await usersAPI.follow(userId)
+
+    if (response.resultCode === 0) {
+        dispatch(follow(userId))
     }
+    dispatch(followingProgressButton(false, userId))
 }
+
 //------------------------------------THUNK-UNFOLLOW-----------------------
-export const unFollowTC = (userId: number) => {
+export const unFollowTC = (userId: number) => async (dispatch: any) => {
 
-    return (dispatch: any) => {
+    dispatch(followingProgressButton(true, userId))
 
-        dispatch(followingProgressButton(true, userId))
-        usersAPI.unFollow(userId)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(unFollow(userId))
-                }
-                dispatch(followingProgressButton(false, userId))
-            })
+    let response = await usersAPI.unFollow(userId)
+
+    if (response.resultCode === 0) {
+        dispatch(unFollow(userId))
     }
+    dispatch(followingProgressButton(false, userId))
+
 }

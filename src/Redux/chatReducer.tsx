@@ -11,13 +11,12 @@ export type MessageType = {
 export type ChatPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
-    newMessageText: string
 }
 
 export type ChatReducerAT =
     AddMessageAT
 
-let initialState = {
+let initialState: ChatPageType = {
     dialogs: [
         {name: "Valera", id: v1()},
         {name: "Gosha", id: v1()},
@@ -29,17 +28,18 @@ let initialState = {
         {id: v1(), MessageText: "Where are you?"},
         {id: v1(), MessageText: "Brooo"},
         {id: v1(), MessageText: "Fine!"},
-    ],
-    newMessageText: ""
+    ]
 }
 
 export const chatReducer = (state: ChatPageType = initialState, action: ChatReducerAT) => {
     switch (action.type) {
         case ADD_MESSAGE: {
-            let stateCopy = {...state}
-            stateCopy.messages = [...state.messages, {id: v1(), MessageText: action.newMessage}]
-            stateCopy.newMessageText = ""
-            return stateCopy
+            return {
+                ...
+                    state,
+                messages: [...state.messages, {id: v1(), MessageText: action.newMessage}]
+
+            }
         }
         default:
             return state
@@ -48,10 +48,11 @@ export const chatReducer = (state: ChatPageType = initialState, action: ChatRedu
 //---------------------------------------ADD-MESSAGE-----------------------------------
 const ADD_MESSAGE = "ADD-MESSAGE";
 export type AddMessageAT = {
-    type: "ADD-MESSAGE"
-    newMessage:string
+    type: typeof ADD_MESSAGE
+    newMessage: string
 }
-export const addMessage = (newMessage:string): AddMessageAT =>
-    ({type: ADD_MESSAGE,
-    newMessage:newMessage
+export const addMessage = (newMessage: string): AddMessageAT =>
+    ({
+        type: ADD_MESSAGE,
+        newMessage: newMessage
     })

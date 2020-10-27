@@ -18,8 +18,7 @@ export function Dialogs(props: PropsType) {
         <Message key={m.id} message={m}/>)
 
     const addNewMessage=(formData:any)=>{
-        console.log(formData)
-        props.addMessage(formData.newMessageBody)
+        props.addMessage(formData.newMessage)
     }
 
     return (

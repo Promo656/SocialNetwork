@@ -1,5 +1,6 @@
 import {v1} from "uuid";
 import {usersAPI} from "../API/api";
+import {Dispatch} from "redux";
 
 export type PostType = {
     id: string
@@ -33,7 +34,7 @@ export type ProfilePageType = {
     profile: ProfileType
 }
 export type PostReducerAT =
-    AddPostAT  | SetUserProfileAT
+    AddPostAT | SetUserProfileAT | DeletePostAT
 
 let initialState: ProfilePageType = {
     posts: [
@@ -80,6 +81,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Po
             //stateCopy.newPostText = ""
             return stateCopy
         }
+        case DELETE_POST: {
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id != action.postId)
+            }
+        }
 
         default :
             return state
@@ -88,13 +95,24 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Po
 //--------------------------------------ADD-POST----------------------------------
 const ADD_POST = "ADD-POST"
 export type AddPostAT = {
-    type: "ADD-POST"
+    type: typeof ADD_POST
     newPostText: string
 }
-export const addPost = (newPostText:string): AddPostAT =>
+export const addPost = (newPostText: string): AddPostAT =>
     ({
         type: ADD_POST,
-        newPostText:newPostText
+        newPostText: newPostText
+    })
+//--------------------------------------DELETE-POST----------------------------------
+const DELETE_POST = "DELETE_POST"
+export type DeletePostAT = {
+    type: typeof DELETE_POST
+    postId: string
+}
+export const deletePost = (postId: string): DeletePostAT =>
+    ({
+        type: DELETE_POST,
+        postId: postId
     })
 //-----------------------------------SET-USER-PROFILE--------------------------
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -107,14 +125,8 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileAT => ({
     profile: profile
 })
 //-----------------------------------THUNK-SET-USER-PROFILE--------------------------
-export const setUserProfileTC = (userId: number) => {
+export const setUserProfileTC = (userId: number) => async (dispatch: Dispatch) => {
 
-    return (dispatch: any) => {
-
-        usersAPI.getProfileId(userId)
-            .then(response => {
-                    dispatch(setUserProfile(response))
-                }
-            )
-    }
+    let response = await usersAPI.getProfileId(userId)
+    dispatch(setUserProfile(response))
 }

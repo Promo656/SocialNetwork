@@ -20,7 +20,7 @@ let initialState: AuthType = {
 
 export const authReducer = (state: AuthType = initialState, action: AuthReducerAT) => {
     switch (action.type) {
-        case "SET_USER_DATA": {
+        case SET_USER_DATA: {
             return {
                 ...state,
                 ...action.payload
@@ -31,7 +31,7 @@ export const authReducer = (state: AuthType = initialState, action: AuthReducerA
     }
 }
 //--------------------------------------SET-USER-DATA--------------------------------
-const SET_USER_DATA = "SET_USER_DATA"
+const SET_USER_DATA = "social-network/auth/SET_USER_DATA"
 export type SetUserDataAT = {
     type: typeof SET_USER_DATA
     payload: AuthType
@@ -41,45 +41,32 @@ export const setAuthUserData = ({id, login, email, isAuth}: AuthType): SetUserDa
     payload: {id, login, email, isAuth}
 })
 //--------------------------------------THUNK-SET-USER-DATA--------------------------------
-export const setAuthUserDataTC = () => {
+export const setAuthUserDataTC = () => async (dispatch: Dispatch) => {
 
-    return (dispatch: Dispatch) => {
+    let response = await usersAPI.authMe()
 
-        return usersAPI.authMe()
-            .then(response => {
-                if (response.resultCode === 0) {
-                    let {id, login, email} = response.data
-                    dispatch(setAuthUserData({id, login, email, isAuth: true}))
-                }
-            })
+    if (response.resultCode === 0) {
+        let {id, login, email} = response.data
+        dispatch(setAuthUserData({id, login, email, isAuth: true}))
     }
 }
 //-------------------------------------THUNK-LOGIN--------------------------------
-export const loginTC = (email: string, password: string, rememberMe: boolean) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {//dispatch:Dispatch???
 
-    return (dispatch: any) => {
+    let response = await usersAPI.login(email, password, rememberMe)
 
-        usersAPI.login(email, password, rememberMe)
-            .then(response => {
-                if (response.resultCode === 0) {
-                    dispatch(setAuthUserDataTC())
-                } else {
-                    debugger
-                    let message = response.messages.length > 0 ? response.messages[0] : "Some error"
-                    dispatch(stopSubmit("login", {_error: message}))
-                }
-            })
+    if (response.resultCode === 0) {
+        dispatch(setAuthUserDataTC())
+    } else {
+        let message = response.messages.length > 0 ? response.messages[0] : "Some error"
+        dispatch(stopSubmit("login", {_error: message}))
     }
 }
 //-------------------------------------THUNK-LOGOUT--------------------------------
-export const logoutTC = () => {
-    debugger
-    return (dispatch: any) => {
-        usersAPI.logout()
-            .then(response => {
-                let {id = 0, login = "", email = "", isAuth = false} = response.data
-                dispatch(setAuthUserData({id, login, email, isAuth}))
-                debugger
-            })
-    }
+export const logoutTC = () => async (dispatch: Dispatch) => {
+
+    let response = await usersAPI.logout()
+
+    let {id = 0, login = "", email = "", isAuth = false} = response.data
+    dispatch(setAuthUserData({id, login, email, isAuth}))
 }
