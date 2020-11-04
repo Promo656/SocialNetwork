@@ -21,13 +21,13 @@ let initialState: ChatPageType = {
         {name: "Valera", id: v1()},
         {name: "Gosha", id: v1()},
         {name: "Ilya", id: v1()},
-        {name: "Yura", id: v1()}
+        {name: "Vova", id: v1()}
     ],
     messages: [
         {id: v1(), MessageText: "Hello!"},
         {id: v1(), MessageText: "Where are you?"},
         {id: v1(), MessageText: "Brother"},
-        {id: v1(), MessageText: "Fine!"},
+        {id: v1(), MessageText: "Fine!!"},
     ]
 }
 
