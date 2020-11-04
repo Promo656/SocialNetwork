@@ -14,7 +14,6 @@ export function LeftNav() {
                     <li><NavLink to="/music" activeClassName={s.activeLink}>Music</NavLink></li>
                     <li><NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink></li>
                 </ul>
-
             </nav>
     )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {profileReducer} from "./profileReducer";
 import {chatReducer} from "./chatReducer"
 import {friendsReducer} from "./friendsReducer";
@@ -19,7 +19,12 @@ let reducers = combineReducers({
 
 export type StateType = ReturnType<typeof reducers>
 
-export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(reducers, composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
+
+//export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 // @ts-ignore
 window.store = store

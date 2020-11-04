@@ -30,30 +30,29 @@ class App extends React.Component<PropsType> {
     }
 
     render() {
-        if (!this.props.initialized){
+        if (!this.props.initialized) {
 
             return <PreLoader/>
         }
-            return (
-                <div className={s.generalContainer}>
-                    <HeaderContainer/>
-                    <div className={s.container}>
-                        <div>
-                            <LeftNav/>
-                        </div>
-                        <div className={s.centerContainer}>
-                            <Route path='/profile/:id?' render={() => <ProfileContainer/>}/>
-                            <Route exact path='/SocialNetwork' render={() => <ProfileContainer/>}/>
-                            <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                            <Route path='/friends' render={() => <FriendsContainer/>}/>
-                            <Route path='/login' render={() => <Login/>}/>
-                        </div>
-                        <div>
-                            {/* <RightNav/>*/}
-                        </div>
+        return (
+            <div className={s.generalContainer}>
+                <HeaderContainer/>
+                <div className={s.container}>
+                    <div>
+                        <LeftNav/>
+                    </div>
+                    <div className={s.centerContainer}>
+                        <Route path='/profile/:id?' render={() => <ProfileContainer/>}/>
+                        <Route exact path='/SocialNetwork' render={() => <ProfileContainer/>}/>
+                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                        <Route path='/friends' render={() => <FriendsContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                    </div>
+                    <div>
                     </div>
                 </div>
-            )
+            </div>
+        )
     }
 }
 

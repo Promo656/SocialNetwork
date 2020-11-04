@@ -25,7 +25,7 @@ export type FriendType = {
 export type FriendsPageType = {
     users: FriendType[]
     pageSize: number
-    TotalUsersCount: number
+    totalUsersCount: number
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<number>
@@ -35,7 +35,7 @@ export type FriendsPageType = {
 let initialState: FriendsPageType = {
     users: [],
     pageSize: 10,
-    TotalUsersCount: 100,
+    totalUsersCount: 100,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],

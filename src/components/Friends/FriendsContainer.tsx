@@ -36,7 +36,7 @@ type MapDispatchToPropsType = {
 type MapStateToPropsType = {
     profile: ProfileType
     pageSize: number
-    TotalUsersCount: number
+    totalUsersCount: number
     currentPage: number
     followingInProgress: Array<number>
     isFetching: boolean
@@ -60,7 +60,7 @@ class UsersApiComponent extends React.Component<PropsType> {
             <>
                 {this.props.isFetching ? <PreLoader/> : null}
                 <Users
-                    TotalUsersCount={this.props.TotalUsersCount}
+                    totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
                     onPageChanged={this.onPageChanged}
                     users={this.props.users}
@@ -82,7 +82,7 @@ let mapStateToProps = (state: StateType) => {
         users: getUsers(state),
         isFetching: getIsFetching(state),
         pageSize: getPageSize(state),
-        TotalUsersCount: getTotalUsersCount(state),
+        totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         followingInProgress: getFollowingInProgress(state),
     }

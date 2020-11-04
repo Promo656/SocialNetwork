@@ -15,13 +15,13 @@ type MSTP = {
 
 type PropsType = MDTP & MSTP
 
-function Login(props: PropsType) {
+function Login({loginTC, isAuth}: PropsType) {
 
-    const onSubmit = (formData: any) => {
-        props.loginTC(formData.email, formData.password, formData.rememberMe)
+    const onSubmit = ({email, password, rememberMe}: any) => {
+        loginTC(email, password, rememberMe)
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={"/profile"}/>
     }
 
