@@ -20,11 +20,7 @@ let reducers = combineReducers({
 export type StateType = ReturnType<typeof reducers>
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export const store = createStore(reducers, composeEnhancers(
-    applyMiddleware(thunkMiddleware)
-));
-
-//export let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 // @ts-ignore
 window.store = store

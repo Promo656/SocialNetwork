@@ -1,7 +1,5 @@
 import React from "react";
-import s from "./Friends.module.css";
 import {FriendType} from "../../Redux/friendsReducer";
-import {NavLink} from "react-router-dom";
 import {Paginator} from "../Common/Paginator/Paginator";
 import {User} from "./User";
 

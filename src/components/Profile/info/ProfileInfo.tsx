@@ -2,7 +2,6 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import {ProfileType} from "../../../Redux/profileReducer";
 import {PreLoader} from "../../Common/PreLoader/PreLoader";
-import {ProfileStatus} from "./ProfileStatus"
 import {usersAPI} from "../../../API/api";
 
 type PropsType = {

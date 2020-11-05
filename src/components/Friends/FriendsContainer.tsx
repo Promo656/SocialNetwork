@@ -1,23 +1,25 @@
 import React from "react";
 import {
     follow,
-    followingProgressButton, followTC,
-    FriendType, getUsersTC,
+    followingProgressButton,
+    followTC,
+    FriendType,
+    getUsersTC,
     setCurrentPage,
     setTotalUsersCount,
-    unFollow, unFollowTC
+    unFollow,
+    unFollowTC
 } from "../../Redux/friendsReducer";
 import {connect} from "react-redux";
 import {StateType} from "../../Redux/redux-store";
 import {Users} from "./Users";
 import {PreLoader} from "../Common/PreLoader/PreLoader";
 import {ProfileType} from "../../Redux/profileReducer";
-import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
-import {compose} from "redux";
 import {
     getCurrentPage,
-    getFollowingInProgress, getIsFetching,
+    getFollowingInProgress,
+    getIsFetching,
     getPageSize,
     getTotalUsersCount,
     getUsers

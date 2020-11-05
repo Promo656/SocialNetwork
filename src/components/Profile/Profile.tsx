@@ -3,7 +3,6 @@ import {ProfileInfo} from "./info/ProfileInfo";
 import s from './Profile.module.css'
 import {ProfileWallContainer} from "./Wall/ProfileWallContainer";
 import {ProfileType} from "../../Redux/profileReducer";
-import { Redirect } from "react-router-dom";
 
 export type PropsType={
     profile: ProfileType
