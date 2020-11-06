@@ -35,8 +35,7 @@ export const chatReducer = (state: ChatPageType = initialState, action: ChatRedu
     switch (action.type) {
         case ADD_MESSAGE: {
             return {
-                ...
-                    state,
+                ...state,
                 messages: [...state.messages, {id: v1(), MessageText: action.newMessage}]
 
             }
