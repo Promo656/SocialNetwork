@@ -1,4 +1,3 @@
-import React from "react";
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {profileReducer} from "./profileReducer";
 import {chatReducer} from "./chatReducer"
